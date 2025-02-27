@@ -161,8 +161,8 @@ export function Contact() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-lg">Courriel</h3>
-                    <a href="mailto:info@r2pro.ca" className="text-gray-600 hover:text-r2pro">
-                      info@r2pro.ca
+                    <a href="mailto:info@r2pro.ca" className="text-gray-600 hover:text-r2pro group">
+                      <span className="group-hover:underline">info@r2pro.ca</span>
                     </a>
                   </div>
                 </div>
@@ -173,8 +173,11 @@ export function Contact() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-lg">Téléphone</h3>
-                    <a href="tel:514-666-7772" className="text-gray-600 hover:text-r2pro">
-                      514-666-7772
+                    <a
+                      href="tel:+14384944426"
+                      className="text-gray-600 hover:text-r2pro transition-colors duration-300 group flex items-center"
+                    >
+                      <span className="group-hover:underline">(438) 494-4426</span>
                     </a>
                   </div>
                 </div>

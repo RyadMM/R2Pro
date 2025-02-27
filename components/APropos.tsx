@@ -1,3 +1,5 @@
+"use client"
+
 import Image from "next/image"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Users, Shield, ThumbsUp } from "lucide-react"
@@ -54,10 +56,11 @@ export function APropos() {
           </motion.div>
           <div className="relative h-96">
             <Image
-              src="/placeholder.svg?height=600&width=800"
+              src="/images/about/team-at-work.jpg"
               alt="L'équipe R2Pro au travail"
-              fill
-              className="object-cover rounded-lg shadow-2xl"
+              layout="fill"
+              objectFit="cover"
+              className="rounded-lg shadow-2xl"
             />
           </div>
         </div>

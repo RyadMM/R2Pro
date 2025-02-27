@@ -1,11 +1,20 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useState, useCallback } from "react"
 import { motion } from "framer-motion"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { type LucideIcon, Home, Wrench, Image, Info, Phone } from "lucide-react"
+import { type LucideIcon, Home, Image, Info, Phone, Wrench } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { useRouter } from "next/navigation"
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from "@/components/ui/navigation-menu"
 
 interface NavItem {
   name: string
@@ -30,24 +39,37 @@ export function NavBar({ items = defaultItems, className }: NavBarProps) {
   const [activeTab, setActiveTab] = useState(items.length > 0 ? items[0].name : "")
   const [isMobile, setIsMobile] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
+  const [isVisible, setIsVisible] = useState(true)
   const pathname = usePathname()
+  const router = useRouter()
+
+  const handleScroll = useCallback(() => {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop
+    setIsScrolled(scrollTop > 50)
+    setIsVisible(scrollTop <= 50 || window.innerHeight - scrollTop > window.innerHeight - 50)
+  }, [])
 
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768)
     }
 
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
-    }
-
     handleResize()
-    handleScroll()
     window.addEventListener("resize", handleResize)
-    window.addEventListener("scroll", handleScroll)
     return () => {
       window.removeEventListener("resize", handleResize)
-      window.removeEventListener("scroll", handleScroll)
+    }
+  }, [])
+
+  useEffect(() => {
+    const handleRouteChange = () => {
+      window.scrollTo(0, 0)
+    }
+
+    window.addEventListener("popstate", handleRouteChange)
+
+    return () => {
+      window.removeEventListener("popstate", handleRouteChange)
     }
   }, [])
 
@@ -58,6 +80,20 @@ export function NavBar({ items = defaultItems, className }: NavBarProps) {
     }
   }, [pathname, items])
 
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll)
+    window.addEventListener("mousemove", (e) => {
+      if (e.clientY <= 50) {
+        setIsVisible(true)
+      }
+    })
+    handleScroll()
+    return () => {
+      window.removeEventListener("scroll", handleScroll)
+      window.removeEventListener("mousemove", handleScroll)
+    }
+  }, [handleScroll])
+
   if (items.length === 0) return null
 
   return (
@@ -65,6 +101,8 @@ export function NavBar({ items = defaultItems, className }: NavBarProps) {
       className={cn(
         "fixed top-0 left-1/2 -translate-x-1/2 z-50 transition-all duration-300",
         isScrolled ? "py-2" : "py-6",
+        isVisible ? "opacity-100" : "opacity-0 pointer-events-none",
+        "md:hover:opacity-100 md:hover:pointer-events-auto",
         className,
       )}
     >
@@ -78,11 +116,59 @@ export function NavBar({ items = defaultItems, className }: NavBarProps) {
           const Icon = item.icon
           const isActive = activeTab === item.name
 
+          if (item.name === "Services") {
+            return (
+              <NavigationMenu key={item.name}>
+                <NavigationMenuList>
+                  <NavigationMenuItem>
+                    <NavigationMenuTrigger
+                      className={cn(
+                        "cursor-pointer text-sm font-medium px-4 py-2 rounded-full transition-colors",
+                        isScrolled ? "text-foreground/80 hover:text-primary" : "text-white hover:text-r2pro-200",
+                        "bg-transparent hover:bg-transparent focus:bg-transparent",
+                        "data-[state=open]:bg-transparent",
+                      )}
+                    >
+                      Services
+                    </NavigationMenuTrigger>
+                    <NavigationMenuContent>
+                      <ul className="grid gap-3 p-4 w-[200px] bg-white rounded-lg shadow-lg">
+                        <li>
+                          <NavigationMenuLink asChild>
+                            <a
+                              href="#"
+                              className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                            >
+                              <div className="text-sm font-medium leading-none">Service A</div>
+                            </a>
+                          </NavigationMenuLink>
+                        </li>
+                        <li>
+                          <NavigationMenuLink asChild>
+                            <a
+                              href="#"
+                              className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                            >
+                              <div className="text-sm font-medium leading-none">Service B</div>
+                            </a>
+                          </NavigationMenuLink>
+                        </li>
+                      </ul>
+                    </NavigationMenuContent>
+                  </NavigationMenuItem>
+                </NavigationMenuList>
+              </NavigationMenu>
+            )
+          }
+
           return (
             <Link
               key={item.name}
               href={item.url}
-              onClick={() => setActiveTab(item.name)}
+              onClick={() => {
+                setActiveTab(item.name)
+                window.scrollTo(0, 0)
+              }}
               className={cn(
                 "relative cursor-pointer text-sm font-medium px-4 py-2 rounded-full transition-colors",
                 isScrolled ? "text-foreground/80 hover:text-primary" : "text-white hover:text-r2pro-200",

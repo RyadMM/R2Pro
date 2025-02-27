@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { Phone, Mail, MapPin } from "lucide-react"
 
 export function Footer() {
   return (
@@ -88,14 +89,18 @@ export function Footer() {
             <div>
               <p className="font-medium">Contact</p>
               <nav className="flex flex-col mt-4 space-y-2 text-sm">
-                <Link href="#" className="hover:opacity-75">
-                  Contactez-nous
+                <Link href="/contact" className="hover:opacity-75 flex items-center">
+                  <MapPin className="w-4 h-4 mr-2" />
+                  Nous contacter
                 </Link>
-                <Link href="#" className="hover:opacity-75">
-                  Demande de soumission
+                <Link href="#" className="hover:opacity-75 flex items-center">
+                  <Mail className="w-4 h-4 mr-2" />
+                  info@r2pro.ca
                 </Link>
-                <p className="hover:opacity-75">info@r2pro.com</p>
-                <p className="hover:opacity-75">+1 (123) 456-7890</p>
+                <a href="tel:+14384944426" className="hover:opacity-75 flex items-center group">
+                  <Phone className="w-4 h-4 mr-2 group-hover:animate-bounce" />
+                  <span className="group-hover:text-r2pro-300 transition-colors duration-300">(438) 494-4426</span>
+                </a>
               </nav>
             </div>
           </div>

@@ -7,7 +7,7 @@ import { generateLocalBusinessSchema, generateServiceSchema } from "./schema"
 import { defaultMetadata } from "./metadata"
 import "./globals.css"
 import { Montserrat, Roboto } from "next/font/google"
-import type React from "react"
+import type React from "react" // Import React
 
 const montserrat = Montserrat({
   subsets: ["latin"],

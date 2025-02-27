@@ -1,6 +1,7 @@
 import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
+import { Phone } from "lucide-react"
 
 export function Header() {
   return (
@@ -32,7 +33,18 @@ export function Header() {
             Contact
           </Link>
         </nav>
-        <Button className="hidden md:inline-flex bg-r2pro hover:bg-r2pro-600">Soumission gratuite</Button>
+        <div className="flex items-center space-x-4">
+          <a
+            href="tel:+14384944426"
+            className="hidden md:flex items-center text-r2pro hover:text-r2pro-600 transition-colors duration-300 group"
+          >
+            <span className="bg-r2pro/10 rounded-full p-2 mr-2 group-hover:bg-r2pro/20 transition-colors duration-300">
+              <Phone className="w-5 h-5" />
+            </span>
+            <span className="font-semibold">(438) 494-4426</span>
+          </a>
+          <Button className="hidden md:inline-flex bg-r2pro hover:bg-r2pro-600">Soumission gratuite</Button>
+        </div>
       </div>
     </header>
   )

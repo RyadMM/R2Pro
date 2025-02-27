@@ -1,46 +1,34 @@
-import Image from "next/image"
+"use client"
+
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { motion, AnimatePresence } from "framer-motion"
 import { AnimatedSection } from "./AnimatedSection"
+import { ProjectCard } from "./ProjectCard"
 
 const projects = [
   {
     id: 1,
     category: "vinyle",
-    image: "/placeholder.svg?height=400&width=600",
+    image: "/images/realisations/vinyl-project.jpg",
     title: "Maison moderne en vinyle",
+    description: "Rénovation complète du revêtement extérieur en vinyle pour une maison moderne.",
   },
   {
     id: 2,
     category: "aluminium",
-    image: "/placeholder.svg?height=400&width=600",
+    image: "/images/realisations/aluminum-project.jpg",
     title: "Façade en aluminium",
+    description: "Installation d'un revêtement en aluminium pour une façade commerciale.",
   },
   {
     id: 3,
     category: "bois",
-    image: "/placeholder.svg?height=400&width=600",
+    image: "/images/realisations/wood-project.jpg",
     title: "Chalet en bois",
+    description: "Restauration et traitement d'un revêtement en bois pour un chalet de montagne.",
   },
-  {
-    id: 4,
-    category: "vinyle",
-    image: "/placeholder.svg?height=400&width=600",
-    title: "Résidence en vinyle",
-  },
-  {
-    id: 5,
-    category: "aluminium",
-    image: "/placeholder.svg?height=400&width=600",
-    title: "Immeuble commercial en aluminium",
-  },
-  {
-    id: 6,
-    category: "bois",
-    image: "/placeholder.svg?height=400&width=600",
-    title: "Maison de campagne en bois",
-  },
+  // Ajoutez d'autres projets ici...
 ]
 
 export function Realisations() {
@@ -78,18 +66,7 @@ export function Realisations() {
                 exit={{ opacity: 0, scale: 0.8 }}
                 transition={{ duration: 0.5 }}
               >
-                <div className="group relative overflow-hidden rounded-lg">
-                  <Image
-                    src={project.image || "/placeholder.svg"}
-                    alt={project.title}
-                    width={600}
-                    height={400}
-                    className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <h3 className="text-white text-xl font-semibold">{project.title}</h3>
-                  </div>
-                </div>
+                <ProjectCard title={project.title} description={project.description} imageUrl={project.image} />
               </motion.div>
             ))}
           </motion.div>

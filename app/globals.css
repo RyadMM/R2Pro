@@ -52,6 +52,8 @@
 @layer base {
   body {
     @apply font-sans;
+    background: linear-gradient(to bottom, #ffffff, #e6f3ff);
+    min-height: 100vh;
   }
 
   h1,
