@@ -156,7 +156,7 @@ export function Temoignages() {
         </div>
 
         <div className="mt-12 text-center">
-          <div className="flex flex-col md:flex-row justify-center gap-4">
+          <div className="flex temoignages-buttons flex-col md:flex-row justify-center gap-4">
             <CustomButton asChild className="bg-white border-r2pro text-r2pro hover:bg-r2pro-50 group px-8 w-96">
               <a
                 href="https://g.page/r/CVKZr9vILHA4EAI/review"
