@@ -1,4 +1,4 @@
-import { Hammer, Wrench, Clipboard, SprayCanIcon as Spray } from "lucide-react"
+import { Clipboard, Hammer, SprayCanIcon as Spray, Wrench } from "lucide-react"
 
 export const services = [
   {

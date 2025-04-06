@@ -1,9 +1,9 @@
 "use client"
 
-import Image from "next/image"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Users, Shield, ThumbsUp } from "lucide-react"
 import { motion, useScroll, useTransform } from "framer-motion"
+import { Shield, ThumbsUp, Users } from "lucide-react"
+import Image from "next/image"
 import { useRef } from "react"
 import { AnimatedSection } from "./AnimatedSection"
 

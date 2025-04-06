@@ -1,7 +1,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { services } from "./servicesData"
 import { motion } from "framer-motion"
 import { AnimatedSection } from "./AnimatedSection"
+import { services } from "./servicesData"
 
 export function Services() {
   return (

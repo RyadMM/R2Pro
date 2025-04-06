@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { motion } from "framer-motion"
 import { Star } from "lucide-react"
 import { AnimatedSection } from "./AnimatedSection"
-import { motion } from "framer-motion"
 
 const testimonials = [
   {

@@ -1,7 +1,7 @@
 "use client"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
-import { AnimatedSection } from "./AnimatedSection"
 import { motion } from "framer-motion"
+import { AnimatedSection } from "./AnimatedSection"
 
 const faqData = [
   {

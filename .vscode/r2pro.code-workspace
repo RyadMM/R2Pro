@@ -1,0 +1,38 @@
+{
+  "folders": [
+    {
+      "path": "/Users/ryad/Downloads/r2pro-website (14)/"
+    },
+    {
+      "path": "/Users/ryad/Downloads/r2pro-website (14)/app"
+    },
+    {
+      "path": "/Users/ryad/Downloads/r2pro-website (14)/components"
+    },
+    {
+      "path": "/Users/ryad/Downloads/r2pro-website (14)/lib"
+    },
+    {
+      "path": "/Users/ryad/Downloads/r2pro-website (14)/public"
+    },
+    {
+      "path": "/Users/ryad/Downloads/r2pro-website (14)/styles"
+    },
+    {
+      "path": "/Users/ryad/Downloads/r2pro-website (14)/hooks"
+    },
+    {
+      "path": "/Users/ryad/Downloads/r2pro-website (14)/public/images"
+    }
+  ],
+  "settings": {
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true,
+    "files.trimTrailingWhitespace": true,
+    "files.insertFinalNewline": true
+  },
+  "recommendations": [
+    "esbenp.prettier-vscode",
+    "dbaeumer.vscode-eslint"
+  ]
+}

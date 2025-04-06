@@ -1,12 +1,5 @@
 "use client"
 
-import { useEffect, useState, useCallback } from "react"
-import { motion } from "framer-motion"
-import Link from "next/link"
-import { usePathname } from "next/navigation"
-import { type LucideIcon, Home, Image, Info, Phone, Wrench } from "lucide-react"
-import { cn } from "@/lib/utils"
-import { useRouter } from "next/navigation"
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -15,6 +8,12 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu"
+import { cn } from "@/lib/utils"
+import { motion } from "framer-motion"
+import { type LucideIcon, Home, Image, Info, Phone, Wrench } from "lucide-react"
+import Link from "next/link"
+import { usePathname, useRouter } from "next/navigation"
+import { useCallback, useEffect, useState } from "react"
 
 interface NavItem {
   name: string

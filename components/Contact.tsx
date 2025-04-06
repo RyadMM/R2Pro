@@ -1,13 +1,13 @@
 "use client"
 
-import { useForm } from "react-hook-form"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
 import { Checkbox } from "@/components/ui/checkbox"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
+import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Mail, Phone, MapPin, Map } from "lucide-react"
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
+import { Textarea } from "@/components/ui/textarea"
+import { Mail, Map, MapPin, Phone } from "lucide-react"
+import { useForm } from "react-hook-form"
 import { AnimatedSection } from "./AnimatedSection"
 
 type FormData = {
