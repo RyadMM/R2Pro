@@ -1,14 +1,17 @@
 "use client"
 
-import { Button } from "@/components/ui/button"
+import { SectionContainer } from "@/components/SectionContainer"
 import { Checkbox } from "@/components/ui/checkbox"
+import { CustomButton } from "@/components/ui/custom-button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Textarea } from "@/components/ui/textarea"
-import { Mail, Map, MapPin, Phone } from "lucide-react"
+import confetti from 'canvas-confetti'
+import { motion } from "framer-motion"
+import { CheckCircle, Mail, Map, MapPin, Phone } from "lucide-react"
+import { useState } from "react"
 import { useForm } from "react-hook-form"
-import { AnimatedSection } from "./AnimatedSection"
 
 type FormData = {
   firstName: string
@@ -20,29 +23,164 @@ type FormData = {
   acceptTerms: boolean
 }
 
+// Fonction pour lancer l'effet de confetti
+const launchConfetti = () => {
+  // Configuration pour un effet de confetti élégant
+  const count = 200
+  const defaults = {
+    origin: { y: 0.7 },
+    zIndex: 1000,
+  }
+
+  // Lancer des confettis avec les couleurs de R2Pro (bleus)
+  function fire(particleRatio: number, opts: any) {
+    confetti({
+      ...defaults,
+      ...opts,
+      particleCount: Math.floor(count * particleRatio),
+    })
+  }
+
+  // Séquence de confettis avec différentes couleurs et angles
+  fire(0.25, {
+    spread: 26,
+    startVelocity: 55,
+    colors: ["#3B82F6", "#60A5FA", "#93C5FD"],
+    origin: { x: 0.2, y: 0.7 },
+  })
+  fire(0.2, {
+    spread: 60,
+    colors: ["#1E40AF", "#2563EB", "#3B82F6"],
+    origin: { x: 0.5, y: 0.7 },
+  })
+  fire(0.35, {
+    spread: 100,
+    decay: 0.91,
+    scalar: 0.8,
+    colors: ["#60A5FA", "#93C5FD", "#DBEAFE"],
+    origin: { x: 0.8, y: 0.7 },
+  })
+  fire(0.1, {
+    spread: 120,
+    startVelocity: 25,
+    decay: 0.92,
+    scalar: 1.2,
+    colors: ["#1E40AF", "#2563EB", "#3B82F6"],
+    origin: { x: 0.5, y: 0.7 },
+  })
+  fire(0.1, {
+    spread: 120,
+    startVelocity: 45,
+    colors: ["#60A5FA", "#93C5FD", "#DBEAFE"],
+    origin: { x: 0.5, y: 0.7 },
+  })
+}
+
 export function Contact() {
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
   const {
     register,
     handleSubmit,
-    formState: { errors },
-  } = useForm<FormData>()
+    formState: { errors, isSubmitting },
+  } = useForm<FormData>();
 
-  const onSubmit = (data: FormData) => console.log(data)
+  const onSubmit = async (data: FormData) => {
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        console.log('Form submitted successfully!');
+        setIsSubmitted(true);
+        setTimeout(() => {
+          launchConfetti();
+        }, 300);
+      } else {
+        console.error('Form submission failed.');
+      }
+    } catch (error) {
+      console.error('An error occurred:', error);
+    }
+  };
 
   return (
-    <section id="contact-form" className="py-24 bg-gradient-to-b from-gray-100 to-white">
-      <div className="container max-w-7xl mx-auto px-4">
-        <div className="grid md:grid-cols-2 gap-12">
-          <AnimatedSection animation="slideIn">
-            <div className="bg-white rounded-2xl shadow-xl p-8">
-              <h2 className="text-3xl font-bold mb-6">Obtenez une soumission!</h2>
-              <p className="text-gray-600 mb-8">
-                Demandez une soumission pour nos services de revêtement extérieur et transformez l'apparence de votre
-                propriété!
-              </p>
+    <SectionContainer id="contact" className="py-16 md:py-24">
+      {/* Éléments décoratifs - position absolute pour ne pas affecter le flux */}
+      <div className="absolute top-0 right-0 w-64 h-64 bg-r2pro-100 rounded-full opacity-20 blur-3xl transform translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
+      <div className="absolute bottom-0 left-0 w-64 h-64 bg-r2pro-200 rounded-full opacity-20 blur-3xl transform -translate-x-1/2 translate-y-1/2 pointer-events-none"></div>
+      <div className="absolute top-1/3 left-0 w-32 h-32 bg-r2pro-300 rounded-full opacity-10 blur-2xl pointer-events-none"></div>
+      <div className="absolute bottom-1/4 right-0 w-40 h-40 bg-r2pro-400 rounded-full opacity-10 blur-2xl pointer-events-none"></div>
 
-              <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-                <div className="grid grid-cols-2 gap-4">
+      <div className="container max-w-7xl mx-auto px-4 relative z-10">
+        <div className="text-center mb-12">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.1 }}
+            viewport={{ once: true }}
+            className="text-3xl md:text-4xl font-bold text-center mb-6 text-r2pro-800 relative mx-auto"
+          >
+            Contactez-nous
+            <motion.div
+              className="absolute -bottom-2 left-0 right-0 h-1 bg-r2pro-500 rounded-full"
+              initial={{ width: "0%" }}
+              whileInView={{ width: "100%" }}
+              transition={{ duration: 0.8, delay: 0.5 }}
+              viewport={{ once: true }}
+            />
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.7, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="max-w-2xl mx-auto text-gray-800 text-base md:text-lg leading-relaxed"
+          >
+            Demandez une soumission gratuite ou posez-nous vos questions
+          </motion.p>
+        </div>
+        <div className="grid md:grid-cols-2 gap-12">
+
+          <div className="bg-white rounded-2xl shadow-xl p-8 border border-gray-100 relative">
+            {/* Élément décoratif dans la carte */}
+            <div className="absolute -top-10 -right-10 w-40 h-40 bg-r2pro-50 rounded-full opacity-20"></div>
+
+            <h2 className="text-3xl font-bold mb-6 text-r2pro-800">Obtenez une soumission!</h2>
+            <p className="text-gray-600 mb-8">
+              Demandez une soumission pour nos services de revêtement extérieur et transformez l'apparence de votre
+              propriété!
+            </p>
+            {isSubmitted ? (
+              <div className="text-center py-12">
+                <motion.div
+                  initial={{ scale: 0.8, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-100 mb-6">
+                    <CheckCircle className="w-8 h-8 text-green-600" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-r2pro-800 mb-4">Merci pour votre message!</h3>
+                  <p className="text-r2pro-600 mb-6">
+                    Nous avons bien reçu votre demande et nous vous contacterons dans les plus brefs délais.
+                  </p>
+                  <CustomButton
+                    onClick={() => setIsSubmitted(false)}
+                    className="bg-r2pro hover:bg-r2pro-600 text-white"
+                  >
+                    Envoyer une autre demande
+                  </CustomButton>
+                </motion.div>
+              </div>
+            ) : (
+              <form id="contact-form" onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label htmlFor="firstName">Prénom</Label>
                     <Input
@@ -63,7 +201,7 @@ export function Contact() {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label htmlFor="email">Courriel</Label>
                     <Input
@@ -94,7 +232,7 @@ export function Contact() {
 
                 <div className="space-y-4">
                   <Label>Type de projet</Label>
-                  <RadioGroup defaultValue="interior" className="grid grid-cols-2 gap-4">
+                  <RadioGroup defaultValue="interior" className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem value="interior" id="interior" />
                       <Label htmlFor="interior">Projet intérieur</Label>
@@ -142,21 +280,23 @@ export function Contact() {
                   </Label>
                 </div>
 
-                <Button
-                  type="submit"
-                  className="w-full bg-r2pro hover:bg-r2pro-600 text-white py-3 rounded-lg transition-all duration-300"
-                >
+                <CustomButton type="submit" className="w-full bg-r2pro hover:bg-r2pro-600 text-white py-3 rounded-lg">
                   Envoyer ma demande
-                </Button>
+                </CustomButton>
               </form>
-            </div>
-          </AnimatedSection>
+            )}
+          </div>
 
-          <AnimatedSection animation="slideIn" className="space-y-8">
-            <div className="bg-white rounded-2xl shadow-xl p-8">
-              <div className="space-y-6">
-                <div className="flex items-center space-x-4">
-                  <div className="p-3 bg-r2pro/10 rounded-full">
+
+          <div className="space-y-8">
+            <div className="bg-white rounded-2xl shadow-xl p-8 border border-gray-100 relative">
+              {/* Élément décoratif dans la carte */}
+              <div className="absolute -top-10 -left-10 w-40 h-40 bg-r2pro-50 rounded-full opacity-20"></div>
+
+              <h3 className="text-2xl font-bold mb-8 text-r2pro-800">Nos coordonnées</h3>
+              <div className="space-y-8">
+                <div className="flex items-center space-x-4 transition-transform hover:translate-x-2 duration-300">
+                  <div className="p-4 bg-r2pro/10 rounded-full">
                     <Mail className="w-6 h-6 text-r2pro" />
                   </div>
                   <div>
@@ -167,8 +307,8 @@ export function Contact() {
                   </div>
                 </div>
 
-                <div className="flex items-center space-x-4">
-                  <div className="p-3 bg-r2pro/10 rounded-full">
+                <div className="flex items-center space-x-4 transition-transform hover:translate-x-2 duration-300">
+                  <div className="p-4 bg-r2pro/10 rounded-full">
                     <Phone className="w-6 h-6 text-r2pro" />
                   </div>
                   <div>
@@ -182,8 +322,8 @@ export function Contact() {
                   </div>
                 </div>
 
-                <div className="flex items-center space-x-4">
-                  <div className="p-3 bg-r2pro/10 rounded-full">
+                <div className="flex items-center space-x-4 transition-transform hover:translate-x-2 duration-300">
+                  <div className="p-4 bg-r2pro/10 rounded-full">
                     <MapPin className="w-6 h-6 text-r2pro" />
                   </div>
                   <div>
@@ -196,8 +336,8 @@ export function Contact() {
                   </div>
                 </div>
 
-                <div className="flex items-center space-x-4">
-                  <div className="p-3 bg-r2pro/10 rounded-full">
+                <div className="flex items-center space-x-4 transition-transform hover:translate-x-2 duration-300">
+                  <div className="p-4 bg-r2pro/10 rounded-full">
                     <Map className="w-6 h-6 text-r2pro" />
                   </div>
                   <div>
@@ -206,11 +346,15 @@ export function Contact() {
                   </div>
                 </div>
               </div>
+
+              {/* Bannière décorative en bas */}
+              <div className="mt-8 p-4 bg-gradient-to-r from-r2pro-50 to-r2pro-100 rounded-lg">
+                <p className="text-r2pro-800 font-medium text-center">Nous sommes à votre service!</p>
+              </div>
             </div>
-          </AnimatedSection>
+          </div>
         </div>
       </div>
-    </section>
+    </SectionContainer>
   )
 }
-

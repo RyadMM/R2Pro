@@ -1,42 +1,45 @@
-import { motion } from "framer-motion"
+"use client"
+
 import type { ReactNode } from "react"
+import { motion } from "framer-motion"
+import { cn } from "@/lib/utils"
 
 interface AnimatedSectionProps {
   children: ReactNode
   className?: string
-  animation?: "fadeIn" | "slideIn" | "scaleIn" | "rotateIn"
+  animation?: "fadeIn" | "slideIn" | "scaleIn"
+  delay?: number
 }
 
-const animations = {
-  fadeIn: {
-    initial: { opacity: 0 },
-    whileInView: { opacity: 1 },
-    viewport: { once: true, amount: 0.2 },
-    transition: { duration: 0.6, ease: "easeOut" },
-  },
-  slideIn: {
-    initial: { x: -50, opacity: 0 },
-    whileInView: { x: 0, opacity: 1 },
-    viewport: { once: true, amount: 0.2 },
-    transition: { duration: 0.6, ease: "easeOut" },
-  },
-  scaleIn: {
-    initial: { scale: 0.8, opacity: 0 },
-    whileInView: { scale: 1, opacity: 1 },
-    viewport: { once: true, amount: 0.2 },
-    transition: { duration: 0.6, ease: "easeOut" },
-  },
-  rotateIn: {
-    initial: { rotate: -10, opacity: 0 },
-    whileInView: { rotate: 0, opacity: 1 },
-    viewport: { once: true, amount: 0.2 },
-    transition: { duration: 0.6, ease: "easeOut" },
-  },
-}
+export function AnimatedSection({ children, className, animation = "fadeIn", delay = 0 }: AnimatedSectionProps) {
+  // Définir les animations
+  const animations = {
+    fadeIn: {
+      initial: { opacity: 0 },
+      whileInView: { opacity: 1 },
+      transition: { duration: 0.7, delay },
+    },
+    slideIn: {
+      initial: { opacity: 0, y: 50 },
+      whileInView: { opacity: 1, y: 0 },
+      transition: { duration: 0.7, delay },
+    },
+    scaleIn: {
+      initial: { opacity: 0, scale: 0.9 },
+      whileInView: { opacity: 1, scale: 1 },
+      transition: { duration: 0.7, delay },
+    },
+  }
 
-export function AnimatedSection({ children, className, animation = "fadeIn" }: AnimatedSectionProps) {
+  const selectedAnimation = animations[animation]
+
   return (
-    <motion.div className={className} {...animations[animation]}>
+    <motion.div
+      {...selectedAnimation}
+      viewport={{ once: true, margin: "-50px" }}
+      className={cn("", className)}
+      style={{ willChange: "transform, opacity" }} // Optimisation des performances
+    >
       {children}
     </motion.div>
   )

@@ -1,13 +1,15 @@
-import { Footer } from "@/components/Footer"
 import { NavBar } from "@/components/NavBar"
+import { Footer } from "@/components/Footer"
 import { PageTransition } from "@/components/PageTransition"
+import { SplashScreen } from "@/components/SplashScreen"
 import { Analytics } from "@vercel/analytics/react"
 import { SpeedInsights } from "@vercel/speed-insights/next"
-import { Montserrat, Roboto } from "next/font/google"
-import type React from "react"; // Import React
-import "./globals.css"
-import { defaultMetadata } from "./metadata"
 import { generateLocalBusinessSchema, generateServiceSchema } from "./schema"
+import { defaultMetadata } from "./metadata"
+import "./globals.css"
+import { Montserrat, Roboto } from "next/font/google"
+import type React from "react" // Import React
+import { ScrollToHashProvider } from "@/components/ScrollToHashProvider"
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -49,15 +51,22 @@ export default function RootLayout({
         <meta name="geo.placename" content="Repentigny" />
         <meta name="geo.position" content="45.7419;-73.4497" />
         <meta name="ICBM" content="45.7419, -73.4497" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
+        {/* Fix pour iOS Safari */}
+        <meta name="apple-mobile-web-app-capable" content="yes" />
       </head>
       <body
-        className={`min-h-screen bg-background font-sans antialiased flex flex-col ${montserrat.className} ${roboto.className}`}
+        className={`min-h-screen font-sans antialiased flex flex-col ios-scroll-fix ${montserrat.className} ${roboto.className} overflow-x-hidden`}
       >
-        <NavBar />
-        <PageTransition>
-          <main className="flex-grow">{children}</main>
-        </PageTransition>
-        <Footer />
+        <SplashScreen />
+        <div className="page-gradient"></div>
+        <ScrollToHashProvider>
+          <NavBar />
+          <PageTransition>
+            <main className="flex-grow overflow-x-hidden overflow-fix zoom-fix">{children}</main>
+          </PageTransition>
+          <Footer />
+        </ScrollToHashProvider>
         <Analytics />
         <SpeedInsights />
       </body>
@@ -65,3 +74,6 @@ export default function RootLayout({
   )
 }
 
+
+
+import './globals.css'

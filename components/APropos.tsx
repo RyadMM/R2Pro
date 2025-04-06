@@ -42,13 +42,13 @@ export function APropos() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <motion.div style={{ y }}>
             <AnimatedSection>
-              <h2 className="text-4xl font-bold mb-6 text-r2pro-800">À propos de R2Pro</h2>
-              <p className="text-lg mb-6 text-gray-600">
+              <h2 className="text-4xl font-bold mb-6 text-r2pro-800 font-heading">À propos de R2Pro</h2>
+              <p className="text-lg mb-6 text-gray-600 font-sans">
                 Depuis plus de 15 ans, R2Pro s'est imposé comme le leader du revêtement extérieur au Québec. Notre
                 passion pour l'excellence et notre engagement envers la satisfaction client nous ont permis de réaliser
                 des milliers de projets avec succès.
               </p>
-              <p className="text-lg mb-6 text-gray-600">
+              <p className="text-lg mb-6 text-gray-600 font-sans">
                 Que ce soit pour le vinyle, l'aluminium ou le bois, notre équipe d'experts saura transformer l'extérieur
                 de votre maison pour lui donner une nouvelle vie.
               </p>
@@ -59,7 +59,7 @@ export function APropos() {
               src="/images/about/team-at-work.jpg"
               alt="L'équipe R2Pro au travail"
               layout="fill"
-              objectFit="cover"
+              style={{ objectFit: 'cover', objectPosition: 'center' }}
               className="rounded-lg shadow-2xl"
             />
           </div>
@@ -78,10 +78,10 @@ export function APropos() {
                     <div className="mb-4 text-r2pro">
                       <value.icon size={48} />
                     </div>
-                    <CardTitle className="text-xl font-bold text-r2pro-700">{value.title}</CardTitle>
+                    <CardTitle className="text-xl font-bold text-r2pro-700 font-heading">{value.title}</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-gray-600">{value.description}</p>
+                    <p className="text-gray-600 font-sans">{value.description}</p>
                   </CardContent>
                 </Card>
               </motion.div>
@@ -92,4 +92,3 @@ export function APropos() {
     </section>
   )
 }
-

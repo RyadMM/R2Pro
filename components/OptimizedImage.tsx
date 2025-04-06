@@ -17,11 +17,10 @@ export function OptimizedImage({ src, alt, width, height, className }: Optimized
         src={imageSrc || "/placeholder.svg"}
         alt={alt}
         layout="fill"
-        objectFit="cover"
+        style={{ objectFit: 'cover' }}
         quality={90}
         className="rounded-lg"
       />
     </div>
   )
 }
-
