@@ -16,8 +16,8 @@ export async function generateStaticParams() {
   }))
 }
 
-export default function ProjectPage({ params }: { params: { id: string } }) {
-  const project = projects.find((p) => p.id === params.id.toString())
+export default async function ProjectPage({ params }: { params: { id: string } }) {
+  const project = projects.find(async (p) => p.id === (await params).id.toString())
 
   if (!project) {
     notFound()
@@ -264,11 +264,7 @@ export default function ProjectPage({ params }: { params: { id: string } }) {
 
       {/* CTA Section */}
       <SectionDivider />
-      <SoumissionCTA
-        title="Vous aimez ce projet ?"
-        description="Contactez-nous pour discuter de votre projet et obtenir un devis gratuit."
-        buttonText="Demander un devis similaire"
-      />
+      <SoumissionCTA />
     </div>
   )
 }
