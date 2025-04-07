@@ -1,14 +1,15 @@
-import { Footer } from "@/components/Footer"
-import { NavBar } from "@/components/NavBar"
-import { PageTransition } from "@/components/PageTransition"
-import { ScrollToHashProvider } from "@/components/ScrollToHashProvider"
-import { Analytics } from "@vercel/analytics/react"
-import { SpeedInsights } from "@vercel/speed-insights/next"
-import { Montserrat, Roboto } from "next/font/google"
+import { Footer } from "@/components/Footer";
+import HeadComponent from "@/components/Head";
+import { NavBar } from "@/components/NavBar";
+import { PageTransition } from "@/components/PageTransition";
+import { ScrollToHashProvider } from "@/components/ScrollToHashProvider";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Montserrat, Roboto } from "next/font/google";
 import type React from "react"; // Import React
-import "./globals.css"
-import { defaultMetadata } from "./metadata"
-import { generateLocalBusinessSchema, generateServiceSchema } from "./schema"
+import "./globals.css";
+import { defaultMetadata } from "./metadata";
+import { generateLocalBusinessSchema, generateServiceSchema } from "./schema";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -33,6 +34,7 @@ export default function RootLayout({
   return (
     <html lang="fr" className={`${montserrat.variable} ${roboto.variable}`}>
       <head>
+        <HeadComponent />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -71,7 +73,3 @@ export default function RootLayout({
     </html>
   )
 }
-
-
-
-import './globals.css'

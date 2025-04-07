@@ -8,7 +8,7 @@ export function generateLocalBusinessSchema() {
       "Expert en revêtement extérieur et intérieur au Québec - Installation professionnelle de vinyle, aluminium, bois, armoires de cuisine et plus.",
     url: "https://r2pro.ca",
     logo: "https://r2pro.ca/logo.png",
-    image: "https://r2pro.ca/og-image.jpg",
+    image: new URL('/images/og-image.jpg', 'https://r2pro.ca').toString(),
     telephone: "+1-514-666-7772",
     email: "info@r2pro.ca",
     address: {
@@ -89,4 +89,3 @@ export function generateServiceSchema() {
     },
   }
 }
-
