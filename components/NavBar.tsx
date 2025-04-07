@@ -10,7 +10,7 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"; // Add Popover imports
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
 import { type LucideIcon, ChevronRight, Home, Image, Info, Menu, Phone, Wrench } from "lucide-react";
@@ -258,7 +258,7 @@ export function NavBar({ items = defaultItems, className }: NavBarProps) {
           </SheetTrigger>
           <SheetContent side="right" className="p-0 w-[85vw] max-w-[350px] border-l-primary/20">
             {/* Add visually hidden heading for accessibility */}
-            <h2 className="sr-only">Navigation Menu</h2>
+            <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
             {/* Sheet Content remains largely the same, logo is already here */}
             <div className="flex flex-col h-full">
               <div className="p-5 border-b bg-primary/5">

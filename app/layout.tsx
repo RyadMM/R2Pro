@@ -1,15 +1,14 @@
-import { NavBar } from "@/components/NavBar"
 import { Footer } from "@/components/Footer"
+import { NavBar } from "@/components/NavBar"
 import { PageTransition } from "@/components/PageTransition"
-import { SplashScreen } from "@/components/SplashScreen"
+import { ScrollToHashProvider } from "@/components/ScrollToHashProvider"
 import { Analytics } from "@vercel/analytics/react"
 import { SpeedInsights } from "@vercel/speed-insights/next"
-import { generateLocalBusinessSchema, generateServiceSchema } from "./schema"
-import { defaultMetadata } from "./metadata"
-import "./globals.css"
 import { Montserrat, Roboto } from "next/font/google"
-import type React from "react" // Import React
-import { ScrollToHashProvider } from "@/components/ScrollToHashProvider"
+import type React from "react"; // Import React
+import "./globals.css"
+import { defaultMetadata } from "./metadata"
+import { generateLocalBusinessSchema, generateServiceSchema } from "./schema"
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -58,7 +57,6 @@ export default function RootLayout({
       <body
         className={`min-h-screen font-sans antialiased flex flex-col ios-scroll-fix ${montserrat.className} ${roboto.className} overflow-x-hidden`}
       >
-        <SplashScreen />
         <div className="page-gradient"></div>
         <ScrollToHashProvider>
           <NavBar />
