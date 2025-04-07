@@ -1,8 +1,13 @@
 "use client"
 
+"use client"
+
+import { CustomButton } from "@/components/CustomButton"
+import { ButtonVariant } from "@/components/ui/button"
 import { motion } from "framer-motion"
+import { ArrowRight } from "lucide-react"
 import Image from "next/image"
-// Ajouter l'import pour notre nouveau composant
+import Link from "next/link"
 
 export function SoumissionCTA() {
   // Vérification du chemin de l'image dans la console pour débogage
@@ -35,13 +40,37 @@ export function SoumissionCTA() {
               Obtenez une estimation précise et sans engagement pour votre projet de revêtement extérieur
             </p>
 
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="inline-block">
-              <a
-                href="/contact#contact-form"
-                className="py-4 px-8 md:px-6 rounded-full shadow-lg bg-white text-r2pro-500 hover:shadow-lg border border-r2pro-500 font-medium transition-all duration-300 inline-flex items-center justify-center text-base"
-              >
-                Demander une soumission
-              </a>
+            <motion.div
+              className="inline-block"
+              variants={{
+                pulse: {
+                  scale: [1, 1.05, 1],
+                  transition: {
+                    duration: 1.5,
+                    ease: "easeInOut",
+                    repeat: Infinity,
+                  },
+                },
+              }}
+              initial="pulse"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Link href="/contact#contact-form">
+                <CustomButton
+                  variant={"primary" as ButtonVariant}
+                  className="py-4 px-8 md:px-6 rounded-full shadow-lg flex items-center justify-center"
+                >
+                  Parlez à un expert dès aujourd'hui
+                  <motion.div
+                    className="ml-2"
+                    animate={{ x: [0, 5, 0] }}
+                    transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                  >
+                    <ArrowRight className="h-5 w-5" />
+                  </motion.div>
+                </CustomButton>
+              </Link>
             </motion.div>
           </motion.div>
         </div>

@@ -29,7 +29,7 @@ export default async function ProjectPage({ params }: { params: { id: string } }
     : projects.filter((p) => p.category === project.category && p.id !== project.id).slice(0, 3)
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[url('/images/background-pattern.svg')] overflow-x-hidden w-full">
       {/* Hero Section */}
       <section className="relative h-[50vh] md:h-[60vh] overflow-hidden">
         <Image
@@ -182,6 +182,37 @@ export default async function ProjectPage({ params }: { params: { id: string } }
               )}
 
               {/* Contact Card */}
+              {/*
+              <div className="bg-white rounded-xl shadow-md p-6">
+                <h3 className="text-xl font-semibold text-gray-800 mb-4">Vous avez un projet similaire?</h3>
+                <p className="text-gray-700 mb-4">
+                  Contactez-nous dès aujourd'hui pour discuter de votre projet et obtenir un devis gratuit et sans
+                  engagement.
+                </p>
+                <div className="space-y-4">
+                  <Link href="/contact">
+                    <CustomButton className="w-full bg-r2pro hover:bg-r2pro-600 text-white flex items-center justify-center">
+                      Nous contacter
+                      <motion.div
+                        className="ml-2"
+                        animate={{ x: [0, 5, 0] }}
+                        transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                      >
+                        <ArrowRight className="h-5 w-5" />
+                      </motion.div>
+                    </CustomButton>
+                  </Link>
+
+                  <Link href="/#services">
+                    <CustomButton variant="outline" className="w-full border-r2pro text-r2pro hover:bg-r2pro/10 mt-4">
+                      Voir nos services
+                    </CustomButton>
+                  </Link>
+                </div>
+              </div>
+              */}
+
+              {/* Contact Card */}
               <div className="bg-white rounded-xl shadow-md p-6">
                 <h3 className="text-xl font-semibold text-gray-800 mb-4">Vous avez un projet similaire?</h3>
                 <p className="text-gray-700 mb-4">
@@ -194,8 +225,9 @@ export default async function ProjectPage({ params }: { params: { id: string } }
                       Nous contacter
                     </CustomButton>
                   </Link>
+
                   <Link href="/#services">
-                    <CustomButton variant="outline" className="w-full border-r2pro text-r2pro hover:bg-r2pro/10">
+                    <CustomButton variant="outline" className="w-full border-r2pro text-r2pro hover:bg-r2pro/10 mt-4">
                       Voir nos services
                     </CustomButton>
                   </Link>
@@ -253,7 +285,7 @@ export default async function ProjectPage({ params }: { params: { id: string } }
       {relatedProjects.length > 0 && (
         <>
           <SectionDivider />
-          <section className="py-12 md:py-16 bg-gray-50">
+          <section className="py-12 md:py-16">
             <div className="container mx-auto px-4">
               <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-8 text-center">Projets similaires</h2>
               <RelatedProjects projects={relatedProjects} />

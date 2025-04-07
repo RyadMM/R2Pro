@@ -1,8 +1,9 @@
 "use client";
 
+import { CustomButton } from "@/components/CustomButton";
 import { SectionContainer } from "@/components/SectionContainer";
 import { TestimonialCard } from "@/components/TestimonialCard";
-import { CustomButton } from "@/components/ui/custom-button";
+import { ButtonVariant } from "@/components/ui/button";
 import { getAverageRating, getTotalReviews, reviews } from "@/data/reviews";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronLeft, ChevronRight, Star } from "lucide-react";
@@ -165,7 +166,7 @@ export function Temoignages() {
         </div>
 
         <div className="mt-8 flex flex-col sm:flex-row justify-center gap-4">
-          <CustomButton asChild>
+          <CustomButton asChild variant={"primary" as ButtonVariant}>
             <a
               href="https://g.page/r/CVKZr9vILHA4EAI/review"
               target="_blank"
@@ -193,7 +194,7 @@ export function Temoignages() {
               Laisser un avis sur Google
             </a>
           </CustomButton>
-          <CustomButton asChild variant="outline">
+          <CustomButton variant={"secondary" as ButtonVariant}>
             <a
               href="/reviews"
               className="inline-flex items-center justify-center"

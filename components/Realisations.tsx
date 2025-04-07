@@ -1,7 +1,7 @@
 "use client"
 
 import { CategoryTabs } from "@/components/CategoryTabs"
-import { CustomButton } from "@/components/ui/custom-button"
+import { Button } from "@/components/ui/button"
 import { projects } from "@/lib/projectData"
 import { AnimatePresence, motion } from "framer-motion"
 import { ArrowRight } from "lucide-react"
@@ -88,12 +88,12 @@ export function Realisations() {
 
         <div className="flex justify-center mt-12">
           <Link href="/realisations">
-            <CustomButton className="bg-r2pro hover:bg-r2pro-600 group text-white">
+            <Button className="hover:bg-r2pro-600 text-white font-medium group text-xs md:text-sm rounded-full">
               <span className="flex items-center justify-center text-base">
                 Voir toutes nos réalisations
                 <ArrowRight className="w-5 h-5 ml-2 transition-transform duration-300 group-hover:translate-x-1" />
               </span>
-            </CustomButton>
+            </Button>
           </Link>
         </div>
       </div>

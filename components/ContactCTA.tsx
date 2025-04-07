@@ -1,5 +1,6 @@
 "use client"
 
+import { Button } from "@/components/ui/button"
 import Image from "next/image"
 import Link from "next/link"
 
@@ -35,7 +36,7 @@ export function ContactCTA({
           <p className="text-xl text-white/90 mb-8">{subtitle}</p>
 
           <Link href="/contact#contact-form">
-            <button className="bg-white text-r2pro-600 hover:bg-r2pro hover:text-white px-8 py-4 rounded-full font-medium text-lg transition-colors duration-300 flex items-center mx-auto shadow-lg border-2 border-white/80">
+            <Button className="hover:bg-r2pro-600 text-white font-medium group text-xs md:text-sm rounded-full px-8 py-4 flex items-center mx-auto shadow-lg border-2 border-white/80">
               <span>Demander une soumission</span>
               <span className="ml-2">
                 <svg
@@ -54,7 +55,7 @@ export function ContactCTA({
                   <path d="m12 5 7 7-7 7"></path>
                 </svg>
               </span>
-            </button>
+            </Button>
           </Link>
         </div>
       </div>
