@@ -163,7 +163,7 @@ export const projects: Project[] = [
     relatedProjects: ["7", "8"],
   },
   {
-    id: "10",
+    id: "3",
     category: "revetement",
     subcategory: "fibrociment",
     title: "Revêtement en CanExel à Saint-Bruno",
@@ -183,7 +183,21 @@ export const projects: Project[] = [
     clientRating: 5,
     date: "Janvier 2025",
     location: "Saint-Bruno, QC",
-    beforeAfter: [],
+    images: [
+      "/images/realisations/projet-3/image-1.png",
+      "/images/realisations/projet-3/image-2.png",
+      "/images/realisations/projet-3/image-3.png",
+      "/images/realisations/projet-3/image-4.png",
+      "/images/realisations/projet-3/image-5.png",
+      "/images/realisations/projet-3/image-6.png",
+    ],
+    beforeAfter: [
+      {
+        before: "/images/realisations/projet-3/before-1.png",
+        after: "/images/realisations/projet-3/after-1.png",
+        description: "Revêtement extérieur en CanExel VStyle couleur Sierra"
+      }
+    ],
     specifications: {
       "Type de matériau": "CanExel (fibre de bois haute densité)",
       "Finition": "VStyle",
@@ -193,10 +207,9 @@ export const projects: Project[] = [
       "Garantie": "Selon fabricant et installation R2Pro",
     },
     relatedProjects: [],
-    images: [],
   },
   {
-    id: "11",
+    id: "4",
     category: "revetement",
     subcategory: "aluminium",
     title: "Finition de façade en composite et aluminium à Boucherville",
@@ -213,7 +226,13 @@ export const projects: Project[] = [
     ],
     date: "Novembre 2024",
     location: "Boucherville, QC",
-    images: [],
+    images: [
+      "/images/realisations/projet-4/image-1.png",
+      "/images/realisations/projet-4/image-2.png",
+      "/images/realisations/projet-4/image-3.png",
+      "/images/realisations/projet-4/image-4.png",
+      "/images/realisations/projet-4/image-5.png",
+    ],
     beforeAfter: [],
     specifications: {
       "Type de matériau": "Composite (NewTechWood) et aluminium",

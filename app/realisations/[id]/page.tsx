@@ -17,10 +17,10 @@ export async function generateStaticParams() {
 }
 
 export default async function ProjectPage({ params }: { params: { id: string } }) {
-  const project = projects.find(async (p) => p.id === (await params).id.toString())
+  const project = projects.find((p) => p.id === params.id.toString())
 
   if (!project) {
-    notFound()
+    return notFound()
   }
 
   // Trouver les projets liés

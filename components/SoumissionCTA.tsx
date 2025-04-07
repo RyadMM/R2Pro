@@ -3,7 +3,6 @@
 import { motion } from "framer-motion"
 import Image from "next/image"
 // Ajouter l'import pour notre nouveau composant
-import { ContactButton } from "@/components/ContactButton"
 
 export function SoumissionCTA() {
   // Vérification du chemin de l'image dans la console pour débogage
@@ -37,12 +36,12 @@ export function SoumissionCTA() {
             </p>
 
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="inline-block">
-              <ContactButton
-                text="Demander une soumission gratuite"
-                variant="white"
-                className="py-4 px-8 rounded-full shadow-lg"
+              <a
                 href="/contact#contact-form"
-              />
+                className="py-4 px-8 md:px-6 rounded-full shadow-lg bg-white text-r2pro-500 hover:shadow-lg border border-r2pro-500 font-medium transition-all duration-300 inline-flex items-center justify-center text-base"
+              >
+                Demander une soumission
+              </a>
             </motion.div>
           </motion.div>
         </div>
@@ -50,4 +49,3 @@ export function SoumissionCTA() {
     </section>
   )
 }
-

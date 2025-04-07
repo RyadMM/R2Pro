@@ -22,7 +22,7 @@ export function Realisations() {
     filter === "tous" ? allProjects : allProjects.filter((project) => project.category === filter)
 
   return (
-    <section className="py-24">
+    <section className="py-12">
       <div className="container">
         <AnimatedSection animation="fadeIn">
           <motion.h2
@@ -88,7 +88,7 @@ export function Realisations() {
 
         <div className="flex justify-center mt-12">
           <Link href="/realisations">
-            <CustomButton className="bg-r2pro hover:bg-r2pro-600 group">
+            <CustomButton className="bg-r2pro hover:bg-r2pro-600 group text-white">
               <span className="flex items-center justify-center text-base">
                 Voir toutes nos réalisations
                 <ArrowRight className="w-5 h-5 ml-2 transition-transform duration-300 group-hover:translate-x-1" />

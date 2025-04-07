@@ -1,7 +1,7 @@
 "use client"
 
-import Link from "next/link"
 import Image from "next/image"
+import Link from "next/link"
 
 interface ContactCTAProps {
   backgroundImage?: string
@@ -15,7 +15,7 @@ export function ContactCTA({
   subtitle = "Contactez-nous dès aujourd'hui pour une soumission gratuite",
 }: ContactCTAProps) {
   return (
-    <section className="relative py-20 overflow-hidden">
+    <section className="relative py-12 overflow-hidden">
       {/* Image d'arrière-plan */}
       <div className="absolute inset-0 z-0">
         <Image
@@ -61,4 +61,3 @@ export function ContactCTA({
     </section>
   )
 }
-
