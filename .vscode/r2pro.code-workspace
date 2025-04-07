@@ -29,7 +29,13 @@
     "editor.tabSize": 2,
     "editor.insertSpaces": true,
     "files.trimTrailingWhitespace": true,
-    "files.insertFinalNewline": true
+    "files.insertFinalNewline": true,
+    "editor.formatOnSave": false,
+    "eslint.format.enable": false,
+    "prettier.enable": false,
+    "[typescriptreact]": {
+      "editor.formatOnSave": false
+    }
   },
   "recommendations": [
     "esbenp.prettier-vscode",

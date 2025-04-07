@@ -1,10 +1,10 @@
 "use client"
 
+import { useScrollToContactForm } from "@/hooks/useScrollToContactForm"
 import { motion } from "framer-motion"
 import { ArrowRight, CheckSquare, ImageIcon } from "lucide-react"
-import Link from "next/link"
 import Image from "next/image"
-import { useScrollToContactForm } from "@/hooks/useScrollToContactForm"
+import Link from "next/link"
 
 export function Hero() {
   const scrollToContactForm = useScrollToContactForm()
@@ -21,14 +21,14 @@ export function Hero() {
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/70 to-black/50"></div>
       </div>
-      <div className="absolute inset-0 flex items-center justify-center">
+      <div className="absolute inset-0 flex items-center flex-col justify-evenly">
         <div className="text-center text-white max-w-4xl px-4">
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 font-heading">
+          <h1 className="text-5xl md:text-6xl font-bold mb-6 font-heading bg-[url('/images/logosvg-cropped.svg')] bg-contain bg-no-repeat bg-center text-transparent">
             R2PRO
             <br />
             Experts en revêtement
           </h1>
-          <p className="text-xl md:text-2xl mb-8 font-sans text-white drop-shadow-md">
+          <p className="text-xl md:text-2xl mb-16 font-sans text-white drop-shadow-md">
             Transformez votre espace avec style et qualité
           </p>
 
@@ -91,7 +91,7 @@ export function Hero() {
             <motion.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="w-full sm:w-auto relative group"
+              className="w-full sm:w-auto relative group mb-4"
             >
               {/* Ajout d'un effet de halo similaire pour uniformiser */}
               <motion.div
@@ -138,10 +138,25 @@ export function Hero() {
               {/* Ajout d'un effet de brillance similaire */}
               <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-3/4 h-2 bg-white/10 blur-md rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </motion.div>
+
+            {/* Scroll Indicator */}
+            <div className="absolute bottom-[calc(15vh+env(safe-area-inset-bottom))] left-1/2 transform -translate-x-1/2 text-white flex flex-col items-center">
+              <motion.svg
+                animate={{ y: [0, 10, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity, repeatType: "reverse" }}
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+              </motion.svg>
+            </div>
           </div>
         </div>
       </div>
     </section>
   )
 }
-
