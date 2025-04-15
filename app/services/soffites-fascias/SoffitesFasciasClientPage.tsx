@@ -1,14 +1,14 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import { motion } from "framer-motion"
-import Image from "next/image"
+import { SectionContainer } from "@/components/SectionContainer"
 import { ServiceHero } from "@/components/ServiceHero"
 import { Card, CardContent } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { CheckCircle2, ArrowRight, CheckSquare, Wind, Droplets, Shield, Home, Paintbrush } from "lucide-react"
+import { motion } from "framer-motion"
+import { ArrowRight, CheckCircle2, CheckSquare, Droplets, Home, Paintbrush, Shield, Wind } from "lucide-react"
+import Image from "next/image"
 import Link from "next/link"
-import { SectionContainer } from "@/components/SectionContainer"
+import { useEffect, useState } from "react"
 
 export default function SoffitesFasciasClientPage() {
   // Ajout d'un état pour vérifier si le composant est monté
@@ -43,7 +43,7 @@ export default function SoffitesFasciasClientPage() {
         description="Protégez votre toiture et améliorez la ventilation de votre maison avec nos solutions de soffites et fascias durables et esthétiques."
         ctaText="Demander un devis gratuit"
         ctaLink="/contact#contact-form"
-        backgroundImage="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/hero-soffites.jpg-4k7cDAhVXinf3q7mDDj2Iy6q8WXVs2.jpeg"
+        backgroundImage="/images/services/soffites-fascias/hero-soffites.jpg"
         ctaIcon={<CheckSquare className="w-5 h-5 mr-2" />}
       />
 
@@ -412,7 +412,7 @@ export default function SoffitesFasciasClientPage() {
             <Card className="overflow-hidden">
               <CardContent className="p-0">
                 <div className="flex flex-col md:flex-row">
-                  <div className="w-full md:w-1/3">
+                  <div className="w-full md:w-1/3 rounded-t-xl md:rounded-l-xl md:rounded-tr-none overflow-hidden">
                     <div className="relative h-48 md:h-full">
                       <Image
                         src="/images/services/soffites-fascias/materiau-aluminium.jpg"
@@ -461,7 +461,7 @@ export default function SoffitesFasciasClientPage() {
             <Card className="overflow-hidden">
               <CardContent className="p-0">
                 <div className="flex flex-col md:flex-row">
-                  <div className="w-full md:w-1/3">
+                  <div className="w-full md:w-1/3 rounded-t-xl md:rounded-l-xl md:rounded-tr-none overflow-hidden">
                     <div className="relative h-48 md:h-full">
                       <Image
                         src="/images/services/soffites-fascias/materiau-acier.jpg"
@@ -510,7 +510,7 @@ export default function SoffitesFasciasClientPage() {
             <Card className="overflow-hidden">
               <CardContent className="p-0">
                 <div className="flex flex-col md:flex-row">
-                  <div className="w-full md:w-1/3">
+                  <div className="w-full md:w-1/3 rounded-t-xl md:rounded-l-xl md:rounded-tr-none overflow-hidden">
                     <div className="relative h-48 md:h-full">
                       <Image
                         src="/images/services/soffites-fascias/materiau-vinyle.jpg"
@@ -557,7 +557,7 @@ export default function SoffitesFasciasClientPage() {
             <Card className="overflow-hidden">
               <CardContent className="p-0">
                 <div className="flex flex-col md:flex-row">
-                  <div className="w-full md:w-1/3">
+                  <div className="w-full md:w-1/3 rounded-t-xl md:rounded-l-xl md:rounded-tr-none overflow-hidden">
                     <div className="relative h-48 md:h-full">
                       <Image
                         src="/images/services/soffites-fascias/materiau-bois.jpg"
@@ -869,4 +869,3 @@ export default function SoffitesFasciasClientPage() {
     </div>
   )
 }
-

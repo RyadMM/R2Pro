@@ -1,7 +1,7 @@
 "use client"
 
-import { useState, useRef, useEffect } from "react"
 import Image from "next/image"
+import { useEffect, useRef, useState } from "react"
 
 interface BeforeAfterSliderProps {
   beforeImage: string
@@ -85,7 +85,7 @@ export function BeforeAfterSlider({
     >
       {/* After Image (Full width) */}
       <div className="absolute inset-0 w-full h-full">
-        <Image src={afterImage || "/placeholder.svg"} alt="Après" fill className="object-cover" />
+        <Image src={afterImage || "/placeholder.svg"} alt="Après" fill className="object-cover" sizes="100vw" />
         <div className="absolute top-4 right-4 bg-black/70 text-white text-sm font-medium px-3 py-1 rounded-full">
           {afterLabel}
         </div>
@@ -93,7 +93,7 @@ export function BeforeAfterSlider({
 
       {/* Before Image (Partial width based on slider) */}
       <div className="absolute inset-0 h-full overflow-hidden" style={{ width: `${sliderPosition}%` }}>
-        <Image src={beforeImage || "/placeholder.svg"} alt="Avant" fill className="object-cover" />
+        <Image src={beforeImage || "/placeholder.svg"} alt="Avant" fill className="object-cover" sizes="100vw" />
         <div className="absolute top-4 left-4 bg-black/70 text-white text-sm font-medium px-3 py-1 rounded-full">
           {beforeLabel}
         </div>
@@ -124,4 +124,3 @@ export function BeforeAfterSlider({
     </div>
   )
 }
-

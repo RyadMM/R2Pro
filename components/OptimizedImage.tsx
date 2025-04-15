@@ -1,26 +1,37 @@
-import Image from "next/image"
+import Image from "next/image";
 
 interface OptimizedImageProps {
-  src: string
-  alt: string
-  width: number
-  height: number
-  className?: string
+  src: string;
+  alt: string;
+  width?: number;
+  height?: number;
+  className?: string;
+  sizes?: string;
+  fill?: boolean;
+  priority?: boolean;
 }
 
-export function OptimizedImage({ src, alt, width, height, className }: OptimizedImageProps) {
-  const imageSrc = src.startsWith("http") ? src : `/images${src}`
-
+export function OptimizedImage({
+  src,
+  alt,
+  width,
+  height,
+  className,
+  sizes,
+  fill,
+  priority,
+}: OptimizedImageProps) {
   return (
-    <div className={`relative ${className}`} style={{ aspectRatio: `${width} / ${height}` }}>
-      <Image
-        src={imageSrc || "/placeholder.svg"}
-        alt={alt}
-        layout="fill"
-        style={{ objectFit: 'cover' }}
-        quality={90}
-        className="rounded-lg"
-      />
-    </div>
-  )
+    <Image
+      src={src}
+      alt={alt}
+      width={width}
+      height={height}
+      className={className}
+      sizes={sizes}
+      fill={fill}
+      priority={priority}
+      style={{ objectFit: "cover" }}
+    />
+  );
 }

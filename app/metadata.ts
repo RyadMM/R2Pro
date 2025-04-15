@@ -8,8 +8,25 @@ const siteConfig = {
   ogImage: "https://r2pro.ca/og-image.jpg",
 }
 
+const isolationExterieureMetadata: Metadata = {
+  title: "Isolation Extérieure | R2Pro",
+  description:
+    "Améliorez l'efficacité énergétique de votre maison avec l'isolation extérieure par R2Pro. Solutions professionnelles pour réduire vos factures d'énergie.",
+  keywords: [
+    "isolation extérieure",
+    "efficacité énergétique",
+    "revêtement extérieur",
+    "R2Pro",
+    "Montréal",
+    "Laval",
+    "Rive-Nord",
+    "Rive-Sud",
+  ],
+}
+
 export const defaultMetadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
+  ...isolationExterieureMetadata,
   title: {
     default: siteConfig.name,
     template: "%s | R2Pro",
@@ -49,4 +66,3 @@ export const defaultMetadata: Metadata = {
     },
   },
 }
-

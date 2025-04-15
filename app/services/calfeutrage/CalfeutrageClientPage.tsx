@@ -1,15 +1,15 @@
 "use client"
 
-import { ServiceHero } from "@/components/ServiceHero"
 import { AnimatedSection } from "@/components/AnimatedSection"
-import Image from "next/image"
-import { motion } from "framer-motion"
-import { PenToolIcon as Tool, Users, Clock, Award, CheckCircle2, ArrowRight, CheckSquare } from "lucide-react"
 import { CountUp } from "@/components/CountUp"
 import { SectionContainer } from "@/components/SectionContainer"
-import Link from "next/link"
+import { ServiceHero } from "@/components/ServiceHero"
 import { Card, CardContent } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { motion } from "framer-motion"
+import { ArrowRight, Award, CheckCircle2, CheckSquare, Clock, PenToolIcon as Tool, Users } from "lucide-react"
+import Image from "next/image"
+import Link from "next/link"
 
 export default function CalfeutrageClientPage() {
   const processSteps = [
@@ -577,7 +577,7 @@ export default function CalfeutrageClientPage() {
                   whileHover={{ scale: 1.02 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <Image src={step.image || "/placeholder.svg"} alt={step.title} fill className="object-cover" />
+                  <Image src={step.image || "/placeholder.svg"} alt={step.title} fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
                   <div className="absolute bottom-0 left-0 w-14 h-14 md:w-16 md:h-16 bg-r2pro-600 flex items-center justify-center text-white text-xl md:text-2xl font-bold rounded-tr-xl">
                     {index + 1}
@@ -639,13 +639,14 @@ export default function CalfeutrageClientPage() {
             <Card className="overflow-hidden">
               <CardContent className="p-0">
                 <div className="flex flex-col md:flex-row">
-                  <div className="w-full md:w-1/3">
+                  <div className="w-full md:w-1/3 rounded-t-xl md:rounded-l-xl md:rounded-tr-none overflow-hidden">
                     <div className="relative h-48 md:h-full">
                       <Image
                         src="/images/services/calfeutrage/application-fenetres.jpg"
                         alt="Calfeutrage de fenêtres"
                         fill
                         className="object-cover"
+                        sizes="(max-width: 768px) 100vw, 33vw"
                       />
                     </div>
                   </div>
@@ -689,13 +690,14 @@ export default function CalfeutrageClientPage() {
             <Card className="overflow-hidden">
               <CardContent className="p-0">
                 <div className="flex flex-col md:flex-row">
-                  <div className="w-full md:w-1/3">
+                  <div className="w-full md:w-1/3 rounded-t-xl md:rounded-l-xl md:rounded-tr-none overflow-hidden">
                     <div className="relative h-48 md:h-full">
                       <Image
                         src="/images/services/calfeutrage/application-portes.jpg"
                         alt="Calfeutrage de portes"
                         fill
                         className="object-cover"
+                        sizes="(max-width: 768px) 100vw, 33vw"
                       />
                     </div>
                   </div>
@@ -737,13 +739,14 @@ export default function CalfeutrageClientPage() {
             <Card className="overflow-hidden">
               <CardContent className="p-0">
                 <div className="flex flex-col md:flex-row">
-                  <div className="w-full md:w-1/3">
+                  <div className="w-full md:w-1/3 rounded-t-xl md:rounded-l-xl md:rounded-tr-none overflow-hidden">
                     <div className="relative h-48 md:h-full">
                       <Image
                         src="/images/services/calfeutrage/application-joints.jpg"
                         alt="Calfeutrage de joints de maçonnerie"
                         fill
                         className="object-cover"
+                        sizes="(max-width: 768px) 100vw, 33vw"
                       />
                     </div>
                   </div>
@@ -786,13 +789,14 @@ export default function CalfeutrageClientPage() {
             <Card className="overflow-hidden">
               <CardContent className="p-0">
                 <div className="flex flex-col md:flex-row">
-                  <div className="w-full md:w-1/3">
+                  <div className="w-full md:w-1/3 rounded-t-xl md:rounded-l-xl md:rounded-tr-none overflow-hidden">
                     <div className="relative h-48 md:h-full">
                       <Image
                         src="/images/services/calfeutrage/application-exterieur.jpg"
                         alt="Calfeutrage de revêtement extérieur"
                         fill
                         className="object-cover"
+                        sizes="(max-width: 768px) 100vw, 33vw"
                       />
                     </div>
                   </div>
@@ -1058,4 +1062,3 @@ export default function CalfeutrageClientPage() {
     </div>
   )
 }
-

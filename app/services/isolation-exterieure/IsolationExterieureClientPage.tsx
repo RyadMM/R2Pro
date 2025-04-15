@@ -1,11 +1,10 @@
 "use client"
 
-import { useEffect } from "react"
-import Image from "next/image"
-import { ServiceHero } from "@/components/ServiceHero"
-import { CheckCircle2, CheckSquare, Thermometer, Zap, DollarSign, Droplets, Shield, Home } from "lucide-react"
-import { SectionContainer } from "@/components/SectionContainer"
 import { MaterialTabs } from "@/components/MaterialTabs"
+import { SectionContainer } from "@/components/SectionContainer"
+import { ServiceHero } from "@/components/ServiceHero"
+import { CheckCircle2, CheckSquare, DollarSign, Droplets, Home, Shield, Thermometer, Zap } from "lucide-react"
+import Image from "next/image"
 
 // Matériaux d'isolation
 const materiaux = ["polystyrene", "polyurethane", "laine", "fibre"]
@@ -69,23 +68,9 @@ const materialInfo = {
 }
 
 export default function IsolationExterieureClientPage() {
-  // Fix pour iOS Safari - Force le rafraîchissement du layout après le chargement
-  useEffect(() => {
-    // Petit délai pour s'assurer que tout est chargé
-    const timer = setTimeout(() => {
-      window.scrollTo(0, 0)
-      // Force un reflow/repaint
-      document.body.style.display = "none"
-      // Cette ligne force le navigateur à recalculer le layout
-      void document.body.offsetHeight
-      document.body.style.display = ""
-    }, 100)
-
-    return () => clearTimeout(timer)
-  }, [])
 
   return (
-    <div className="min-h-screen relative overflow-x-hidden">
+    <div className="min-h-screen relative overflow-x-hidden overflow-y-auto">
       <ServiceHero
         title="Isolation Extérieure Professionnelle"
         description="Améliorez l'efficacité énergétique de votre maison et réduisez vos factures d'énergie avec nos solutions d'isolation extérieure de haute qualité."
@@ -253,4 +238,3 @@ export default function IsolationExterieureClientPage() {
     </div>
   )
 }
-

@@ -1,25 +1,26 @@
 "use client"
 
-import { CategoryTabs } from "@/components/CategoryTabs"
 import { Button } from "@/components/ui/button"
 import { projects } from "@/lib/projectData"
 import { AnimatePresence, motion } from "framer-motion"
 import { ArrowRight } from "lucide-react"
 import Link from "next/link"
-import { useState } from "react"
 import { AnimatedSection } from "./AnimatedSection"
 import { ProjectCard } from "./ProjectCard"
 
 // Extraire toutes les catégories uniques des projets
 const categories = ["tous", ...new Set(projects.map((project) => project.category))]
 
-export function Realisations() {
-  const [filter, setFilter] = useState("tous")
+interface RealisationsProps {
+  category?: string;
+}
 
+export function Realisations({ category }: RealisationsProps) {
   // Limiter à 3 projets pour la page d'accueil
-  const allProjects = projects.slice(0, 3)
-  const filteredProjects =
-    filter === "tous" ? allProjects : allProjects.filter((project) => project.category === filter)
+  const allProjects = projects.slice(0, 3);
+  const filteredProjects = category
+    ? allProjects.filter((project) => project.category === category)
+    : allProjects;
 
   return (
     <section className="py-12">
@@ -44,10 +45,6 @@ export function Realisations() {
           <p className="text-center text-gray-800 mb-8 max-w-2xl mx-auto text-base md:text-lg leading-relaxed">
             Découvrez nos projets récents et les témoignages de nos clients satisfaits
           </p>
-        </AnimatedSection>
-
-        <AnimatedSection animation="scaleIn" className="mb-12">
-          <CategoryTabs categories={categories} activeCategory={filter} onChange={setFilter} />
         </AnimatedSection>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -81,7 +78,6 @@ export function Realisations() {
           {filteredProjects.length === 0 && (
             <div className="flex flex-col items-center justify-center text-center mt-8 p-8 rounded-lg bg-white/80 backdrop-blur-sm">
               <p className="text-gray-700 font-medium">Aucune réalisation disponible pour cette catégorie.</p>
-              <p className="text-gray-500">Section du site en construction. Revenez plus tard!</p>
             </div>
           )}
         </div>

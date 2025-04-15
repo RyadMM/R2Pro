@@ -1,11 +1,11 @@
 "use client"
 
-import { useState } from "react"
-import { motion, AnimatePresence } from "framer-motion"
-import Image from "next/image"
-import { Card, CardContent } from "@/components/ui/card"
-import { CheckCircle2 } from "lucide-react"
 import { CategoryTabs } from "@/components/CategoryTabs"
+import { Card, CardContent } from "@/components/ui/card"
+import { AnimatePresence, motion } from "framer-motion"
+import { CheckCircle2 } from "lucide-react"
+import Image from "next/image"
+import { useState } from "react"
 
 interface MaterialInfo {
   title: string
@@ -50,7 +50,7 @@ export function MaterialTabs({ materials, materialInfo, basePath = "" }: Materia
                   <Card className="overflow-hidden">
                     <CardContent className="p-0">
                       <div className="flex flex-col md:flex-row">
-                        <div className="w-full md:w-1/3">
+                        <div className="w-full md:w-1/3 rounded-t-xl md:rounded-l-xl md:rounded-tr-none overflow-hidden">
                           <div className="relative h-48 md:h-full">
                             <Image
                               src={materialInfo[material].imagePath || `${basePath}${material}.jpg`}
@@ -89,4 +89,3 @@ export function MaterialTabs({ materials, materialInfo, basePath = "" }: Materia
     </div>
   )
 }
-

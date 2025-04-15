@@ -8,7 +8,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight, Check, ChevronDown, Filter, Search, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 // Structure des filtres organisée par catégories et sous-catégories
 const filterCategories = [
@@ -432,16 +432,13 @@ export default function RealisationsPage() {
               filteredProjects.map((project) => (
                 <motion.div key={project.id} variants={itemVariants} className="h-full">
                   <ProjectCard
-                    id={project.id}
+                    id={parseInt(project.id, 10)}
                     title={project.title}
                     description={project.description}
                     imageUrl={project.images[0] || "/placeholder.svg"}
                     category={project.category}
                     clientName={project.clientTestimonial ? "Client satisfait" : undefined}
-                    clientReview={
-                      project.clientTestimonial ? project.clientTestimonial.substring(0, 100) + "..." : undefined
-                    }
-                    clientRating={5}
+                    clientReview={project.clientTestimonial ? project.clientTestimonial.substring(0, 100) + "..." : undefined}
                     href={`/realisations/${project.id}`}
                   />
                 </motion.div>
