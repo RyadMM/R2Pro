@@ -45,6 +45,7 @@ export function ImageGallery({ images }: ImageGalleryProps) {
               layout="fill"
               style={{ objectFit: 'cover' }}
               className="transition-transform duration-300 hover:scale-110"
+              sizes="(max-width: 768px) 50vw, 33vw"
             />
           </div>
         ))}

@@ -37,6 +37,9 @@
       "editor.formatOnSave": false
     }
   },
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": false
+  },
   "recommendations": [
     "esbenp.prettier-vscode",
     "dbaeumer.vscode-eslint"

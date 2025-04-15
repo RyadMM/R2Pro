@@ -1,14 +1,14 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import { motion } from "framer-motion"
-import Image from "next/image"
+import { SectionContainer } from "@/components/SectionContainer"
 import { ServiceHero } from "@/components/ServiceHero"
 import { Card, CardContent } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { CheckCircle2, ArrowRight, CheckSquare, Shield, Zap, DollarSign, Thermometer, Lock } from "lucide-react"
+import { motion } from "framer-motion"
+import { ArrowRight, CheckCircle2, CheckSquare, DollarSign, Lock, Shield, Thermometer, Zap } from "lucide-react"
+import Image from "next/image"
 import Link from "next/link"
-import { SectionContainer } from "@/components/SectionContainer"
+import { useEffect, useState } from "react"
 
 export default function PortesFenetresClientPage() {
   // Ajout d'un état pour vérifier si le composant est monté
@@ -43,7 +43,7 @@ export default function PortesFenetresClientPage() {
         description="Améliorez l'efficacité énergétique et l'esthétique de votre maison avec nos solutions de portes et fenêtres sur mesure."
         ctaText="Demander un devis gratuit"
         ctaLink="/contact#contact-form"
-        backgroundImage="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/hero-porte-fenetre.jpg-8tsFmV6kucmiYfE7M4w5PceX4fM7O6.jpeg"
+        backgroundImage="/images/services/portes-fenetres/hero-porte-fenetre.jpg"
         ctaIcon={<CheckSquare className="w-5 h-5 mr-2" />}
       />
 
@@ -459,7 +459,7 @@ export default function PortesFenetresClientPage() {
                 <Card key={index} className="overflow-hidden h-full">
                   <CardContent className="p-0 h-full">
                     <div className="flex flex-col h-full">
-                      <div className="relative h-48">
+                      <div className="relative h-48 rounded-t-xl overflow-hidden">
                         <Image src={item.image || "/placeholder.svg"} alt={item.title} fill className="object-cover" />
                       </div>
                       <div className="p-4 md:p-6 flex-grow">
@@ -538,7 +538,7 @@ export default function PortesFenetresClientPage() {
                 <Card key={index} className="overflow-hidden h-full">
                   <CardContent className="p-0 h-full">
                     <div className="flex flex-col h-full">
-                      <div className="relative h-48">
+                      <div className="relative h-48 rounded-t-xl overflow-hidden">
                         <Image src={item.image || "/placeholder.svg"} alt={item.title} fill className="object-cover" />
                       </div>
                       <div className="p-4 md:p-6 flex-grow">
@@ -581,6 +581,7 @@ export default function PortesFenetresClientPage() {
             viewport={{ once: true }}
           />
         </motion.h2>
+      </SectionContainer>
 
         <Tabs defaultValue="pvc" className="max-w-4xl mx-auto">
           <div className="flex justify-center">
@@ -608,7 +609,7 @@ export default function PortesFenetresClientPage() {
             <Card className="overflow-hidden">
               <CardContent className="p-0">
                 <div className="flex flex-col md:flex-row">
-                  <div className="w-full md:w-1/3">
+                  <div className="w-full md:w-1/3 rounded-t-xl md:rounded-l-xl md:rounded-tr-none overflow-hidden">
                     <div className="relative h-48 md:h-full">
                       <Image
                         src="/images/services/portes-fenetres/materiau-pvc.jpg"
@@ -657,7 +658,7 @@ export default function PortesFenetresClientPage() {
             <Card className="overflow-hidden">
               <CardContent className="p-0">
                 <div className="flex flex-col md:flex-row">
-                  <div className="w-full md:w-1/3">
+                  <div className="w-full md:w-1/3 rounded-t-xl md:rounded-l-xl md:rounded-tr-none overflow-hidden">
                     <div className="relative h-48 md:h-full">
                       <Image
                         src="/images/services/portes-fenetres/materiau-aluminium.jpg"
@@ -708,7 +709,7 @@ export default function PortesFenetresClientPage() {
             <Card className="overflow-hidden">
               <CardContent className="p-0">
                 <div className="flex flex-col md:flex-row">
-                  <div className="w-full md:w-1/3">
+                  <div className="w-full md:w-1/3 rounded-t-xl md:rounded-l-xl md:rounded-tr-none overflow-hidden">
                     <div className="relative h-48 md:h-full">
                       <Image
                         src="/images/services/portes-fenetres/materiau-hybride.jpg"
@@ -757,7 +758,7 @@ export default function PortesFenetresClientPage() {
             <Card className="overflow-hidden">
               <CardContent className="p-0">
                 <div className="flex flex-col md:flex-row">
-                  <div className="w-full md:w-1/3">
+                  <div className="w-full md:w-1/3 rounded-t-xl md:rounded-l-xl md:rounded-tr-none overflow-hidden">
                     <div className="relative h-48 md:h-full">
                       <Image
                         src="/images/services/portes-fenetres/materiau-bois.jpg"
@@ -802,90 +803,6 @@ export default function PortesFenetresClientPage() {
             </Card>
           </TabsContent>
         </Tabs>
-      </SectionContainer>
-
-      {/* Notre processus Section */}
-      <SectionContainer className="py-12 md:py-16 section-alt">
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.1 }}
-          viewport={{ once: true }}
-          className="text-2xl md:text-3xl font-bold mb-8 md:mb-12 text-center text-r2pro-800 relative mx-auto"
-        >
-          Notre processus d'installation
-          <motion.div
-            className="absolute -bottom-2 left-0 right-0 h-1 bg-r2pro-500 rounded-full"
-            initial={{ width: "0%" }}
-            whileInView={{ width: "100%" }}
-            transition={{ duration: 0.8, delay: 0.5 }}
-            viewport={{ once: true }}
-          />
-        </motion.h2>
-
-        <div className="max-w-5xl mx-auto">
-          {[
-            {
-              title: "Consultation et mesures",
-              description:
-                "Nous commençons par une consultation approfondie pour comprendre vos besoins et prendre des mesures précises de vos ouvertures.",
-              image: "/images/services/portes-fenetres/etape-consultation.jpg",
-            },
-            {
-              title: "Sélection des produits",
-              description:
-                "Nous vous guidons dans le choix des portes et fenêtres qui correspondent le mieux à votre style, votre budget et vos besoins énergétiques.",
-              image: "/images/services/portes-fenetres/etape-selection.jpg",
-            },
-            {
-              title: "Fabrication sur mesure",
-              description:
-                "Vos portes et fenêtres sont fabriquées sur mesure selon les spécifications exactes de votre maison pour garantir un ajustement parfait.",
-              image: "/images/services/portes-fenetres/etape-fabrication.jpg",
-            },
-            {
-              title: "Installation professionnelle",
-              description:
-                "Nos techniciens certifiés installent vos nouvelles portes et fenêtres avec précision, en veillant à l'étanchéité et à l'isolation optimales.",
-              image: "/images/services/portes-fenetres/etape-installation.jpg",
-            },
-            {
-              title: "Finition et vérification",
-              description:
-                "Nous finalisons l'installation avec soin, vérifions le fonctionnement de chaque porte et fenêtre, et nettoyons complètement la zone de travail.",
-              image: "/images/services/portes-fenetres/etape-verification.jpg",
-            },
-          ].map((step, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className={`flex flex-col ${index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"} items-center mb-12 md:mb-20 last:mb-0`}
-            >
-              <div className="w-full md:w-1/2 mb-6 md:mb-0">
-                <motion.div
-                  className="relative h-64 sm:h-72 md:h-80 lg:h-96 rounded-xl overflow-hidden shadow-lg"
-                  whileHover={{ scale: 1.02 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <Image src={step.image || "/placeholder.svg"} alt={step.title} fill className="object-cover" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-                  <div className="absolute bottom-0 left-0 w-14 h-14 md:w-16 md:h-16 bg-r2pro-600 flex items-center justify-center text-white text-xl md:text-2xl font-bold rounded-tr-xl">
-                    {index + 1}
-                  </div>
-                </motion.div>
-              </div>
-              <div className={`w-full md:w-1/2 ${index % 2 === 0 ? "md:pl-8 lg:pl-12" : "md:pr-8 lg:pr-12"}`}>
-                <h3 className="text-xl md:text-2xl lg:text-3xl font-bold mb-3 md:mb-4 text-r2pro-600">{step.title}</h3>
-                <p className="text-sm md:text-base lg:text-lg text-gray-700 mb-4 md:mb-6">{step.description}</p>
-                <div className="w-16 h-1 bg-r2pro-500 rounded-full"></div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </SectionContainer>
 
       {/* CTA Section finale */}
       <section className="relative py-20 md:py-28 overflow-hidden">
@@ -973,4 +890,3 @@ export default function PortesFenetresClientPage() {
     </div>
   )
 }
-

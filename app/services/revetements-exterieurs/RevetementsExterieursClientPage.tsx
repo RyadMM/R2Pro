@@ -1,19 +1,19 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import { motion } from "framer-motion"
-import Image from "next/image"
-import { ServiceHero } from "@/components/ServiceHero"
-import { CheckCircle2, ArrowRight, CheckSquare } from "lucide-react"
-import { projects } from "@/lib/projectData"
-import Link from "next/link"
-import { SectionContainer } from "@/components/SectionContainer"
-import { AnimatedSection } from "@/components/AnimatedSection"
-import { MaterialTabs } from "@/components/MaterialTabs"
-import { ProjectGallery } from "@/components/ProjectGallery"
+import { AnimatedSection } from "@/components/AnimatedSection";
+import { MaterialTabs } from "@/components/MaterialTabs";
+import { Realisations } from "@/components/Realisations";
+import { SectionContainer } from "@/components/SectionContainer";
+import { ServiceHero } from "@/components/ServiceHero";
+import { motion } from "framer-motion";
+import { ArrowRight, CheckCircle2, CheckSquare } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 
-const categories = ["tout", "aluminium", "vinyle", "fibrociment", "bois"]
-const materiaux = ["aluminium", "acier", "vinyle", "fibrociment", "bois"]
+// Removed unused projects and categories variables
+
+const materiaux = ["aluminium", "acier", "vinyle", "fibrociment", "bois"];
 
 // Informations sur les matériaux
 const materialInfo = {
@@ -119,7 +119,7 @@ export default function RevetementsExterieursClientPage() {
         description="Transformez l'apparence de votre maison avec nos solutions de revêtements extérieurs durables, esthétiques et adaptées à votre style."
         ctaText="Demander un devis gratuit"
         ctaLink="/contact#contact-form"
-        backgroundImage="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/hero-revetement.jpg-2K86O48EfANHr085RNSm3Y3DOwzJTP.jpeg"
+        backgroundImage="/images/services/revetements-exterieurs/hero-revetement.jpg"
         ctaIcon={<CheckSquare className="w-5 h-5 mr-2" />}
       />
 
@@ -210,7 +210,7 @@ export default function RevetementsExterieursClientPage() {
 
       {/* Réalisations Section - Avec le nouveau composant ProjectGallery */}
       <SectionContainer className="py-12 md:py-16 section-alt">
-        <AnimatedSection animation="rotateIn">
+        <AnimatedSection animation="fadeIn">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -232,17 +232,12 @@ export default function RevetementsExterieursClientPage() {
           </p>
         </AnimatedSection>
 
-        <ProjectGallery
-          projects={projects}
-          categories={categories}
-          baseCategory="revetement"
-          linkPrefix="/services/revetements-exterieurs"
-        />
+        <Realisations category="revetement" />
       </SectionContainer>
 
       {/* Matériaux Section - Avec le nouveau composant MaterialTabs */}
       <SectionContainer className="py-12 md:py-16 section-alt">
-        <AnimatedSection animation="rotateIn">
+        <AnimatedSection animation="fadeIn">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -276,7 +271,7 @@ export default function RevetementsExterieursClientPage() {
         {/* Image de fond avec overlay */}
         <div className="absolute inset-0 z-0">
           <Image
-            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_7491.JPG-9MDIcElScHwlX4ezp3lpeDzJB5GCHH.jpeg"
+            src="/images/services/revetements-exterieurs/IMG_7491.jpg"
             alt="Revêtement extérieur de qualité"
             fill
             className="object-cover"
@@ -358,4 +353,3 @@ export default function RevetementsExterieursClientPage() {
 //   "/images/services/revetements-exterieurs/realisation-3.jpg"
 // ];
 // <ProjectGallery images={someImages || defaultImages} />
-

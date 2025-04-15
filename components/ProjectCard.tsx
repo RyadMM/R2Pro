@@ -1,10 +1,10 @@
 "use client"
 
-import { useState } from "react"
-import Image from "next/image"
 import { motion } from "framer-motion"
-import { Star, ArrowRight } from "lucide-react"
+import { ArrowRight, Star } from "lucide-react"
+import Image from "next/image"
 import Link from "next/link"
+import { useState } from "react"
 
 // SVG de l'icône Google
 const GoogleIcon = () => (
@@ -69,6 +69,8 @@ export function ProjectCard({
             alt={title}
             fill
             className={`object-cover transition-transform duration-500 ${isHovered ? "scale-110" : "scale-100"}`}
+            loading="lazy"
+            sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
           />
 
           {/* Overlay avec catégorie */}
@@ -131,9 +133,8 @@ export function ProjectCard({
 
         {/* Bouton voir plus - Correction pour masquer complètement au chargement initial */}
         <div
-          className={`absolute bottom-0 right-0 bg-r2pro text-white p-3 rounded-tl-xl z-20 transition-all duration-300 ${
-            isHovered ? "opacity-100 translate-y-0" : "opacity-0 translate-y-full pointer-events-none"
-          }`}
+          className={`absolute bottom-0 right-0 bg-r2pro text-white p-3 rounded-tl-xl z-20 transition-all duration-300 ${isHovered ? "opacity-100 translate-y-0" : "opacity-0 translate-y-full pointer-events-none"
+            }`}
         >
           <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:rotate-45" />
         </div>
@@ -141,4 +142,3 @@ export function ProjectCard({
     </motion.div>
   )
 }
-

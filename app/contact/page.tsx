@@ -9,7 +9,8 @@ import { Label } from "@/components/ui/label"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Textarea } from "@/components/ui/textarea"
 import { zodResolver } from "@hookform/resolvers/zod"
-import confetti from "canvas-confetti"
+// Dynamically import confetti later
+// import confetti from "canvas-confetti"
 import { motion } from "framer-motion"
 import { CheckCircle, Clock, Mail, MapPin, Phone, Send } from "lucide-react"
 import Image from "next/image"
@@ -36,8 +37,10 @@ const formSchema = z.object({
   message: z.string().optional(),
 })
 
-// Fonction pour lancer l'effet de confetti
-const launchConfetti = () => {
+// Fonction pour lancer l'effet de confetti (async pour dynamic import)
+const launchConfetti = async () => {
+  const confetti = (await import("canvas-confetti")).default;
+
   // Configuration pour un effet de confetti élégant
   const count = 200
   const defaults = {
@@ -121,10 +124,8 @@ export default function ContactPage() {
       console.error('An error occurred:', error);
     }
 
-    // Lancer l'effet de confetti après un court délai pour synchroniser avec l'animation du message
-    setTimeout(() => {
-      launchConfetti()
-    }, 300);
+    // Lancer l'effet de confetti (maintenant async)
+    launchConfetti();
   };
 
   // Après la déclaration de la fonction ContactPage, ajouter:

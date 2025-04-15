@@ -1,23 +1,24 @@
 "use client"
 
-import { useScrollToContactForm } from "@/hooks/useScrollToContactForm"
-import { motion } from "framer-motion"
-import { ArrowRight, CheckSquare, ImageIcon } from "lucide-react"
-import Image from "next/image"
-import Link from "next/link"
+import { OptimizedImage } from "@/components/OptimizedImage";
+import { useScrollToContactForm } from "@/hooks/useScrollToContactForm";
+import { motion } from "framer-motion";
+import { ArrowRight, CheckSquare, ImageIcon } from "lucide-react";
+import Link from "next/link";
 
 export function Hero() {
-  const scrollToContactForm = useScrollToContactForm()
+  const scrollToContactForm = useScrollToContactForm();
 
   return (
     <section className="relative h-screen">
       <div className="absolute inset-0">
-        <Image
+        <OptimizedImage
           src="/images/hero-background.jpg"
           alt="R2Pro en action - Spécialiste de l'habitation"
           fill
           priority
           className="object-cover object-bottom"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/70 to-black/50"></div>
       </div>
@@ -28,7 +29,7 @@ export function Hero() {
             <br />
             Experts en revêtement
           </h1>
-          <p className="text-xl md:text-2xl mb-16 font-sans text-white drop-shadow-md">
+          <p className="text-xl md:text-2xl mb-16 font-sans text-white">
             Transformez votre espace avec style et qualité
           </p>
 

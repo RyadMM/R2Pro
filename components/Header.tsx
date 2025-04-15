@@ -1,10 +1,10 @@
 "use client"
 
-import Link from "next/link"
-import Image from "next/image"
-import { Phone, CheckSquare } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { motion } from "framer-motion"
+import { CheckSquare, Phone } from "lucide-react"
+import Image from "next/image"
+import Link from "next/link"
 
 export function Header() {
   return (
@@ -12,11 +12,12 @@ export function Header() {
       <div className="container flex h-20 items-center justify-between">
         <Link href="/" className="flex items-center space-x-2">
           <Image
-            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/SCR-20240423-vh3-9XzUjTAtr6pntCZpiYdddo6bO31shV.png"
+            src="/images/logo.png" // Use local logo
             alt="R2Pro Logo"
-            width={100}
-            height={50}
-            className="h-12 w-auto"
+            width={100} // Adjust width if needed based on original logo dimensions
+            height={50} // Adjust height if needed based on original logo dimensions
+            className="h-12 w-auto" // Keep existing styling
+            priority // Prioritize loading for LCP
           />
         </Link>
 
@@ -89,4 +90,3 @@ export function Header() {
     </header>
   )
 }
-
