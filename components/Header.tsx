@@ -5,6 +5,7 @@ import { motion } from "framer-motion"
 import { CheckSquare, Phone } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 
 export function Header() {
   return (
@@ -70,20 +71,22 @@ export function Header() {
               </Button>
             </motion.div>
 
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Button
-                asChild
-                variant="outline"
-                className="border-r2pro text-r2pro hover:bg-r2pro-50 font-medium group text-xs md:text-sm rounded-full"
-                size="sm"
-              >
-                <Link href="/realisations">
-                  <span className="flex items-center">
-                    <span className="hidden sm:inline">Nos</span> réalisations
-                  </span>
-                </Link>
-              </Button>
-            </motion.div>
+            {usePathname() !== '/realisations' && (
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <Button
+                  asChild
+                  variant="outline"
+                  className="border-r2pro text-r2pro hover:bg-r2pro-50 font-medium group text-xs md:text-sm rounded-full"
+                  size="sm"
+                >
+                  <Link href="/realisations">
+                    <span className="flex items-center">
+                      <span className="hidden sm:inline">Nos</span> réalisations
+                    </span>
+                  </Link>
+                </Button>
+              </motion.div>
+            )}
           </div>
         </div>
       </div>

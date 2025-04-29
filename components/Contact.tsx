@@ -9,7 +9,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Textarea } from "@/components/ui/textarea"
 import confetti from 'canvas-confetti'
 import { motion } from "framer-motion"
-import { CheckCircle, Mail, Map, MapPin, Phone } from "lucide-react"
+import { CheckCircle, Mail, Map, Phone } from "lucide-react"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
 
@@ -96,7 +96,6 @@ export function Contact() {
       });
 
       if (response.ok) {
-        console.log('Form submitted successfully!');
         setIsSubmitted(true);
         setTimeout(() => {
           launchConfetti();
@@ -324,32 +323,13 @@ export function Contact() {
 
                 <div className="flex items-center space-x-4 transition-transform hover:translate-x-2 duration-300">
                   <div className="p-4 bg-r2pro/10 rounded-full">
-                    <MapPin className="w-6 h-6 text-r2pro" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-lg">Bureau</h3>
-                    <p className="text-gray-600">
-                      C.P. 235-211 BOUL. Brien
-                      <br />
-                      Repentigny QC J6A0A4
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-center space-x-4 transition-transform hover:translate-x-2 duration-300">
-                  <div className="p-4 bg-r2pro/10 rounded-full">
                     <Map className="w-6 h-6 text-r2pro" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-lg">Territoire desservi</h3>
-                    <p className="text-gray-600">Rive-Nord, Laurentides, Montréal, Lanaudière, Rive-Sud, Estrie</p>
+                    <p className="text-gray-600">Montréal Rive-Sud, Rive Nord</p>
                   </div>
                 </div>
-              </div>
-
-              {/* Bannière décorative en bas */}
-              <div className="mt-8 p-4 bg-gradient-to-r from-r2pro-50 to-r2pro-100 rounded-lg">
-                <p className="text-r2pro-800 font-medium text-center">Nous sommes à votre service!</p>
               </div>
             </div>
           </div>

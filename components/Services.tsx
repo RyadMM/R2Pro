@@ -7,10 +7,22 @@ import { ServiceCard } from "./ServiceCard"
 
 const servicesData = [
   {
+    title: "Peinture au Spray",
+    description: "Finition impeccable pour tous vos projets de peinture extérieure.",
+    imageUrl: "/images/services/service-card-peinture.jpg",
+    link: "/services/peinture-spray",
+  },
+  {
     title: "Revêtements Extérieurs",
     description: "Installation et réparation de revêtements en vinyle, aluminium, bois et plus.",
     imageUrl: "/images/services/service-card-revetements.jpg",
     link: "/services/revetements-exterieurs",
+  },
+  {
+    title: "Calfeutrage",
+    description: "Protection contre les infiltrations d'eau et d'air.",
+    imageUrl: "/images/services/service-card-calfeutrage.jpg",
+    link: "/services/calfeutrage",
   },
   {
     title: "Portes et Fenêtres",
@@ -35,18 +47,6 @@ const servicesData = [
     description: "Solutions d'isolation pour une efficacité énergétique optimale.",
     imageUrl: "/images/services/service-card-isolation.jpg",
     link: "/services/isolation-exterieure",
-  },
-  {
-    title: "Peinture au Spray",
-    description: "Finition impeccable pour tous vos projets de peinture extérieure.",
-    imageUrl: "/images/services/service-card-peinture.jpg",
-    link: "/services/peinture-spray",
-  },
-  {
-    title: "Calfeutrage",
-    description: "Protection contre les infiltrations d'eau et d'air.",
-    imageUrl: "/images/services/service-card-calfeutrage.jpg",
-    link: "/services/calfeutrage",
   },
   {
     title: "Design 3D",

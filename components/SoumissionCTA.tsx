@@ -11,7 +11,6 @@ import Link from "next/link"
 
 export function SoumissionCTA() {
   // Vérification du chemin de l'image dans la console pour débogage
-  console.log("Chemin de l'image CTA:", "/images/services/revetements-exterieurs/hero-revetement.jpg")
 
   return (
     <section className="relative py-24 overflow-hidden">
