@@ -1,28 +1,36 @@
 {
   "folders": [
     {
-      "path": "/Users/ryad/Downloads/r2pro-website (14)/"
+      "name": "r2pro-website (14)",
+      "path": ".."
     },
     {
-      "path": "/Users/ryad/Downloads/r2pro-website (14)/app"
+      "name": "app",
+      "path": "../app"
     },
     {
-      "path": "/Users/ryad/Downloads/r2pro-website (14)/components"
+      "name": "components",
+      "path": "../components"
     },
     {
-      "path": "/Users/ryad/Downloads/r2pro-website (14)/lib"
+      "name": "lib",
+      "path": "../lib"
     },
     {
-      "path": "/Users/ryad/Downloads/r2pro-website (14)/public"
+      "name": "public",
+      "path": "../public"
     },
     {
-      "path": "/Users/ryad/Downloads/r2pro-website (14)/styles"
+      "name": "styles",
+      "path": "../styles"
     },
     {
-      "path": "/Users/ryad/Downloads/r2pro-website (14)/hooks"
+      "name": "hooks",
+      "path": "../hooks"
     },
     {
-      "path": "/Users/ryad/Downloads/r2pro-website (14)/public/images"
+      "name": "images",
+      "path": "../public/images"
     }
   ],
   "settings": {
