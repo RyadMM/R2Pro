@@ -114,7 +114,6 @@ export default function ContactPage() {
       });
 
       if (response.ok) {
-        console.log('Form submitted successfully!');
         setIsSubmitted(true);
         // Optionally, reset the form after successful submission
       } else {

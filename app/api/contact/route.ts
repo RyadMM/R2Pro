@@ -8,7 +8,6 @@ export async function POST(req: Request) {
     const body = await req.json();
     const { firstName, lastName, email, phone, projectType, message, acceptTerms } = body;
 
-    console.log('Sending email...');
     const data = await resend.emails.send({
       from: 'Acme <info@contact.r2pro.ca>',
       to: ['info@r2pro.ca'],
@@ -21,8 +20,6 @@ export async function POST(req: Request) {
              <p><strong>Message:</strong> ${message}</p>
              <p><strong>Accept Terms:</strong> ${acceptTerms}</p>`,
     });
-    console.log('Email sent successfully!');
-    console.log('Data:', data);
 
     return NextResponse.json({ data });
   } catch (error) {
