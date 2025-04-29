@@ -62,7 +62,7 @@ export function Temoignages() {
   return (
     <SectionContainer
       id="temoignages"
-      className="py-16 md:py-24 relative overflow-hidden"
+      className="py-16 md:pt-24 pb-8 md:pb-12 relative overflow-hidden"
     >
       {/* Motif d'arrière-plan */}
       <div className="absolute inset-0 opacity-5 pointer-events-none">
