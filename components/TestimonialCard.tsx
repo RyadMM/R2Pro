@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import type { Review } from "@/data/reviews"
-import { motion } from "framer-motion"
-import { Star } from "lucide-react"
+import type { Review } from "@/lib/reviews"; // Import Review from lib/reviews
+import { motion } from "framer-motion";
+import { useState } from "react";
 
 // Logo Google
 const GoogleLogo = () => (
@@ -24,13 +24,18 @@ const GoogleLogo = () => (
       fill="#EA4335"
     />
   </svg>
-)
+);
 
 interface TestimonialCardProps {
-  review: Review
+  review: Review;
 }
 
 export function TestimonialCard({ review }: TestimonialCardProps) {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const textLimit = 200; // Character limit for truncated text
+
+  // displayedText logic will be removed as animation handles visibility
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -39,7 +44,7 @@ export function TestimonialCard({ review }: TestimonialCardProps) {
       transition={{ duration: 0.4 }}
       className="bg-white rounded-xl shadow-md h-full flex flex-col"
     >
-      <div className="p-6 flex-grow">
+      <div className="p-6 flex flex-col"> {/* Removed flex-grow */}
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center">
             <div>
@@ -50,23 +55,26 @@ export function TestimonialCard({ review }: TestimonialCardProps) {
           <GoogleLogo />
         </div>
 
-        <div className="flex mb-3">
-          {[...Array(5)].map((_, i) => (
-            <Star
-              key={i}
-              size={16}
-              className={i < review.rating ? "text-yellow-400 fill-yellow-400" : "text-gray-300"}
-            />
-          ))}
-        </div>
+        <motion.div
+          className="overflow-hidden"
+          initial={{ maxHeight: "5rem" }} // Explicitly set initial maxHeight
+          animate={{ maxHeight: isExpanded ? "500px" : "5rem" }} // 5rem is approx 80px, adjust as needed
+          transition={{ duration: 0.5, ease: "easeInOut" }} // Reverted to easeInOut
+        >
+          <p className="text-gray-700 leading-relaxed mb-2">
+            {review.text}
+          </p>
+        </motion.div>
 
-        <p className="text-gray-700 leading-relaxed mb-2">{review.text}</p>
-
-        <div className="mt-auto pt-2 flex justify-between items-center text-sm text-gray-500">
-          <span>{review.date}</span>
-          <span className="font-medium text-r2pro-600">{review.project}</span>
-        </div>
+        {review.text.length > textLimit && (
+          <button
+            onClick={() => setIsExpanded(!isExpanded)}
+            className="text-r2pro-600 hover:underline text-sm self-start mt-2" // Added self-start and margin-top
+          >
+            {isExpanded ? "Afficher moins" : "Lire la suite"}
+          </button>
+        )}
       </div>
     </motion.div>
-  )
+  );
 }

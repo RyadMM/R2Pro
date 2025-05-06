@@ -1,14 +1,13 @@
 export interface Review {
-  id: number
-  name: string
-  location: string
-  rating: number
-  avatar: string
-  text: string
-  date: string
-  project: string
+  id: number;
+  name: string;
+  location: string;
+  rating: number;
+  avatar: string;
+  text: string;
+  date: string;
+  project: string;
 }
-
 
 // Modify utility functions to accept reviews as argument
 export function getAverageRating(reviews: Review[]): number {
@@ -17,7 +16,6 @@ export function getAverageRating(reviews: Review[]): number {
   return Number.parseFloat((sum / reviews.length).toFixed(1));
 }
 
-// Fonction utilitaire pour obtenir le nombre total d'avis
 export function getTotalReviews(reviews: Review[]): number {
   return reviews.length;
 }

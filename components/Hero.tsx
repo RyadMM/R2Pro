@@ -6,11 +6,15 @@ import { motion } from "framer-motion";
 import { ArrowRight, CheckSquare, ImageIcon } from "lucide-react";
 import Link from "next/link";
 
-export function Hero() {
+interface HeroProps {
+  className?: string;
+}
+
+export function Hero({ className }: HeroProps) {
   const scrollToContactForm = useScrollToContactForm();
 
   return (
-    <section className="relative h-screen">
+    <section className={`relative h-screen ${className}`}>
       <div className="absolute inset-0">
         <OptimizedImage
           src="/images/hero-background.jpg"

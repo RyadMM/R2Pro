@@ -1,10 +1,10 @@
-"use client";
-
 import { SectionContainer } from "@/components/SectionContainer";
 import { TestimonialCard } from "@/components/TestimonialCard";
-import { reviews } from "@/data/reviews";
+import { getReviewsFromJson } from "@/lib/server/reviews";
 
-export default function ReviewsPage() {
+export default async function ReviewsPage() {
+  const reviews = await getReviewsFromJson();
+
   return (
     <SectionContainer className="py-16 md:py-24">
       <div className="container mx-auto px-4">

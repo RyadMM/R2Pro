@@ -4,18 +4,22 @@ import { CustomButton } from "@/components/CustomButton";
 import { SectionContainer } from "@/components/SectionContainer";
 import { TestimonialCard } from "@/components/TestimonialCard";
 import { ButtonVariant } from "@/components/ui/button";
-import { getAverageRating, getTotalReviews, reviews } from "@/data/reviews";
+import { Review, getAverageRating, getTotalReviews } from "@/lib/reviews";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronLeft, ChevronRight, Star } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
-export function Temoignages() {
+interface TemoignagesProps {
+  reviews: Review[];
+}
+
+export function Temoignages({ reviews }: TemoignagesProps) {
   const [currentPage, setCurrentPage] = useState(0);
   const [itemsPerPage, setItemsPerPage] = useState(3);
   const containerRef = useRef<HTMLDivElement>(null);
   const totalPages = Math.ceil(reviews.length / itemsPerPage);
-  const averageRating = getAverageRating();
-  const totalReviews = getTotalReviews();
+  const averageRating = getAverageRating(reviews);
+  const totalReviews = getTotalReviews(reviews);
 
   // Ajuster le nombre d'éléments par page en fonction de la taille de l'écran
   useEffect(() => {
@@ -39,7 +43,7 @@ export function Temoignages() {
     if (currentPage >= Math.ceil(reviews.length / itemsPerPage)) {
       setCurrentPage(0);
     }
-  }, [itemsPerPage, currentPage]);
+  }, [itemsPerPage, currentPage, reviews.length]);
 
   const nextPage = () => {
     setCurrentPage((prev) => (prev + 1) % totalPages);
