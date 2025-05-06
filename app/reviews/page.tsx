@@ -1,5 +1,5 @@
+import { ReviewCard } from "@/components/AdaptedReviewSection";
 import { SectionContainer } from "@/components/SectionContainer";
-import { TestimonialCard } from "@/components/TestimonialCard";
 import { getReviewsFromJson } from "@/lib/server/reviews";
 
 export default async function ReviewsPage() {
@@ -13,7 +13,7 @@ export default async function ReviewsPage() {
         </h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {reviews.map((review) => (
-            <TestimonialCard key={review.id} review={review} />
+            <ReviewCard key={review.id} review={review} />
           ))}
         </div>
       </div>

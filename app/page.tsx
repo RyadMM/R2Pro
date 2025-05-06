@@ -1,16 +1,13 @@
-import { AboutSection } from "@/components/AboutSection"
-import { Contact } from "@/components/Contact"
-import { FAQ } from "@/components/FAQ"
-import { Hero } from "@/components/Hero"
-import { Realisations } from "@/components/Realisations"
-import { Services } from "@/components/Services"
-import { SoumissionCTA } from "@/components/SoumissionCTA"
-import { Temoignages } from "@/components/Temoignages"
-import { getReviewsFromJson } from "@/lib/server/reviews"
+import { AboutSection } from "@/components/AboutSection";
+import AdaptedReviewSection from "@/components/AdaptedReviewSection";
+import { Contact } from "@/components/Contact";
+import { FAQ } from "@/components/FAQ";
+import { Hero } from "@/components/Hero";
+import { Realisations } from "@/components/Realisations";
+import { Services } from "@/components/Services";
+import { SoumissionCTA } from "@/components/SoumissionCTA";
 
-export default async function Home() {
-  const reviews = await getReviewsFromJson();
-
+export default function Home() {
   return (
     <div className="overflow-x-hidden w-full">
       <Hero className="hero-section" />
@@ -18,9 +15,9 @@ export default async function Home() {
       <AboutSection />
       <Realisations />
       <SoumissionCTA />
-      <Temoignages reviews={reviews} />
+      <AdaptedReviewSection />
       <Contact />
       <FAQ />
     </div>
-  )
+  );
 }
