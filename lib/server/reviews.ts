@@ -1,12 +1,9 @@
-import { promises as fs } from 'fs';
-import path from 'path';
+import rawReviewsData from '../../reviews/reviews.json';
 import { Review } from '../reviews'; // Import Review interface from the shared file
 
 export async function getReviewsFromJson(): Promise<Review[]> {
-  const filePath = path.join(process.cwd(), 'reviews', 'reviews.json');
   try {
-    const fileContents = await fs.readFile(filePath, 'utf8');
-    const rawReviews: any[] = JSON.parse(fileContents);
+    const rawReviews: any[] = rawReviewsData;
 
     const reviews: Review[] = rawReviews
       .filter(rawReview => rawReview.review_text && rawReview.review_text.trim() !== '') // Filter out reviews with empty text
@@ -24,7 +21,7 @@ export async function getReviewsFromJson(): Promise<Review[]> {
 
     return reviews;
   } catch (error) {
-    console.error('Error reading or parsing reviews.json:', error);
+    console.error('Error parsing reviews.json:', error);
     return []; // Return empty array in case of error
   }
 }
