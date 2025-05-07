@@ -5,7 +5,8 @@ export interface Review {
   rating: number;
   avatar: string;
   text: string;
-  date: string;
+  date: string; // Keep existing date field for now
+  published_at_date?: string; // Add the new field as optional
   project: string;
   projectId?: string;
 }

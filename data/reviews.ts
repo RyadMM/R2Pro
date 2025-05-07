@@ -6,6 +6,7 @@ export interface Review {
   avatar: string
   text: string
   date: string
+  published_at_date?: string; // Add the new field as optional
   project: string
 }
 

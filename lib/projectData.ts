@@ -61,16 +61,16 @@ export const projects: Project[] = [
     date: "Automne 2024",
     location: "Boucherville, QC",
     images: [
-      "/images/realisations/projet-2/image-1.png",
-      "/images/realisations/projet-2/image-2.png",
-      "/images/realisations/projet-2/image-3.png",
-      "/images/realisations/projet-2/image-4.png",
-      "/images/realisations/projet-2/image-5.png",
+      "/images/realisations/optimized/projet-2/image-1.png",
+      "/images/realisations/optimized/projet-2/image-2.png",
+      "/images/realisations/optimized/projet-2/image-3.png",
+      "/images/realisations/optimized/projet-2/image-4.png",
+      "/images/realisations/optimized/projet-2/image-5.png",
     ],
     beforeAfter: [
       {
-        before: "/images/realisations/projet-2/before-1.png",
-        after: "/images/realisations/projet-2/after-1.png",
+        before: "/images/realisations/optimized/projet-2/before-1.png",
+        after: "/images/realisations/realisations/optimized/projet-2/after-1.png",
         description: "Revêtement extérieur en CanExel blanc"
       }
     ],
@@ -82,14 +82,14 @@ export const projects: Project[] = [
     category: "revetement",
     subcategory: "aluminium",
     images: [
-      "/images/realisations/projet-1/main.png",
-      "/images/realisations/projet-1/image-1.png",
-      "/images/realisations/projet-1/image-2.png",
-      "/images/realisations/projet-1/image-3.png",
-      "/images/realisations/projet-1/image-4.png",
-      "/images/realisations/projet-1/image-5.png",
-      "/images/realisations/projet-1/image-6.png",
-      "/images/realisations/projet-1/main.png",
+      "/images/realisations/optimized/projet-1/main.png",
+      "/images/realisations/optimized/projet-1/image-1.png",
+      "/images/realisations/optimized/projet-1/image-2.png",
+      "/images/realisations/optimized/projet-1/image-3.png",
+      "/images/realisations/optimized/projet-1/image-4.png",
+      "/images/realisations/optimized/projet-1/image-5.png",
+      "/images/realisations/optimized/projet-1/image-6.png",
+      "/images/realisations/optimized/projet-1/main.png",
     ],
     title: "Revêtement aluminium Board & Batten à Boucherville",
     description: "Projet de revêtement extérieur en aluminium Board & Batten de chez Rialux réalisé à Boucherville.",
@@ -117,11 +117,11 @@ export const projects: Project[] = [
     category: "revetement",
     subcategory: "aluminium",
     images: [
-      "/images/realisations/projet-9/main.jpg",
-      "/images/realisations/projet-9/image-1.jpg",
-      "/images/realisations/projet-9/image-2.jpg",
-      "/images/realisations/projet-9/image-3.jpg",
-      "/images/realisations/projet-9/image-4.jpg",
+      "/images/realisations/optimized/projet-9/main.jpg",
+      "/images/realisations/optimized/projet-9/image-1.jpg",
+      "/images/realisations/optimized/projet-9/image-2.jpg",
+      "/images/realisations/optimized/projet-9/image-3.jpg",
+      "/images/realisations/optimized/projet-9/image-4.jpg",
     ],
     title: "Revêtement en aluminium Driftwood à Boucherville",
     description: "Projet de revêtement complet en aluminium Rialux avec ajout d'isolation à Boucherville.",
@@ -142,8 +142,8 @@ export const projects: Project[] = [
     location: "Boucherville, QC",
     beforeAfter: [
       {
-        before: "/images/realisations/projet-9/before-1.jpg",
-        after: "/images/realisations/projet-9/after-1.jpg",
+        before: "/images/realisations/optimized/projet-9/before-1.jpg",
+        after: "/images/realisations/optimized/projet-9/after-1.jpg",
         description:
           "Transformation complète du revêtement extérieur avec modernisation du look et amélioration thermique de l'enveloppe.",
       },
@@ -186,17 +186,17 @@ export const projects: Project[] = [
     date: "Janvier 2025",
     location: "Saint-Bruno, QC",
     images: [
-      "/images/realisations/projet-3/image-1.png",
-      "/images/realisations/projet-3/image-2.png",
-      "/images/realisations/projet-3/image-3.png",
-      "/images/realisations/projet-3/image-4.png",
-      "/images/realisations/projet-3/image-5.png",
-      "/images/realisations/projet-3/image-6.png",
+      "/images/realisations/optimized/projet-3/image-1.png",
+      "/images/realisations/optimized/projet-3/image-2.png",
+      "/images/realisations/optimized/projet-3/image-3.png",
+      "/images/realisations/optimized/projet-3/image-4.png",
+      "/images/realisations/optimized/projet-3/image-5.png",
+      "/images/realisations/optimized/projet-3/image-6.png",
     ],
     beforeAfter: [
       {
-        before: "/images/realisations/projet-3/before-1.png",
-        after: "/images/realisations/projet-3/after-1.png",
+        before: "/images/realisations/optimized/projet-3/before-1.png",
+        after: "/images/realisations/optimized/projet-3/after-1.png",
         description: "Revêtement extérieur en CanExel VStyle couleur Sierra"
       }
     ],
@@ -229,11 +229,11 @@ export const projects: Project[] = [
     date: "Novembre 2024",
     location: "Boucherville, QC",
     images: [
-      "/images/realisations/projet-4/image-1.png",
-      "/images/realisations/projet-4/image-2.png",
-      "/images/realisations/projet-4/image-3.png",
-      "/images/realisations/projet-4/image-4.png",
-      "/images/realisations/projet-4/image-5.png",
+      "/images/realisations/optimized/projet-4/image-1.png",
+      "/images/realisations/optimized/projet-4/image-2.png",
+      "/images/realisations/optimized/projet-4/image-3.png",
+      "/images/realisations/optimized/projet-4/image-4.png",
+      "/images/realisations/optimized/projet-4/image-5.png",
     ],
     beforeAfter: [],
     specifications: {
