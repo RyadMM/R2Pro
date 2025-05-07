@@ -3,10 +3,19 @@
 import { CustomButton } from "@/components/CustomButton";
 import { SectionContainer } from "@/components/SectionContainer";
 import { ButtonVariant } from "@/components/ui/button";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+  type CarouselApi,
+} from "@/components/ui/carousel"; // Import carousel components
+import { formatDateInFrench } from "@/lib/dateUtils"; // Import the helper function
 import { Review, getAverageRating, getTotalReviews } from "@/lib/reviews";
 import { AnimatePresence, motion } from "framer-motion";
-import { ChevronLeft, ChevronRight, Star } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { Star } from "lucide-react";
+import { useEffect, useState } from "react"; // Import useCallback
 
 interface AdaptedReviewSectionProps {
   reviews: Review[];
@@ -59,6 +68,11 @@ export const ReviewCard = ({ review }: { review: Review }) => {
           <div>
             <h3 className="font-semibold text-gray-900">{review.name}</h3> {/* Use existing classes */}
             {review.location && <p className="text-sm text-gray-500">{review.location}</p>} {/* Use existing classes and show location if available */}
+            {review.published_at_date && (
+              <p className="text-xs text-gray-500 mt-1"> {/* Added text-xs and mt-1 for styling */}
+                {formatDateInFrench(review.published_at_date)}
+              </p>
+            )}
           </div>
         </div>
         <GoogleLogo />
@@ -102,52 +116,22 @@ export const ReviewCard = ({ review }: { review: Review }) => {
 };
 
 export default function AdaptedReviewSection({ reviews }: AdaptedReviewSectionProps) {
-  const [currentPage, setCurrentPage] = useState(0); // Pagination state
-  const [itemsPerPage, setItemsPerPage] = useState(3); // Pagination state
-  const containerRef = useRef<HTMLDivElement>(null); // Ref for container
-  const totalPages = Math.ceil(reviews.length / itemsPerPage); // Calculate total pages
+  const [api, setApi] = useState<CarouselApi>(); // Carousel API state
+  const [current, setCurrent] = useState(0); // Current slide index
+  const [count, setCount] = useState(0); // Total number of slides
 
-  // Adjust items per page based on screen size (from original Temoignages)
   useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth < 640) {
-        setItemsPerPage(1);
-      } else if (window.innerWidth < 1024) {
-        setItemsPerPage(2);
-      } else {
-        setItemsPerPage(3);
-      }
-    };
-
-    handleResize(); // Execute immediately
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  // Recalculate total pages and reset current page if necessary (from original Temoignages)
-  useEffect(() => {
-    if (currentPage >= Math.ceil(reviews.length / itemsPerPage)) {
-      setCurrentPage(0);
+    if (!api) {
+      return;
     }
-  }, [itemsPerPage, currentPage, reviews.length]);
 
-  const nextPage = () => {
-    setCurrentPage((prev) => (prev + 1) % totalPages);
-  };
+    setCount(api.scrollSnapList().length);
+    setCurrent(api.selectedScrollSnap());
 
-  const prevPage = () => {
-    setCurrentPage((prev) => (prev - 1 + totalPages) % totalPages);
-  };
-
-  const goToPage = (pageIndex: number) => {
-    setCurrentPage(pageIndex);
-  };
-
-  // Get reviews for the current page (from original Temoignages)
-  const getCurrentPageItems = () => {
-    const startIndex = currentPage * itemsPerPage;
-    return reviews.slice(startIndex, startIndex + itemsPerPage);
-  };
+    api.on("select", () => {
+      setCurrent(api.selectedScrollSnap());
+    });
+  }, [api]);
 
   const averageRating = getAverageRating(reviews);
   const totalReviews = getTotalReviews(reviews);
@@ -207,64 +191,36 @@ export default function AdaptedReviewSection({ reviews }: AdaptedReviewSectionPr
           </div>
         </motion.div>
 
-        <motion.div ref={containerRef} className="relative" layout> {/* Add ref and layout prop */}
-          {/* Testimonials grid with pagination (from original Temoignages) */}
-          <div> {/* Removed overflow-hidden */}
-            <AnimatePresence mode="wait">
-              <motion.div layout> {/* Added layout prop */}
-                <motion.div
-                  key={currentPage}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.4 }}
-                  className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 items-start min-h-[160px]" // Use grid layout and added min-h
-                >
-                  {getCurrentPageItems().map((review) => (
-                    <ReviewCard key={review.id} review={review} />
-                  ))}
-                </motion.div>
-              </motion.div> {/* Closing tag for the new motion.div */}
-            </AnimatePresence>
+        <Carousel setApi={setApi} opts={{ loop: true }}> {/* Add setApi and options */}
+          <CarouselContent>
+            {reviews.map((review) => (
+              <CarouselItem key={review.id} className="md:basis-1/2 lg:basis-1/3"> {/* Use CarouselItem and adjust basis for responsiveness */}
+                <ReviewCard review={review} />
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious className="-left-4 top-1/2 -translate-y-1/2" /> {/* Adjust position */}
+          <CarouselNext className="-right-4 top-1/2 -translate-y-1/2" /> {/* Adjust position */}
+        </Carousel>
+
+        {/* Pagination indicator */}
+        <div className="flex justify-center items-center mt-8 space-x-2">
+          {/* Show dots on all screen sizes */}
+          <div className="flex space-x-2">
+            {Array.from({ length: count }).map((_, index) => (
+              <button
+                key={index}
+                onClick={() => api?.scrollTo(index)} // Use carousel API to scroll
+                className={`w-3 h-3 rounded-full transition-all duration-300 ${current === index
+                  ? "bg-r2pro-600" // Active dot color
+                  : "bg-gray-300 hover:bg-gray-400" // Inactive dot color
+                  }`}
+                aria-label={`Page ${index + 1}`}
+                aria-current={current === index ? "page" : undefined}
+              />
+            ))}
           </div>
-
-          {/* Pagination dots and navigation buttons */}
-          <div className="flex justify-center items-center mt-8 space-x-4"> {/* Added items-center and space-x-4 */}
-             {/* Navigation buttons */}
-            <button
-              onClick={prevPage}
-              className="bg-white rounded-full shadow-md p-2 hover:bg-gray-50 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-r2pro-500" // Removed pointer-events-auto
-              aria-label="Témoignages précédents"
-            >
-              <ChevronLeft className="w-5 h-5 text-r2pro-600" />
-            </button>
-
-            {/* Pagination dots */}
-            <div className="flex space-x-2">
-              {Array.from({ length: totalPages }).map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => goToPage(index)}
-                  className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${currentPage === index
-                    ? "bg-r2pro-600 w-6"
-                    : "bg-gray-300 hover:bg-gray-400"
-                    }`}
-                  aria-label={`Page ${index + 1}`}
-                  aria-current={currentPage === index ? "page" : undefined}
-                />
-              ))}
-            </div>
-
-            {/* Navigation buttons */}
-            <button
-              onClick={nextPage}
-              className="bg-white rounded-full shadow-md p-2 hover:bg-gray-50 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-r2pro-500" // Removed pointer-events-auto
-              aria-label="Témoignages suivants"
-            >
-              <ChevronRight className="w-5 h-5 text-r2pro-600" />
-            </button>
-          </div>
-        </motion.div>
+        </div>
 
         {/* Buttons from existing Temoignages */}
         <div className="mt-8 flex flex-col sm:flex-row justify-center gap-4">

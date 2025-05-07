@@ -29,6 +29,7 @@ const GoogleIcon = () => (
   </svg>
 )
 
+import { formatDateInFrench } from "@/lib/dateUtils"; // Import the helper function
 import { Review } from "@/lib/reviews"; // Import Review interface
 
 interface ProjectCardProps {
@@ -88,9 +89,9 @@ export function ProjectCard({
                         ? "Isolation"
                         : category === "portes-fenetres"
                           ? "Portes et Fenêtres"
-                          : category === "soffites-fascias"
-                            ? "Soffites et Fascias"
-                            : category}
+                        : category === "soffites-fascias"
+                          ? "Soffites et Fascias"
+                          : category}
             </div>
           )}
         </div>
@@ -127,8 +128,13 @@ export function ProjectCard({
                     <span className="text-xs text-gray-500">{review.name}</span>
                   </div>
                 )}
+                {review.published_at_date && (
+                  <p className="text-xs text-gray-500 mt-1"> {/* Added text-xs and mt-1 for styling */}
+                    {formatDateInFrench(review.published_at_date)}
+                  </p>
+                )}
                 {review.text && (
-                  <p className="text-xs text-gray-700 italic">
+                  <p className="text-xs text-gray-700 italic mt-1"> {/* Added mt-1 for spacing */}
                     {review.text.length > 150
                       ? `${review.text.substring(0, 150)}...`
                       : review.text}
