@@ -92,18 +92,41 @@ export function NavBar({ items = defaultItems, className }: NavBarProps) {
   }, [pathname, items])
 
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll)
-    window.addEventListener("mousemove", (e) => {
-      if (e.clientY <= 50) {
-        setIsVisible(true)
-      }
-    })
-    handleScroll()
+    let isThrottled = false;
+    const throttleDuration = 100; // milliseconds
+
+    const throttledHandleScroll = () => {
+      if (isThrottled) return;
+      isThrottled = true;
+      setTimeout(() => {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        setIsScrolled(scrollTop > 50);
+        setIsVisible(scrollTop <= 50 || window.innerHeight - scrollTop > window.innerHeight - 50);
+        isThrottled = false;
+      }, throttleDuration);
+    };
+
+    const throttledMouseMove = (e: MouseEvent) => {
+      if (isThrottled) return;
+      isThrottled = true;
+      setTimeout(() => {
+        if (e.clientY <= 50) {
+          setIsVisible(true);
+        }
+        isThrottled = false;
+      }, throttleDuration);
+    };
+
+    window.addEventListener("scroll", throttledHandleScroll);
+    window.addEventListener("mousemove", throttledMouseMove);
+
+    handleScroll(); // Initial call to set state based on initial scroll position
+
     return () => {
-      window.removeEventListener("scroll", handleScroll)
-      window.removeEventListener("mousemove", handleScroll)
-    }
-  }, [handleScroll])
+      window.removeEventListener("scroll", throttledHandleScroll);
+      window.removeEventListener("mousemove", throttledMouseMove);
+    };
+  }, [handleScroll]); // handleScroll is already memoized with useCallback
 
   // Remplacer la fonction scrollToSection par:
   const scrollToSection = (sectionId: string) => {

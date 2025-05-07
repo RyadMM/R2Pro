@@ -7,6 +7,7 @@ export interface Review {
   text: string;
   date: string;
   project: string;
+  projectId?: string;
 }
 
 // Modify utility functions to accept reviews as argument

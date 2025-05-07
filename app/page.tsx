@@ -6,16 +6,19 @@ import { Hero } from "@/components/Hero";
 import { Realisations } from "@/components/Realisations";
 import { Services } from "@/components/Services";
 import { SoumissionCTA } from "@/components/SoumissionCTA";
+import { getReviewsFromJson } from "@/lib/server/reviews";
 
-export default function Home() {
+export default async function Home() {
+  const reviews = await getReviewsFromJson();
+
   return (
     <div className="overflow-x-hidden w-full">
       <Hero className="hero-section" />
       <Services />
       <AboutSection />
-      <Realisations />
+      <Realisations reviews={reviews} />
       <SoumissionCTA />
-      <AdaptedReviewSection />
+      <AdaptedReviewSection reviews={reviews} />
       <Contact />
       <FAQ />
     </div>

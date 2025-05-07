@@ -4,7 +4,7 @@ import { motion } from "framer-motion"
 import { ArrowRight, Star } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
-import { useState } from "react"
+import { useState } from "react"; // Removed useEffect and useState for fetching
 
 // SVG de l'icône Google
 const GoogleIcon = () => (
@@ -29,15 +29,15 @@ const GoogleIcon = () => (
   </svg>
 )
 
+import { Review } from "@/lib/reviews"; // Import Review interface
+
 interface ProjectCardProps {
   id: number
   title: string
   description: string
   imageUrl: string
   category?: string
-  clientName?: string
-  clientReview?: string
-  clientRating?: number
+  review?: Review; // Added optional review prop
   href: string
 }
 
@@ -47,12 +47,12 @@ export function ProjectCard({
   description,
   imageUrl,
   category,
-  clientName = "Client satisfait",
-  clientReview = "Travail impeccable et service professionnel. Je recommande vivement!",
-  clientRating = 5,
+  review, // Accept review prop
   href,
 }: ProjectCardProps) {
-  const [isHovered, setIsHovered] = useState(false)
+  const [isHovered, setIsHovered] = useState(false);
+
+  const hasReview = !!review; // Check if a review was passed
 
   return (
     <motion.div
@@ -101,29 +101,42 @@ export function ProjectCard({
           <p className="text-gray-700 text-sm mb-4 leading-relaxed">{description}</p>
 
           {/* Séparateur */}
-          <div className="border-t border-gray-100 my-3 mt-auto"></div>
+          {hasReview && (
+            <div className="border-t border-gray-100 my-3 mt-auto"></div>
+          )}
 
           {/* Avis client avec badge Google */}
-          <div className="flex items-start space-x-3">
-            <div className="flex-shrink-0 mt-1 bg-white p-1 rounded-full shadow-sm">
-              <GoogleIcon />
-            </div>
-            <div className="flex-1">
-              <div className="flex items-center mb-1">
-                {/* Étoiles de notation */}
-                <div className="flex mr-2">
-                  {[...Array(5)].map((_, i) => (
-                    <Star
-                      key={i}
-                      className={`h-3 w-3 ${i < clientRating ? "text-yellow-400 fill-yellow-400" : "text-gray-300"}`}
-                    />
-                  ))}
-                </div>
-                <span className="text-xs text-gray-500">{clientName}</span>
+          {hasReview && review && ( // Use the review prop
+            <div className="flex items-start space-x-3">
+              <div className="flex-shrink-0 mt-1 bg-white p-1 rounded-full shadow-sm">
+                <GoogleIcon />
               </div>
-              <p className="text-xs text-gray-700 italic">{clientReview}</p>
+              <div className="flex-1">
+                {/* Always display rating and name if review exists */}
+                {review.rating && (
+                  <div className="flex items-center mb-1">
+                    {/* Étoiles de notation */}
+                    <div className="flex mr-2">
+                      {[...Array(5)].map((_, i) => (
+                        <Star
+                          key={i}
+                          className={`h-3 w-3 ${i < (review.rating || 0) ? "text-yellow-400 fill-yellow-400" : "text-gray-300"}`}
+                        />
+                      ))}
+                    </div>
+                    <span className="text-xs text-gray-500">{review.name}</span>
+                  </div>
+                )}
+                {review.text && (
+                  <p className="text-xs text-gray-700 italic">
+                    {review.text.length > 150
+                      ? `${review.text.substring(0, 150)}...`
+                      : review.text}
+                  </p>
+                )}
+              </div>
             </div>
-          </div>
+          )}
         </div>
 
         {/* Lien et bouton voir plus */}

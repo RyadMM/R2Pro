@@ -25,6 +25,7 @@ export interface Project {
   features: string[];
   clientTestimonial?: string;
   clientName?: string;
+  clientReview?: string;
   clientRating?: number;
   date?: string;
   location?: string;
@@ -37,6 +38,7 @@ export interface Project {
     [key: string]: string;
   };
   relatedProjects?: string[];
+  reviewerName?: string; // Added reviewerName field
 }
 
 export const projects: Project[] = [

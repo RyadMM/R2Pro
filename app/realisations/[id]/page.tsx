@@ -5,6 +5,7 @@ import { SectionDivider } from "@/components/SectionDivider";
 import { SoumissionCTA } from "@/components/SoumissionCTA";
 import { CustomButton } from "@/components/ui/custom-button";
 import { projects } from "@/lib/projectData";
+import { getReviewsFromJson } from "@/lib/server/reviews";
 import { ArrowRight, CheckCircle, Star } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -22,6 +23,12 @@ export default async function ProjectPage({ params }: { params: { id: string } }
   if (!project) {
     return notFound()
   }
+
+  const reviews = await getReviewsFromJson();
+  // Find the review based on the reviewerName in projectData
+  const projectReview = project.reviewerName
+    ? reviews.find(review => review.name === project.reviewerName)
+    : undefined;
 
   // Trouver les projets liés
   const relatedProjects = project.relatedProjects
@@ -189,37 +196,40 @@ export default async function ProjectPage({ params }: { params: { id: string } }
             {/* Sidebar - 1/3 width on desktop */}
             <div className="space-y-8">
               {/* Client Testimonial if available */}
-              {project.clientTestimonial && (
+              {projectReview && (
                 <div className="bg-white rounded-xl shadow-md p-6">
                   <h3 className="text-xl font-semibold text-gray-800 mb-4">Témoignage client</h3>
                   <div className="bg-gray-50 p-5 rounded-lg">
-                    {project.clientRating && (
+                    {projectReview.rating && (
                       <div className="flex mb-3">
                         {[...Array(5)].map((_, i) => (
                           <Star
                             key={i}
-                            className={`h-5 w-5 ${i < (project.clientRating || 0) ? "text-yellow-400 fill-yellow-400" : "text-gray-300"}`}
+                            className={`h-5 w-5 ${i < (projectReview.rating || 0) ? "text-yellow-400 fill-yellow-400" : "text-gray-300"}`}
                           />
                         ))}
-                      </div>
-                    )}
-                    <p className="text-gray-700 italic mb-4">"{project.clientTestimonial}"</p>
-                    <div className="flex items-center">
-                      <div className="h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center">
-                        <span className="text-gray-500 font-medium">
-                          {project.clientName ? project.clientName.charAt(0) : "C"}
-                        </span>
-                      </div>
-                      <div className="ml-3">
-                        <p className="font-medium">{project.clientName || "Client satisfait"}</p>
-                        <p className="text-sm text-gray-500">{project.location}</p>
-                      </div>
-                    </div>
+                  </div>
+                )}
+                {/* Display review text if available, otherwise display a placeholder or nothing */}
+                {projectReview.text && (
+                  <p className="text-gray-700 italic mb-4">"{projectReview.text}"</p>
+                )}
+                <div className="flex items-center">
+                  <div className="h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center">
+                    <span className="text-gray-500 font-medium">
+                      {projectReview.name ? projectReview.name.charAt(0) : ""}
+                    </span>
+                  </div>
+                  <div className="ml-3">
+                    <p className="font-medium">{projectReview.name || "Client"}</p>
+                    {projectReview.location && <p className="text-sm text-gray-500">{projectReview.location}</p>}
                   </div>
                 </div>
-              )}
+              </div>
+            </div>
+          )}
 
-              {/* Contact Card */}
+          {/* Contact Card */}
               {/*
               <div className="bg-white rounded-xl shadow-md p-6">
                 <h3 className="text-xl font-semibold text-gray-800 mb-4">Vous avez un projet similaire?</h3>

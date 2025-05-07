@@ -8,6 +8,10 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ChevronLeft, ChevronRight, Star } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
+interface AdaptedReviewSectionProps {
+  reviews: Review[];
+}
+
 // Google "G" logo SVG component
 const GoogleLogo = () => (
   <svg className="w-6 h-6" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -97,34 +101,11 @@ export const ReviewCard = ({ review }: { review: Review }) => {
   );
 };
 
-export default function AdaptedReviewSection() {
-  const [reviews, setReviews] = useState<Review[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+export default function AdaptedReviewSection({ reviews }: AdaptedReviewSectionProps) {
   const [currentPage, setCurrentPage] = useState(0); // Pagination state
   const [itemsPerPage, setItemsPerPage] = useState(3); // Pagination state
   const containerRef = useRef<HTMLDivElement>(null); // Ref for container
   const totalPages = Math.ceil(reviews.length / itemsPerPage); // Calculate total pages
-
-  useEffect(() => {
-    async function fetchReviews() {
-      try {
-        const response = await fetch("/api/reviews");
-        if (!response.ok) {
-          throw new Error(`Error fetching reviews: ${response.statusText}`);
-        }
-        const data: Review[] = await response.json();
-        setReviews(data);
-      } catch (err: any) {
-        setError(err.message);
-        console.error("Failed to fetch reviews:", err);
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    fetchReviews();
-  }, []);
 
   // Adjust items per page based on screen size (from original Temoignages)
   useEffect(() => {
@@ -171,24 +152,8 @@ export default function AdaptedReviewSection() {
   const averageRating = getAverageRating(reviews);
   const totalReviews = getTotalReviews(reviews);
 
-  if (loading) {
-    return (
-      <SectionContainer id="temoignages" className="py-16 md:pt-24 pb-8 md:pb-12 relative overflow-hidden">
-        <div className="container mx-auto px-4 relative z-10 text-center">
-          <p>Loading reviews...</p>
-        </div>
-      </SectionContainer>
-    );
-  }
-
-  if (error) {
-    return (
-      <SectionContainer id="temoignages" className="py-16 md:pt-24 pb-8 md:pb-12 relative overflow-hidden">
-        <div className="container mx-auto px-4 relative z-10 text-center text-red-500">
-          <p>Error loading reviews: {error}</p>
-        </div>
-      </SectionContainer>
-    );
+  if (!reviews || reviews.length === 0) {
+    return null; // Or a message indicating no reviews
   }
 
   return (

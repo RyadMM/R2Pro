@@ -63,6 +63,22 @@ export default function RealisationsPage() {
   const [isSearchFocused, setIsSearchFocused] = useState(false)
   const [showFilters, setShowFilters] = useState(false)
   const [expandedCategories, setExpandedCategories] = useState<string[]>(["main"])
+  const [reviews, setReviews] = useState<any[]>([]);
+
+  useEffect(() => {
+    async function fetchReviews() {
+      const response = await fetch('/api/projects/reviews');
+      if (response.ok) {
+        const reviewsData = await response.json();
+        setReviews(reviewsData);
+      } else {
+        console.error('Failed to fetch reviews:', response.statusText);
+        setReviews([]); // Set empty array on error
+      }
+    }
+    fetchReviews();
+  }, []);
+
 
   // Effet pour filtrer les projets en fonction des critères
   useEffect(() => {
@@ -70,7 +86,7 @@ export default function RealisationsPage() {
 
     // Filtrer par filtres sélectionnés
     if (selectedFilters.length > 0) {
-      // Vérifier si les filtres incluent des catégories principales
+      // Vérifier si les filtres inclus des catégories principales
       const mainCategories = selectedFilters.filter((filter) =>
         filterCategories[0].filters.some((f) => f.id === filter && f.id !== "tous"),
       )
@@ -390,20 +406,24 @@ export default function RealisationsPage() {
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
             >
               {filteredProjects.length > 0 ? (
-                filteredProjects.map((project) => (
-                  <motion.div key={project.id} variants={itemVariants} className="h-full">
-                    <ProjectCard
-                      id={parseInt(project.id, 10)}
-                      title={project.title}
-                      description={project.description}
-                      imageUrl={project.images[0] || "/placeholder.svg"}
-                      category={project.category}
-                      clientName={project.clientTestimonial ? "Client satisfait" : undefined}
-                      clientReview={project.clientTestimonial ? project.clientTestimonial.substring(0, 100) + "..." : undefined}
-                      href={`/realisations/${project.id}`}
-                    />
-                  </motion.div>
-                ))
+                filteredProjects.map((project) => {
+                  // Find the review for this project
+                  const projectReview = reviews.find(review => review.projectId === project.id);
+
+                  return (
+                    <motion.div key={project.id} variants={itemVariants} className="h-full">
+                      <ProjectCard
+                        id={parseInt(project.id, 10)}
+                        title={project.title}
+                        description={project.description}
+                        imageUrl={project.images[0] || "/placeholder.svg"}
+                        category={project.category}
+                        review={projectReview} // Pass the full review object if found
+                        href={`/realisations/${project.id}`}
+                      />
+                    </motion.div>
+                  );
+                })
               ) : (
                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="col-span-full py-16 text-center">
                   <div className="bg-white rounded-xl p-8 shadow-sm max-w-md mx-auto">
