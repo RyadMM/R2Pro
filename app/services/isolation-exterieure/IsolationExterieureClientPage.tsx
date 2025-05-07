@@ -1,10 +1,12 @@
 "use client"
 
-import { MaterialTabs } from "@/components/MaterialTabs"
-import { SectionContainer } from "@/components/SectionContainer"
-import { ServiceHero } from "@/components/ServiceHero"
-import { CheckCircle2, CheckSquare, DollarSign, Droplets, Home, Shield, Thermometer, Zap } from "lucide-react"
-import Image from "next/image"
+import { MaterialTabs } from "@/components/MaterialTabs";
+import { SectionContainer } from "@/components/SectionContainer";
+import { ServiceHero } from "@/components/ServiceHero";
+import { motion } from "framer-motion"; // Add motion
+import { ArrowRight, CheckCircle2, CheckSquare, DollarSign, Droplets, Home, Shield, Thermometer, Zap } from "lucide-react"; // Add ArrowRight
+import Image from "next/image";
+import Link from "next/link"; // Add Link
 
 // Matériaux d'isolation
 const materiaux = ["polystyrene", "polyurethane", "laine", "fibre"]
@@ -234,7 +236,72 @@ export default function IsolationExterieureClientPage() {
         />
       </SectionContainer>
 
-      {/* Reste du contenu... */}
+      {/* CTA Section - Transformez l'apparence de votre maison */}
+      <section className="relative py-20 md:py-28 overflow-hidden">
+        {/* Image de fond avec overlay */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/images/services/revetements-exterieurs/IMG_7491.jpg"
+            alt="Revêtement extérieur de qualité"
+            fill
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-r2pro-800/90 to-r2pro-900/70"></div>
+        </div>
+
+        {/* Contenu */}
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="max-w-3xl mx-auto text-center text-white">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+            >
+              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white font-heading">
+                Améliorez le confort et l'efficacité de votre maison
+              </h2>
+              <p className="text-xl md:text-2xl mb-8 text-white/90 font-sans">
+                Contactez-nous dès aujourd'hui pour une consultation gratuite et un devis personnalisé pour votre projet
+                d'isolation extérieure.
+              </p>
+
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+                viewport={{ once: true }}
+                className="inline-block"
+              >
+                <div className="relative">
+                  <Link href="/contact#contact-form">
+                    <motion.button
+                      className="bg-white text-r2pro-600 hover:bg-r2pro hover:text-white px-8 py-4 rounded-full font-medium text-base md:text-lg transition-colors duration-300 flex items-center shadow-lg border-2 border-white/80 group relative z-10"
+                      whileHover={{ y: -3 }}
+                      transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                    >
+                      <span className="mr-2 relative z-10">
+                        <CheckSquare className="w-5 h-5" />
+                      </span>
+                      <span className="relative z-10">Demander une soumission gratuite</span>
+                      <span className="ml-2 relative z-10">
+                        <ArrowRight className="w-5 h-5" />
+                      </span>
+                    </motion.button>
+                  </Link>
+
+                  {/* Effet de brillance sous le bouton */}
+                  <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-3/4 h-4 bg-white/10 blur-md rounded-full"></div>
+                </div>
+              </motion.div>
+            </motion.div>
+          </div>
+        </div>
+
+        {/* Éléments décoratifs */}
+        <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-black/30 to-transparent"></div>
+        <div className="absolute top-0 left-0 w-full h-24 bg-gradient-to-b from-black/30 to-transparent"></div>
+      </section>
     </div>
   )
 }

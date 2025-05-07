@@ -52,8 +52,8 @@ export function Realisations({ category, reviews }: RealisationsProps) { // Acce
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <AnimatePresence mode="sync">
             {filteredProjects.map((project) => { // Use curly braces for map body
-              // Find the review for the current project
-              const projectReview = reviews.find(review => review.projectId === project.id);
+              // Filter reviews to only include those with a projectId before finding
+              const projectReview = reviews.filter(review => review.projectId).find(review => review.projectId === project.id);
 
               return ( // Return the JSX
                 <motion.div

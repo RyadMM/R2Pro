@@ -1,10 +1,13 @@
 "use client"
 
+"use client"
+
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { MaterialTabs } from "@/components/MaterialTabs";
 import { Realisations } from "@/components/Realisations";
 import { SectionContainer } from "@/components/SectionContainer";
 import { ServiceHero } from "@/components/ServiceHero";
+import { Review } from "@/lib/reviews"; // Import Review interface
 import { motion } from "framer-motion";
 import { ArrowRight, CheckCircle2, CheckSquare } from "lucide-react";
 import Image from "next/image";
@@ -80,14 +83,18 @@ const materialInfo = {
       "Esthétique naturelle et chaleureuse",
       "Matériau renouvelable et écologique",
       "Excellente isolation thermique et acoustique",
-      "Disponible en différentes essences, textures et finitions",
+      "Available in different species, textures and finishes",
     ],
     applications: "Chalets, maisons de style rustique ou traditionnel, propriétés dans des environnements boisés.",
     imagePath: "/images/services/revetements-exterieurs/materiau-bois.jpg",
   },
 }
 
-export default function RevetementsExterieursClientPage() {
+interface RevetementsExterieursClientPageProps {
+  reviews: Review[];
+}
+
+export default function RevetementsExterieursClientPage({ reviews }: RevetementsExterieursClientPageProps) {
   // Ajout d'un état pour vérifier si le composant est monté
   const [isMounted, setIsMounted] = useState(false)
 
@@ -208,31 +215,9 @@ export default function RevetementsExterieursClientPage() {
         </div>
       </SectionContainer>
 
-      {/* Réalisations Section - Avec le nouveau composant ProjectGallery */}
+      {/* Réalisations Section */}
       <SectionContainer className="py-12 md:py-16 section-alt">
-        <AnimatedSection animation="fadeIn">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.1 }}
-            viewport={{ once: true }}
-            className="text-3xl md:text-4xl font-bold text-center mb-6 text-r2pro-800 relative mx-auto"
-          >
-            Nos Réalisations de Revêtements
-            <motion.div
-              className="absolute -bottom-2 left-0 right-0 h-1 bg-r2pro-500 rounded-full"
-              initial={{ width: "0%" }}
-              whileInView={{ width: "100%" }}
-              transition={{ duration: 0.8, delay: 0.5 }}
-              viewport={{ once: true }}
-            />
-          </motion.h2>
-          <p className="text-center text-gray-800 mb-8 max-w-2xl mx-auto text-base md:text-lg leading-relaxed">
-            Découvrez nos projets récents de revêtements extérieurs réalisés par notre équipe d'experts
-          </p>
-        </AnimatedSection>
-
-        <Realisations category="revetement" />
+        <Realisations category="revetement" reviews={reviews} /> {/* Pass the reviews prop */}
       </SectionContainer>
 
       {/* Matériaux Section - Avec le nouveau composant MaterialTabs */}
@@ -335,21 +320,3 @@ export default function RevetementsExterieursClientPage() {
     </div>
   )
 }
-// Vérifier comment le composant ProjectGallery est utilisé et s'assurer que la propriété images est correctement passée
-
-// Si le composant ProjectGallery est utilisé, assurez-vous qu'il reçoit un tableau d'images valide
-// Par exemple, si vous avez un code comme:
-// <ProjectGallery images={someImages} />
-// Assurez-vous que someImages est défini et est un tableau
-
-// Exemple de correction:
-// Avant: <ProjectGallery images={someImages} />
-// Après: <ProjectGallery images={someImages || []} />
-
-// Ou si vous avez besoin de définir des images par défaut:
-// const defaultImages = [
-//   "/images/services/revetements-exterieurs/realisation-1.jpg",
-//   "/images/services/revetements-exterieurs/realisation-2.jpg",
-//   "/images/services/revetements-exterieurs/realisation-3.jpg"
-// ];
-// <ProjectGallery images={someImages || defaultImages} />
