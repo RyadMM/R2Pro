@@ -16,7 +16,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { type LucideIcon, ChevronRight, Home, Image, Info, Menu, Phone, Wrench } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 // Ajouter l'import pour notre nouveau hook
 import { useScrollToAnchor } from "@/hooks/useScrollToAnchor";
@@ -43,8 +43,8 @@ const defaultItems: NavItem[] = [
 export function NavBar({ items = defaultItems, className }: NavBarProps) {
   const [activeTab, setActiveTab] = useState(items.length > 0 ? items[0].name : "")
   const [isMobile, setIsMobile] = useState(false)
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isVisible, setIsVisible] = useState(true);
+  // const [isScrolled, setIsScrolled] = useState(false); // Removed isScrolled
+  // const [isVisible, setIsVisible] = useState(true); // Removed isVisible
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [servicesPopoverOpen, setServicesPopoverOpen] = useState(false); // Add state for popover
   const pathname = usePathname();
@@ -53,11 +53,7 @@ export function NavBar({ items = defaultItems, className }: NavBarProps) {
   // Dans la fonction NavBar, ajouter:
   const scrollToAnchor = useScrollToAnchor()
 
-  const handleScroll = useCallback(() => {
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop
-    setIsScrolled(scrollTop > 50)
-    setIsVisible(scrollTop <= 50 || window.innerHeight - scrollTop > window.innerHeight - 50)
-  }, [])
+  // handleScroll and related useEffects for scroll/mouse listeners are removed
 
   useEffect(() => {
     const handleResize = () => {
@@ -91,42 +87,7 @@ export function NavBar({ items = defaultItems, className }: NavBarProps) {
     }
   }, [pathname, items])
 
-  useEffect(() => {
-    let isThrottled = false;
-    const throttleDuration = 100; // milliseconds
-
-    const throttledHandleScroll = () => {
-      if (isThrottled) return;
-      isThrottled = true;
-      setTimeout(() => {
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        setIsScrolled(scrollTop > 50);
-        setIsVisible(scrollTop <= 50 || window.innerHeight - scrollTop > window.innerHeight - 50);
-        isThrottled = false;
-      }, throttleDuration);
-    };
-
-    const throttledMouseMove = (e: MouseEvent) => {
-      if (isThrottled) return;
-      isThrottled = true;
-      setTimeout(() => {
-        if (e.clientY <= 50) {
-          setIsVisible(true);
-        }
-        isThrottled = false;
-      }, throttleDuration);
-    };
-
-    window.addEventListener("scroll", throttledHandleScroll);
-    window.addEventListener("mousemove", throttledMouseMove);
-
-    handleScroll(); // Initial call to set state based on initial scroll position
-
-    return () => {
-      window.removeEventListener("scroll", throttledHandleScroll);
-      window.removeEventListener("mousemove", throttledMouseMove);
-    };
-  }, [handleScroll]); // handleScroll is already memoized with useCallback
+  // Removed useEffect for scroll and mousemove listeners
 
   // Remplacer la fonction scrollToSection par:
   const scrollToSection = (sectionId: string) => {
@@ -155,18 +116,15 @@ export function NavBar({ items = defaultItems, className }: NavBarProps) {
       <div
         className={cn(
           "fixed top-0 left-1/2 -translate-x-1/2 z-50 transition-all duration-300 hidden md:block",
-          isScrolled ? "py-2" : "py-6",
-          isVisible ? "opacity-100" : "opacity-0 pointer-events-none",
-          "md:hover:opacity-100 md:hover:pointer-events-auto",
+          "py-6", // Use fixed padding, e.g., the non-scrolled version
+          // isVisible and hover logic removed, defaults to visible
           className,
         )}
       >
         <div
           className={cn(
             "flex items-center gap-6 backdrop-blur-lg py-2 px-2 rounded-full shadow-lg transition-all duration-300",
-            isScrolled
-              ? "bg-background/90 border border-gray-200/50"
-              : "bg-background/70 border border-white/30 shadow-md",
+            "bg-background/70 border border-white/30 shadow-md", // Use fixed style, e.g., the non-scrolled version
           )}
         >
           {items.map((item, index) => {
@@ -182,7 +140,7 @@ export function NavBar({ items = defaultItems, className }: NavBarProps) {
                       <NavigationMenuTrigger
                         className={cn(
                           "cursor-pointer text-base font-medium px-5 py-2.5 rounded-full transition-colors",
-                          isScrolled ? "text-foreground hover:text-primary" : "text-foreground/90 hover:text-primary",
+                          "text-foreground/90 hover:text-primary", // Use fixed style
                           "bg-transparent hover:bg-transparent focus:bg-transparent",
                           "data-[state=open]:bg-transparent",
                         )}
@@ -231,7 +189,7 @@ export function NavBar({ items = defaultItems, className }: NavBarProps) {
                 className={cn(
                   "relative cursor-pointer text-base font-medium py-2.5 rounded-full transition-colors flex items-center justify-center",
                   isFirstItem ? "pl-5 pr-5" : "px-5",
-                  isScrolled ? "text-foreground hover:text-primary" : "text-foreground/90 hover:text-primary",
+                  "text-foreground/90 hover:text-primary", // Use fixed style
                   isActive && "bg-muted text-primary",
                 )}
               >
@@ -271,8 +229,8 @@ export function NavBar({ items = defaultItems, className }: NavBarProps) {
               className={cn(
                 "fixed top-4 right-4 z-50 rounded-full h-12 w-12 shadow-lg", // Position & Size
                 "bg-background/90 border border-border/30 hover:bg-accent", // Appearance
-                "transition-opacity duration-300",
-                isVisible ? "opacity-100" : "opacity-0 pointer-events-none", // Visibility based on scroll
+                "transition-opacity duration-300", // Opacity will be constant
+                "opacity-100", // Ensure always visible
               )}
             >
               <Menu className="h-5 w-5 text-foreground" /> {/* Adjusted icon color */}
@@ -402,10 +360,10 @@ export function NavBar({ items = defaultItems, className }: NavBarProps) {
           </SheetContent>
         </Sheet>
 
-        {/* Bottom navigation bar (remains unchanged) */}
+        {/* Bottom navigation bar */}
         <div className={cn(
           "fixed bottom-0 left-0 right-0 z-40 bg-background/95 backdrop-blur-lg border-t border-border/50 shadow-lg transition-all duration-300", // Adjusted border color to match FAB
-          isVisible ? "translate-y-0" : "translate-y-full"
+          "translate-y-0" // Ensure always visible and in place
         )}>
           <div className="flex items-center justify-around px-1 py-2">
             {items.slice(0, 5).map((item) => {
