@@ -1,6 +1,5 @@
 "use client"
 
-import { NavBar } from "@/components/NavBar"
 import { SectionAlt } from "@/components/SectionAlt"
 import { Card, CardContent } from "@/components/ui/card"
 import { CustomButton } from "@/components/ui/custom-button"
@@ -19,7 +18,6 @@ import { useForm } from "react-hook-form"
 import * as z from "zod"
 // Ajouter cette fonction useEffect pour gérer le défilement vers l'ancre au chargement de la page
 // Après les autres imports, ajouter:
-import { useEffect } from "react"
 
 const COMPANY_PHONE = "+14384944426"
 const COMPANY_EMAIL = "info@r2pro.ca"
@@ -127,25 +125,10 @@ export default function ContactPage() {
     launchConfetti();
   };
 
-  // Après la déclaration de la fonction ContactPage, ajouter:
-  // Ajouter cet useEffect pour gérer le défilement vers l'ancre au chargement de la page
-  useEffect(() => {
-    // Vérifier si l'URL contient une ancre
-    if (window.location.hash === "#contact-form") {
-      // Attendre un peu que la page soit complètement chargée
-      setTimeout(() => {
-        const contactForm = document.getElementById("contact-form")
-        if (contactForm) {
-          contactForm.scrollIntoView({ behavior: "smooth" })
-        }
-      }, 500)
-    }
-  }, [])
-
   return (
     <div className="flex-1 flex flex-col">
       {/* Hero Section */}
-      <section className="relative h-[70vh] min-h-[500px]">
+      <section className="relative h-screen min-h-[500px]">
         <Image
           src="/images/contact/contact-background.jpg"
           alt="Contactez R2Pro"
@@ -155,7 +138,6 @@ export default function ContactPage() {
         />
         <div className="absolute inset-0 bg-black bg-opacity-50">
           <div className="container mx-auto px-4 h-full flex flex-col">
-            <NavBar />
             <div className="flex-grow flex items-center">
               <div className="max-w-2xl">
                 <motion.h1

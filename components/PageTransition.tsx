@@ -7,15 +7,32 @@ import type React from "react"
 export function PageTransition({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
 
+  const pageVariants = {
+    initial: {
+      opacity: 0,
+    },
+    in: {
+      opacity: 1,
+    },
+    // 'out' variant removed as it's no longer used
+  }
+
+  const pageTransition = {
+    type: "tween",
+    ease: "easeInOut",
+    duration: 0.4,
+  }
+
   return (
-    <AnimatePresence> {/* REMOVED mode="wait" */}
+    <AnimatePresence mode="wait">
       <motion.div
-        key={pathname}
-        className="flex-grow flex flex-col w-full relative" // Keep position: relative
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0, position: "absolute" }} // RE-ADDED position: absolute
-        transition={{ duration: 0.4, ease: "easeInOut" }} // Keep increased duration
+        key={pathname} // Reverted from uniqueKey
+        className="flex-grow flex flex-col w-full relative"
+        initial="initial"
+        animate="in"
+        // exit="out" // Temporarily removed to diagnose
+        variants={pageVariants}
+        transition={pageTransition}
       >
         {children}
       </motion.div>

@@ -1,9 +1,9 @@
 "use client"
 
-import type { ReactNode } from "react"
+import { NavBar } from "@/components/NavBar"
 import Image from "next/image"
 import Link from "next/link"
-import { NavBar } from "@/components/NavBar"
+import type { ReactNode } from "react"
 
 interface ServiceHeroProps {
   title: string
@@ -16,7 +16,7 @@ interface ServiceHeroProps {
 
 export function ServiceHero({ title, description, ctaText, ctaLink, backgroundImage, ctaIcon }: ServiceHeroProps) {
   return (
-    <section className="relative min-h-[80vh] md:min-h-screen">
+    <section className="relative min-h-screen">
       {/* Image d'arrière-plan avec priorité de chargement */}
       <Image
         src={backgroundImage || "/placeholder.svg"}
@@ -74,4 +74,3 @@ export function ServiceHero({ title, description, ctaText, ctaLink, backgroundIm
     </section>
   )
 }
-
