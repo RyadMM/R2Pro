@@ -81,11 +81,28 @@ export function NavBar({ items = defaultItems, className }: NavBarProps) {
   }, [])
 
   useEffect(() => {
-    const currentItem = items.find((item) => item.url === pathname)
-    if (currentItem) {
-      setActiveTab(currentItem.name)
+    let newActiveTabName = "";
+
+    // 1. Check for exact match first (this handles "/" for Accueil correctly)
+    const exactMatchItem = items.find(item => item.url === pathname);
+
+    if (exactMatchItem) {
+      newActiveTabName = exactMatchItem.name;
+    } else {
+      // 2. If no exact match, check for startsWith for non-"/" URLs, prioritizing longer URLs
+      const potentialParentItems = items
+        .filter(item => item.url !== "/") // Exclude "/" from ambiguous startsWith
+        .filter(item => pathname.startsWith(item.url))
+        .sort((a, b) => b.url.length - a.url.length); // Longest URL first
+
+      if (potentialParentItems.length > 0) {
+        newActiveTabName = potentialParentItems[0].name;
+      }
     }
-  }, [pathname, items])
+
+    // If newActiveTabName is found, set it. Otherwise, set to empty.
+    setActiveTab(newActiveTabName);
+  }, [pathname, items]);
 
   // Removed useEffect for scroll and mousemove listeners
 
@@ -143,6 +160,7 @@ export function NavBar({ items = defaultItems, className }: NavBarProps) {
                           "text-foreground/90 hover:text-primary", // Use fixed style
                           "bg-transparent hover:bg-transparent focus:bg-transparent",
                           "data-[state=open]:bg-transparent",
+                          activeTab === "Services" && "bg-muted text-primary",
                         )}
                       >
                         Services
@@ -255,10 +273,19 @@ export function NavBar({ items = defaultItems, className }: NavBarProps) {
                 <nav className="flex flex-col space-y-2 px-4">
                   {items.map((item) => {
                     const Icon = item.icon
-                    const isActive = activeTab === item.name || pathname.startsWith(item.url)
+                    const isActive = activeTab === item.name; // Simplified: useEffect now handles this logic
 
                     if (item.name === "Services") {
-                      const [servicesExpanded, setServicesExpanded] = useState(isActive)
+                      // For the "Services" accordion, its active state is purely if activeTab is "Services"
+                      const isServicesActive = activeTab === "Services";
+                      const [servicesExpanded, setServicesExpanded] = useState(isServicesActive);
+
+                      // Update servicesExpanded if isServicesActive changes (e.g. route change)
+                      useEffect(() => {
+                        if (isServicesActive) {
+                          setServicesExpanded(true);
+                        }
+                      }, [isServicesActive]);
 
                       return (
                         <div key={item.name} className="py-1">
@@ -266,7 +293,8 @@ export function NavBar({ items = defaultItems, className }: NavBarProps) {
                             onClick={() => setServicesExpanded(!servicesExpanded)}
                             className={cn(
                               "flex items-center justify-between w-full px-4 py-3 text-base font-medium rounded-xl transition-all",
-                              isActive || servicesExpanded ? "bg-primary/10 text-primary" : "hover:bg-muted",
+                              // Use isServicesActive for the accordion header styling
+                              (isServicesActive || servicesExpanded) ? "bg-primary/10 text-primary" : "hover:bg-muted",
                             )}
                           >
                             <div className="flex items-center">
@@ -368,10 +396,8 @@ export function NavBar({ items = defaultItems, className }: NavBarProps) {
           <div className="flex items-center justify-around px-1 py-2">
             {items.slice(0, 5).map((item) => {
               const Icon = item.icon;
-              // Updated active state logic for Services
-              const isActive = item.name === "Services"
-                ? pathname.startsWith("/services") || activeTab === "Services"
-                : activeTab === item.name || pathname === item.url;
+              // Simplified active state logic: useEffect now correctly sets activeTab
+              const isActive = activeTab === item.name;
 
               if (item.name === "Services") {
                 // Render Popover for Services item
