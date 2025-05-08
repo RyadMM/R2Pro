@@ -1,7 +1,7 @@
 "use client"
 
-import { useEffect } from "react"
 import { usePathname } from "next/navigation"
+import { useEffect } from "react"
 
 export function useScrollToHash() {
   const pathname = usePathname()
@@ -9,27 +9,34 @@ export function useScrollToHash() {
   useEffect(() => {
     // Fonction pour gérer le défilement vers l'ancre
     const scrollToHash = () => {
-      const hash = window.location.hash
+      const hash = window.location.hash;
       if (hash) {
         // Petit délai pour s'assurer que le DOM est complètement chargé
+        // et que les animations de transition sont potentiellement terminées.
         setTimeout(() => {
-          const element = document.getElementById(hash.substring(1))
-          if (element) {
-            element.scrollIntoView({ behavior: "smooth" })
+          try {
+            const element = document.getElementById(hash.substring(1));
+            if (element) {
+              element.scrollIntoView({ behavior: "smooth" });
+            }
+          } catch (e) {
+            console.error("Error scrolling to hash:", e);
           }
-        }, 100)
+        }, 150); // Augmenté légèrement le délai
       }
+    };
+
+    // Exécuter seulement si un hash existe au chargement initial ou changement de pathname
+    if (window.location.hash) {
+      scrollToHash();
     }
 
-    // Exécuter au chargement initial
-    scrollToHash()
+    // Ajouter un écouteur d'événements pour les changements de hash explicites
+    window.addEventListener("hashchange", scrollToHash);
 
-    // Ajouter un écouteur d'événements pour les changements d'URL
-    window.addEventListener("hashchange", scrollToHash)
-
+    // Nettoyer l'écouteur
     return () => {
-      window.removeEventListener("hashchange", scrollToHash)
+      window.removeEventListener("hashchange", scrollToHash);
     }
   }, [pathname])
 }
-

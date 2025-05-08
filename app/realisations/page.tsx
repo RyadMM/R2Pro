@@ -184,7 +184,7 @@ export default function RealisationsPage() {
   }
 
   return (
-    <div className="min-h-screen">
+    <div className="flex-1 flex flex-col">
       <ServiceHero
         title="Nos Réalisations"
         description="Découvrez notre portfolio de projets exceptionnels qui témoignent de notre expertise et de notre engagement envers la qualité."

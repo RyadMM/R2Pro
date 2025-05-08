@@ -194,13 +194,13 @@ export default function AdaptedReviewSection({ reviews }: AdaptedReviewSectionPr
         <Carousel setApi={setApi} opts={{ loop: true }}> {/* Add setApi and options */}
           <CarouselContent>
             {reviews.map((review) => (
-              <CarouselItem key={review.id} className="md:basis-1/2 lg:basis-1/3"> {/* Use CarouselItem and adjust basis for responsiveness */}
+              <CarouselItem key={review.id} className="md:basis-1/2 lg:basis-1/3 py-4"> {/* Use CarouselItem and adjust basis for responsiveness, added py-4 for vertical padding */}
                 <ReviewCard review={review} />
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious className="-left-4 top-1/2 -translate-y-1/2" /> {/* Adjust position */}
-          <CarouselNext className="-right-4 top-1/2 -translate-y-1/2" /> {/* Adjust position */}
+          <CarouselPrevious className="-left-4 top-1/2 -translate-y-1/2 bg-white shadow-md" /> {/* Adjust position, added background and shadow */}
+          <CarouselNext className="-right-4 top-1/2 -translate-y-1/2 bg-white shadow-md" /> {/* Adjust position, added background and shadow */}
         </Carousel>
 
         {/* Pagination indicator */}

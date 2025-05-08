@@ -12,7 +12,7 @@ export default async function Home() {
   const reviews = await getReviewsFromJson();
 
   return (
-    <div className="overflow-x-hidden w-full">
+    <div className="flex-1 flex flex-col">
       <Hero className="hero-section" />
       <Services />
       <AboutSection />

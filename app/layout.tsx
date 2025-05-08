@@ -63,7 +63,7 @@ export default function RootLayout({
         <ScrollToHashProvider>
           <NavBar />
           <PageTransition>
-            <main className="flex-grow overflow-x-hidden overflow-fix zoom-fix">{children}</main>
+            <main className="flex-grow flex flex-col overflow-x-hidden">{children}</main>
           </PageTransition>
           <Footer />
         </ScrollToHashProvider>

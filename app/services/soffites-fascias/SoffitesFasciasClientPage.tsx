@@ -29,7 +29,7 @@ export default function SoffitesFasciasClientPage() {
   }
 
   return (
-    <div className="min-h-screen relative">
+    <div className="flex-1 flex flex-col relative">
       {/* Éléments décoratifs d'arrière-plan */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-24 -right-24 w-96 h-96 bg-r2pro-100 rounded-full opacity-20 blur-3xl"></div>

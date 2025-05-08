@@ -143,7 +143,7 @@ export default function ContactPage() {
   }, [])
 
   return (
-    <>
+    <div className="flex-1 flex flex-col">
       {/* Hero Section */}
       <section className="relative h-[70vh] min-h-[500px]">
         <Image
@@ -452,6 +452,6 @@ export default function ContactPage() {
           </div>
         </div>
       </SectionAlt>
-    </>
+    </div>
   )
 }

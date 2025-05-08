@@ -71,7 +71,7 @@ export function Design3DClientPage() {
     },
   ];
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex-1 flex flex-col">
       {/* Hero Section */}
       <ServiceHero
         title="Design 3D"

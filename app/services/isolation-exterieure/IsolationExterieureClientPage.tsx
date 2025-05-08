@@ -72,7 +72,7 @@ const materialInfo = {
 export default function IsolationExterieureClientPage() {
 
   return (
-    <div className="min-h-screen relative overflow-x-hidden overflow-y-auto">
+    <div className="flex-1 flex flex-col relative overflow-x-hidden overflow-y-auto">
       <ServiceHero
         title="Isolation Extérieure Professionnelle"
         description="Améliorez l'efficacité énergétique de votre maison et réduisez vos factures d'énergie avec nos solutions d'isolation extérieure de haute qualité."
