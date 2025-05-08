@@ -9,6 +9,7 @@ interface OptimizedImageProps {
   sizes?: string;
   fill?: boolean;
   priority?: boolean;
+  fetchpriority?: "high" | "low" | "auto";
 }
 
 export function OptimizedImage({
@@ -20,6 +21,7 @@ export function OptimizedImage({
   sizes,
   fill,
   priority,
+  fetchpriority,
 }: OptimizedImageProps) {
   return (
     <Image
@@ -31,6 +33,7 @@ export function OptimizedImage({
       sizes={sizes}
       fill={fill}
       priority={priority}
+      fetchPriority={fetchpriority} // Pass it to next/image
       style={{ objectFit: "cover" }}
     />
   );

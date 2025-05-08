@@ -1,8 +1,8 @@
 "use client"
 
 import { useScrollToHash } from "@/hooks/useScrollToHash"
-import { type ReactNode, useEffect, useState } from "react"
 import { usePathname } from "next/navigation"
+import { type ReactNode, useEffect, useState } from "react"
 
 export function ScrollToHashProvider({ children }: { children: ReactNode }) {
   const pathname = usePathname()
@@ -15,6 +15,5 @@ export function ScrollToHashProvider({ children }: { children: ReactNode }) {
 
   useScrollToHash()
 
-  return <>{children}</>
+  return <div className="flex flex-col flex-grow">{children}</div>
 }
-

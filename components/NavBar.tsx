@@ -106,13 +106,7 @@ export function NavBar({ items = defaultItems, className }: NavBarProps) {
 
   // Removed useEffect for scroll and mousemove listeners
 
-  // Remplacer la fonction scrollToSection par:
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId)
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" })
-    }
-  }
+  // Removed unused scrollToSection function
 
   if (items.length === 0) return null
 

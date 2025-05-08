@@ -10,9 +10,11 @@ import { Textarea } from "@/components/ui/textarea"
 import { zodResolver } from "@hookform/resolvers/zod"
 // Dynamically import confetti later
 // import confetti from "canvas-confetti"
-import { motion } from "framer-motion"
+import { motion } from "framer-motion"; // Re-add for other animations
 import { CheckCircle, Clock, Mail, MapPin, Phone, Send } from "lucide-react"
-import Image from "next/image"
+// import Image from "next/image" // No longer directly used for hero background
+import { GenericHero } from "@/components/GenericHero"
+import Link from "next/link"; // For the button
 import { useState } from "react"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
@@ -103,109 +105,92 @@ export default function ContactPage() {
 
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
     try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
+      const response = await fetch("/api/contact", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(data),
-      });
+      })
 
       if (response.ok) {
-        setIsSubmitted(true);
+        setIsSubmitted(true)
         // Optionally, reset the form after successful submission
       } else {
-        console.error('Form submission failed.');
+        console.error("Form submission failed.")
       }
     } catch (error) {
-      console.error('An error occurred:', error);
+      console.error("An error occurred:", error)
     }
 
     // Lancer l'effet de confetti (maintenant async)
-    launchConfetti();
-  };
+    launchConfetti()
+  }
+
+  // Reconstruct original title, subtitle, and button styling for the contact page
+  const contactPageTitle = (
+    <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white font-heading">
+      Contactez-nous
+    </h1>
+  );
+
+  const contactPageSubtitle = (
+    <p className="text-xl mb-8 text-white font-sans">
+      Transformez votre propriété avec R2Pro - Experts en revêtement extérieur au Québec
+    </p>
+  );
+
+  const renderContactHeroButtons = () => (
+    // The outer div for layout (inline-block behavior) was part of the original motion.div wrapper for the button section
+    // GenericHero's AnimatedHeroContent now provides the motion.div wrapper.
+    // We need to ensure the button itself maintains its structure and styling.
+    // The original structure had an outer motion.div, then a div.relative, then the <a> and <motion.button>
+    // We'll replicate the <a> and <motion.button> part here.
+    // The `inline-block` behavior for the button group might need to be on the div returned by this function.
+     <div className="inline-block"> {/* This mimics the original motion.div's display behavior */}
+        <div className="relative"> {/* This div was also part of original structure */}
+            <Link href="#contact-form" passHref legacyBehavior>
+                <motion.a // Changed from motion.button to motion.a to work with Link, style as button
+                    className="bg-white text-r2pro-600 hover:bg-r2pro hover:text-white px-8 py-4 rounded-full font-medium text-base md:text-lg transition-colors duration-300 flex items-center shadow-lg border-2 border-white/80 group relative z-10"
+                    whileHover={{ y: -3 }} // Original hover effect
+                    transition={{ type: "spring", stiffness: 400, damping: 10 }} // Original transition
+                >
+                    <div className="absolute inset-0 rounded-full bg-white/20 blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <motion.span
+                        animate={{ rotate: [0, 10, 0] }}
+                        transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
+                        className="mr-2 relative z-10"
+                    >
+                        <CheckCircle className="w-5 h-5" />
+                    </motion.span>
+                    <span className="relative z-10">Obtenir une soumission gratuite</span>
+                    {/* The Send icon was part of the original button, let's re-add it if it was there */}
+                    {/* Checking original file... yes, a Send icon was there on hover. */}
+                     <motion.div
+                        className="ml-2 opacity-0 group-hover:opacity-100 transition-opacity relative z-10"
+                        animate={{ x: [0, 5, 0] }}
+                        transition={{ duration: 1.5, repeat: Number.POSITIVE_INFINITY, repeatType: "reverse" }}
+                    >
+                        <Send className="w-5 h-5" />
+                    </motion.div>
+                </motion.a>
+            </Link>
+            <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-3/4 h-4 bg-white/10 blur-md rounded-full"></div>
+        </div>
+    </div>
+  );
 
   return (
     <div className="flex-1 flex flex-col">
-      {/* Hero Section */}
-      <section className="relative h-screen min-h-[500px]">
-        <Image
-          src="/images/contact/contact-background.jpg"
-          alt="Contactez R2Pro"
-          fill
-          className="object-cover"
-          priority
-        />
-        <div className="absolute inset-0 bg-black bg-opacity-50">
-          <div className="container mx-auto px-4 h-full flex flex-col">
-            <div className="flex-grow flex items-center">
-              <div className="max-w-2xl">
-                <motion.h1
-                  initial={{ opacity: 0, y: -20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.7, delay: 0.2 }}
-                  className="text-4xl md:text-5xl font-bold mb-4 text-white font-heading"
-                >
-                  Contactez-nous
-                </motion.h1>
-                <motion.p
-                  initial={{ opacity: 0, y: -20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.7, delay: 0.4 }}
-                  className="text-xl mb-8 text-white font-sans"
-                >
-                  Transformez votre propriété avec R2Pro - Experts en revêtement extérieur au Québec
-                </motion.p>
-
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.5, delay: 0.6 }}
-                  className="inline-block"
-                >
-                  <div className="relative">
-                    <a href="#contact-form">
-                      <motion.button
-                        className="bg-white text-r2pro-600 hover:bg-r2pro hover:text-white px-8 py-4 rounded-full font-medium text-base md:text-lg transition-colors duration-300 flex items-center shadow-lg border-2 border-white/80 group relative z-10"
-                        whileHover={{ y: -3 }}
-                        transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                      >
-                        {/* Effet de halo contenu dans le bouton */}
-                        <div className="absolute inset-0 rounded-full bg-white/20 blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-
-                        <motion.span
-                          animate={{ rotate: [0, 10, 0] }}
-                          transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
-                          className="mr-2 relative z-10"
-                        >
-                          <CheckCircle className="w-5 h-5" />
-                        </motion.span>
-                        <span className="relative z-10">Obtenir une soumission gratuite</span>
-                        <motion.div
-                          className="ml-2 opacity-0 group-hover:opacity-100 transition-opacity relative z-10"
-                          animate={{
-                            x: [0, 5, 0],
-                          }}
-                          transition={{
-                            duration: 1.5,
-                            repeat: Number.POSITIVE_INFINITY,
-                            repeatType: "reverse",
-                          }}
-                        >
-                          <Send className="w-5 h-5" />
-                        </motion.div>
-                      </motion.button>
-                    </a>
-
-                    {/* Effet de brillance sous le bouton */}
-                    <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-3/4 h-4 bg-white/10 blur-md rounded-full"></div>
-                  </div>
-                </motion.div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <GenericHero
+        backgroundImageSrc="/images/contact/contact-background.jpg"
+        backgroundImageAlt="Contactez R2Pro"
+        title={contactPageTitle}
+        subtitle={contactPageSubtitle}
+        renderButtons={renderContactHeroButtons}
+        imagePriority={true}
+        contentAlignment="left" // Original contact page hero content was left-aligned within its container
+      />
 
       {/* Formulaire de contact et informations */}
       <SectionAlt id="contact-form" className="py-16">

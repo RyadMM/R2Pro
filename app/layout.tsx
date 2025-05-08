@@ -1,7 +1,7 @@
 import { Footer } from "@/components/Footer";
 import HeadComponent from "@/components/Head";
+import HeroImagePreloader from "@/components/HeroImagePreloader"; // Added import
 import { NavBar } from "@/components/NavBar";
-import { PageTransition } from "@/components/PageTransition";
 import { ScrollToHashProvider } from "@/components/ScrollToHashProvider";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -55,6 +55,19 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
         {/* Fix pour iOS Safari */}
         <meta name="apple-mobile-web-app-capable" content="yes" />
+        <HeroImagePreloader images={[
+          { src: "/images/hero-background.jpg", sizes: "(max-width: 768px) 100vw, 50vw" },
+          { src: "/images/realisations/hero-realisation.jpg", sizes: "(max-width: 768px) 100vw, 50vw" },
+          { src: "/images/contact/contact-background.jpg", sizes: "(max-width: 768px) 100vw, 50vw" },
+          { src: "/images/services/calfeutrage/hero-calfeutrage.jpg", sizes: "(max-width: 768px) 100vw, 50vw" },
+          { src: "/images/services/design-3d/hero-design.jpg", sizes: "(max-width: 768px) 100vw, 50vw" },
+          { src: "/images/services/gouttieres/hero-gouttieres.jpg", sizes: "(max-width: 768px) 100vw, 50vw" },
+          { src: "/images/services/isolation-exterieure/hero-isolation.jpg", sizes: "(max-width: 768px) 100vw, 50vw" },
+          { src: "/images/services/peinture-spray/hero-peinture.jpg", sizes: "(max-width: 768px) 100vw, 50vw" },
+          { src: "/images/services/portes-fenetres/hero-porte-fenetre.jpg", sizes: "(max-width: 768px) 100vw, 50vw" },
+          { src: "/images/services/revetements-exterieurs/hero-revetement.jpg", sizes: "(max-width: 768px) 100vw, 50vw" },
+          { src: "/images/services/soffites-fascias/hero-soffites.jpg", sizes: "(max-width: 768px) 100vw, 50vw" },
+        ]} />
       </head>
       <body
         className={`min-h-screen font-sans antialiased flex flex-col ios-scroll-fix ${montserrat.className} ${roboto.className} overflow-x-hidden`}
@@ -62,9 +75,7 @@ export default function RootLayout({
         <div className="page-gradient"></div>
         <ScrollToHashProvider>
           <NavBar />
-          <PageTransition>
-            <main className="flex-grow flex flex-col overflow-x-hidden">{children}</main>
-          </PageTransition>
+          <main className="flex-grow flex flex-col overflow-x-hidden w-full relative">{children}</main>
           <Footer />
         </ScrollToHashProvider>
         {process.env.NODE_ENV === 'production' && <Analytics />}
