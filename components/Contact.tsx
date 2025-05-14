@@ -327,7 +327,7 @@ export function Contact() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-lg">Territoire desservi</h3>
-                    <p className="text-gray-600">Montréal Rive-Sud, Rive Nord</p>
+                    <p className="text-gray-600">Grand Montréal, Montérégie</p>
                   </div>
                 </div>
               </div>
