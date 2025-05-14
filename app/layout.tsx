@@ -75,7 +75,8 @@ export default function RootLayout({
         <div className="page-gradient"></div>
         <ScrollToHashProvider>
           <NavBar />
-          <main className="flex-grow flex flex-col overflow-x-hidden w-full relative">{children}</main>
+          <main className="flex-grow flex flex-col overflow-x-hidden w-full relative min-h-screen">
+{children}</main>
           <Footer />
         </ScrollToHashProvider>
         {process.env.NODE_ENV === 'production' && <Analytics />}
