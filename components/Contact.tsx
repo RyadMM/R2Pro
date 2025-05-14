@@ -83,9 +83,20 @@ export function Contact() {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
+    setError,
+    clearErrors,
   } = useForm<FormData>();
 
   const onSubmit = async (data: FormData) => {
+    // Custom validation for email or phone
+    if (!data.email && !data.phone) {
+      setError("email", { type: "manual", message: "Courriel ou téléphone requis" });
+      setError("phone", { type: "manual", message: "Courriel ou téléphone requis" });
+      return;
+    } else {
+      clearErrors(["email", "phone"]);
+    }
+
     try {
       const response = await fetch('/api/contact', {
         method: 'POST',
@@ -207,10 +218,9 @@ export function Contact() {
                       id="email"
                       type="email"
                       {...register("email", {
-                        required: "L'email est requis",
                         pattern: {
                           value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                          message: "Adresse email invalide",
+                          message: "Adresse courriel invalide",
                         },
                       })}
                       className="w-full"
@@ -222,7 +232,7 @@ export function Contact() {
                     <Input
                       id="phone"
                       type="tel"
-                      {...register("phone", { required: "Le téléphone est requis" })}
+                      {...register("phone")}
                       className="w-full"
                     />
                     {errors.phone && <p className="text-red-500 text-sm">{errors.phone.message}</p>}
@@ -231,32 +241,29 @@ export function Contact() {
 
                 <div className="space-y-4">
                   <Label>Type de projet</Label>
-                  <RadioGroup defaultValue="interior" className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <RadioGroup defaultValue="revetement-exterieur" className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="interior" id="interior" />
-                      <Label htmlFor="interior">Projet intérieur</Label>
+                      <RadioGroupItem value="revetement-exterieur" id="revetement-exterieur" {...register("projectType")} />
+                      <Label htmlFor="revetement-exterieur">Revêtement extérieur</Label>
                     </div>
                     <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="exterior" id="exterior" />
-                      <Label htmlFor="exterior">Projet extérieur</Label>
+                      <RadioGroupItem value="peinture" id="peinture" {...register("projectType")} />
+                      <Label htmlFor="peinture">Peinture</Label>
                     </div>
                     <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="kitchen" id="kitchen" />
-                      <Label htmlFor="kitchen">Armoires de cuisine</Label>
+                      <RadioGroupItem value="calfeutrage" id="calfeutrage" {...register("projectType")} />
+                      <Label htmlFor="calfeutrage">Calfeutrage</Label>
                     </div>
                     <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="commercial" id="commercial" />
-                      <Label htmlFor="commercial">Projet commercial</Label>
+                      <RadioGroupItem value="porte-fenetre" id="porte-fenetre" {...register("projectType")} />
+                      <Label htmlFor="porte-fenetre">Porte et fenêtre</Label>
                     </div>
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="caulking" id="caulking" />
-                      <Label htmlFor="caulking">Calfeutrage</Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="other" id="other" />
-                      <Label htmlFor="other">Autre</Label>
+                     <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="autres" id="autres" {...register("projectType")} />
+                      <Label htmlFor="autres">Autres</Label>
                     </div>
                   </RadioGroup>
+                   {errors.projectType && <p className="text-red-500 text-sm">{errors.projectType.message}</p>}
                 </div>
 
                 <div className="space-y-2">
@@ -270,17 +277,18 @@ export function Contact() {
                 </div>
 
                 <div className="flex items-center space-x-2">
-                  <Checkbox id="terms" {...register("acceptTerms", { required: true })} />
+                  <Checkbox id="terms" {...register("acceptTerms", { required: "Vous devez accepter les conditions" })} />
                   <Label htmlFor="terms" className="text-sm">
                     J'accepte les{" "}
                     <a href="#" className="text-r2pro hover:underline">
                       conditions
                     </a>
                   </Label>
+                  {errors.acceptTerms && <p className="text-red-500 text-sm">{errors.acceptTerms.message}</p>}
                 </div>
 
-                <CustomButton type="submit" className="w-full bg-r2pro hover:bg-r2pro-600 text-white py-3 rounded-lg">
-                  Envoyer ma demande
+                <CustomButton type="submit" className="w-full bg-r2pro hover:bg-r2pro-600 text-white py-3 rounded-lg" disabled={isSubmitting}>
+                  {isSubmitting ? "Envoi en cours..." : "Envoyer ma demande"}
                 </CustomButton>
               </form>
             )}

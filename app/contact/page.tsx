@@ -11,7 +11,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 // Dynamically import confetti later
 // import confetti from "canvas-confetti"
 import { motion } from "framer-motion"; // Re-add for other animations
-import { CheckCircle, Clock, Mail, MapPin, Phone, Send } from "lucide-react"
+import { CheckCircle, Clock, Mail, Map as MapIcon, Phone, Send } from "lucide-react"
 // import Image from "next/image" // No longer directly used for hero background
 import { GenericHero } from "@/components/GenericHero"
 import Link from "next/link"; // For the button
@@ -29,13 +29,19 @@ const COMPANY_HOURS = "Lun - Ven: 8h à 17h"
 const formSchema = z.object({
   firstName: z.string().min(2, { message: "Le prénom doit contenir au moins 2 caractères" }),
   lastName: z.string().min(2, { message: "Le nom doit contenir au moins 2 caractères" }),
-  email: z.string().email({ message: "Adresse e-mail invalide" }),
-  phone: z.string().min(10, { message: "Numéro de téléphone invalide" }),
-  projectType: z.enum(["interior", "exterior", "kitchen", "commercial", "caulking", "other"], {
+  email: z.string().email({ message: "Adresse courriel invalide" }).optional().or(z.literal('')), // Keep email optional initially
+  phone: z.string().optional().or(z.literal('')), // Keep phone optional initially
+  projectType: z.enum(["revetement-exterieur", "peinture", "calfeutrage", "porte-fenetre", "autres"], {
     required_error: "Veuillez sélectionner un type de projet",
   }),
   message: z.string().optional(),
-})
+}).refine(data => data.email || data.phone, { // Keep refine to require either email or phone
+  message: "Veuillez fournir un courriel ou un numéro de téléphone.",
+  path: ["email"], // Attach the error to the email field (or phone, or both)
+}).refine(data => data.email || data.phone, {
+  message: "Veuillez fournir un courriel ou un numéro de téléphone.",
+  path: ["phone"],
+});
 
 // Fonction pour lancer l'effet de confetti (async pour dynamic import)
 const launchConfetti = async () => {
@@ -93,24 +99,43 @@ const launchConfetti = async () => {
 }
 
 export default function ContactPage() {
-  const [isSubmitted, setIsSubmitted] = useState(false)
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [selectedProjectType, setSelectedProjectType] = useState<z.infer<typeof formSchema>['projectType'] | undefined>(undefined);
+
 
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
+    setValue, // Add setValue from useForm
+    trigger, // Add trigger for manual validation
   } = useForm({
     resolver: zodResolver(formSchema),
   })
 
+  // Manually update projectType value in react-hook-form state
+  // and trigger validation when radio button is selected
+  const handleProjectTypeChange = (value: z.infer<typeof formSchema>['projectType']) => {
+    setSelectedProjectType(value);
+    setValue("projectType", value);
+    trigger("projectType"); // Manually trigger validation for projectType
+  };
+
+
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
+    // Ensure selectedProjectType is included in data
+    const submissionData = {
+      ...data,
+      projectType: selectedProjectType,
+    };
+
     try {
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify(submissionData), // Use submissionData
       })
 
       if (response.ok) {
@@ -270,14 +295,14 @@ export default function ContactPage() {
                             <Label htmlFor="email" className="text-sm font-medium font-sans text-r2pro-700">
                               Courriel
                             </Label>
-                            <Input id="email" type="email" {...register("email")} className="mt-1" />
+                            <Input id="email" type="email" {...register("email")} className="mt-1" placeholder="votre.courriel@example.com" />
                             {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>}
                           </div>
                           <div>
                             <Label htmlFor="phone" className="text-sm font-medium font-sans text-r2pro-700">
                               Téléphone
                             </Label>
-                            <Input id="phone" type="tel" {...register("phone")} className="mt-1" />
+                            <Input id="phone" type="tel" {...register("phone")} className="mt-1" placeholder="(123) 456-7890" />
                             {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone.message}</p>}
                           </div>
                         </div>
@@ -285,23 +310,23 @@ export default function ContactPage() {
                           <Label className="text-sm font-medium font-sans text-r2pro-700 block mb-2">
                             Type de projet
                           </Label>
-                          <RadioGroup defaultValue="interior" className="grid grid-cols-2 gap-4">
+                          <RadioGroup onValueChange={handleProjectTypeChange} className="grid grid-cols-2 gap-4">
                             {[
-                              ["interior", "Intérieur"],
-                              ["exterior", "Extérieur"],
-                              ["kitchen", "Cuisine"],
-                              ["commercial", "Commercial"],
-                              ["caulking", "Calfeutrage"],
-                              ["other", "Autre"],
+                              ["revetement-exterieur", "Revêtement extérieur"],
+                              ["peinture", "Peinture"],
+                              ["calfeutrage", "Calfeutrage"],
+                              ["porte-fenetre", "Porte et fenêtre"],
+                              ["autres", "Autres"],
                             ].map(([value, label]) => (
                               <div key={value} className="flex items-center space-x-2">
-                                <RadioGroupItem value={value} id={value} {...register("projectType")} />
+                                <RadioGroupItem value={value} id={value} />
                                 <Label htmlFor={value} className="text-sm font-sans text-r2pro-600">
                                   {label}
                                 </Label>
                               </div>
                             ))}
                           </RadioGroup>
+                           {errors.projectType && <p className="text-red-500 text-xs mt-1">{errors.projectType.message}</p>}
                         </div>
                         <div>
                           <Label htmlFor="message" className="text-sm font-medium font-sans text-r2pro-700">
@@ -382,7 +407,7 @@ export default function ContactPage() {
                       {[
                         { icon: Mail, title: "Courriel", content: COMPANY_EMAIL, href: `mailto:${COMPANY_EMAIL}` },
                         { icon: Phone, title: "Téléphone", content: COMPANY_PHONE, href: `tel:${COMPANY_PHONE}` },
-                        { icon: MapPin, title: "Adresse", content: COMPANY_ADDRESS },
+                        { icon: MapIcon, title: "Territoire desservi", content: "Grand Montréal, Montérégie" },
                         { icon: Clock, title: "Heures d'ouverture", content: COMPANY_HOURS },
                       ].map((item, index) => (
                         <motion.div

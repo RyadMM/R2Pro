@@ -11,7 +11,7 @@ export async function POST(req: Request) {
     const data = await resend.emails.send({
       from: 'Acme <info@contact.r2pro.ca>',
       to: ['info@r2pro.ca'],
-      subject: 'Contact Form Submission',
+      subject: `${firstName} ${lastName} - ${projectType}`,
       html: `<p><strong>First Name:</strong> ${firstName}</p>
              <p><strong>Last Name:</strong> ${lastName}</p>
              <p><strong>Email:</strong> ${email}</p>
