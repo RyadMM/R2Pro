@@ -147,7 +147,7 @@ export default function RevetementsExterieursClientPage({ reviews }: Revetements
                 viewport={{ once: true }}
                 className="text-2xl md:text-3xl font-bold mb-6 text-r2pro-800 relative"
               >
-                Nos Matériaux de Revêtement Extérieur
+                Nos services de Revêtement extérieur
                 <motion.div
                   className="absolute -bottom-2 left-0 right-0 h-1 bg-r2pro-500 rounded-full"
                   initial={{ width: "0%" }}
@@ -221,7 +221,7 @@ export default function RevetementsExterieursClientPage({ reviews }: Revetements
       </SectionContainer>
 
       {/* Matériaux Section - Avec le nouveau composant MaterialTabs */}
-      <SectionContainer className="py-12 md:py-16 section-alt">
+      <SectionContainer className="py-12 md:py-16 pb-32 section-alt">
         <AnimatedSection animation="fadeIn">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
