@@ -151,7 +151,7 @@ export default async function ProjectPage({ params }: { params: { id: string } }
                   <Link href="/contact">
                     <CustomButton className="w-full bg-r2pro hover:bg-r2pro-600 text-white group">
                       <span className="flex items-center justify-center">
-                        Demander un devis pour un projet similaire
+                        Demander un devis
                         <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
                       </span>
                     </CustomButton>
