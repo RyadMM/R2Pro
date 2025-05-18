@@ -280,7 +280,7 @@ export function Contact() {
                   <Checkbox id="terms" {...register("acceptTerms", { required: "Vous devez accepter les conditions" })} />
                   <Label htmlFor="terms" className="text-sm">
                     J'accepte les{" "}
-                    <a href="#" className="text-r2pro hover:underline">
+                    <a href="/termes-conditions" className="text-r2pro hover:underline">
                       conditions
                     </a>
                   </Label>

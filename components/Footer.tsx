@@ -158,13 +158,13 @@ export function Footer() {
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
             <p className="text-sm text-gray-300">© 2023 R2Pro. Tous droits réservés.</p>
             <nav className="flex justify-start space-x-4 text-sm lg:justify-end">
-              <Link href="#" className="text-gray-200 hover:text-white transition-colors text-base">
+              <Link href="/termes-conditions" className="text-gray-200 hover:text-white transition-colors text-base">
                 Termes & Conditions
               </Link>
-              <Link href="#" className="text-gray-200 hover:text-white transition-colors text-base">
+              <Link href="/politique-confidentialite" className="text-gray-200 hover:text-white transition-colors text-base">
                 Politique de confidentialité
               </Link>
-              <Link href="#" className="text-gray-200 hover:text-white transition-colors text-base">
+              <Link href="/cookies" className="text-gray-200 hover:text-white transition-colors text-base">
                 Cookies
               </Link>
             </nav>
