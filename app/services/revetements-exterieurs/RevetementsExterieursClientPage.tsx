@@ -16,7 +16,7 @@ import { useEffect, useState } from "react";
 
 // Removed unused projects and categories variables
 
-const materiaux = ["aluminium", "acier", "vinyle", "fibrociment", "bois"];
+const materiaux = ["aluminium", "acier", "vinyle", "fibrociment", "bois véritable", "bois d'ingénierie", "composite"];
 
 // Informations sur les matériaux
 const materialInfo = {
@@ -75,7 +75,7 @@ const materialInfo = {
       "Maisons haut de gamme, propriétés dans des zones humides ou à risque d'incendie, styles architecturaux traditionnels.",
     imagePath: "/images/services/revetements-exterieurs/materiau-fibrociment.jpg",
   },
-  bois: {
+  "bois véritable": {
     title: "Revêtement en bois",
     description:
       "Les revêtements en bois comme CanExel et Maibec offrent une beauté naturelle et une chaleur incomparable à votre propriété.",
@@ -87,6 +87,32 @@ const materialInfo = {
     ],
     applications: "Chalets, maisons de style rustique ou traditionnel, propriétés dans des environnements boisés.",
     imagePath: "/images/services/revetements-exterieurs/materiau-bois.jpg",
+  },
+  "bois d'ingénierie": { // Placeholder - content needs to be added
+    title: "Revêtement en bois d'ingénierie",
+    description:
+      "Le bois d'ingénierie offre l'apparence du bois naturel avec une durabilité et une stabilité améliorées.",
+    advantages: [
+      "Apparence esthétique du bois naturel",
+      "Plus stable et résistant à l'humidité que le bois massif",
+      "Large gamme de finitions et de couleurs",
+      "Facile à installer",
+    ],
+    applications: "Maisons résidentielles, projets de rénovation, styles architecturaux variés.",
+    imagePath: "/images/services/revetements-exterieurs/materiau-ingenerie.webp", // Placeholder image path
+  },
+  composite: { // Placeholder - content needs to be added
+    title: "Revêtement en composite",
+    description:
+      "Le revêtement composite est un matériau durable et nécessitant peu d'entretien, souvent fabriqué à partir de matériaux recyclés.",
+    advantages: [
+      "Très faible entretien",
+      "Résistant à la pourriture, aux insectes et à la décoloration",
+      "Longue durée de vie",
+      "Disponible en diverses couleurs et textures",
+    ],
+    applications: "Maisons résidentielles, terrasses, zones nécessitant une grande durabilité et peu d'entretien.",
+    imagePath: "/images/services/revetements-exterieurs/materiau-composite.jpg", // Placeholder image path
   },
 }
 
