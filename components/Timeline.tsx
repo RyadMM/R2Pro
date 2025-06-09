@@ -62,16 +62,16 @@ const Timeline: React.FC = () => {
             viewport={{ once: true, amount: 0.5 }}
           >
             {/* Text block with card styling */}
-            <div className={`timeline-content w-full px-6 py-4 rounded-lg shadow-xl bg-gray-50 border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-300
-              ml-10 md:w-5/12 ${index % 2 === 0 ? 'md:mr-auto' : 'md:ml-auto'} text-center md:text-left`}> {/* Adjusted margin for mobile, and width/margin for desktop */}
-              <h3 className="mb-3 font-bold text-gray-800 text-xl">{step.title}</h3>
+            {/* Card with integrated number */}
+            <div className={`timeline-card relative w-11/12 md:w-5/12 px-6 py-4 rounded-lg shadow-xl bg-white border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-300 text-center md:text-left
+              ${index % 2 === 0 ? 'md:mr-8' : 'md:ml-8'}`}> {/* Added margin to push away from center line */}
+              <h3 className="mb-3 font-bold text-gray-800 text-xl flex items-center">
+                <span className="timeline-number flex items-center justify-center bg-blue-600 text-white rounded-full w-6 h-6 text-sm font-semibold mr-2">
+                  {index + 1}
+                </span>
+                {step.title}
+              </h3>
               <p className="text-sm leading-snug tracking-wide text-gray-900 text-opacity-100">{step.description}</p>
-            </div>
-            {/* Number circle */}
-            <div className="timeline-number z-20 flex items-center bg-blue-600 shadow-xl w-8 h-8 rounded-full flex-shrink-0
-              absolute left-5 -translate-x-1/2
-              md:left-1/2 md:-translate-x-1/2"> {/* Adjusted positioning for mobile and desktop */}
-              <h1 className="mx-auto font-semibold text-lg text-white">{index + 1}</h1>
             </div>
           </motion.div>
         ))}
