@@ -7,6 +7,7 @@ import { MaterialTabs } from "@/components/MaterialTabs";
 import { Realisations } from "@/components/Realisations";
 import { SectionContainer } from "@/components/SectionContainer";
 import { ServiceHero } from "@/components/ServiceHero";
+import Timeline from "@/components/Timeline"; // Import Timeline component
 import { Review } from "@/lib/reviews"; // Import Review interface
 import { motion } from "framer-motion";
 import { ArrowRight, CheckCircle2, CheckSquare } from "lucide-react";
@@ -239,6 +240,11 @@ export default function RevetementsExterieursClientPage({ reviews }: Revetements
             </motion.div>
           </div>
         </div>
+      </SectionContainer>
+
+      {/* Timeline Section */}
+      <SectionContainer className="py-12 md:py-16">
+        <Timeline />
       </SectionContainer>
 
       {/* Réalisations Section */}

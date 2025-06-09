@@ -17,7 +17,7 @@ const CookiesPage = () => {
       <p className="mb-6 text-gray-700">Vous pouvez contrôler et gérer les cookies via les paramètres de votre navigateur. Veuillez noter que la désactivation de certains cookies peut affecter le fonctionnement du site.</p>
 
       <h2 className="text-2xl font-semibold mb-4 text-gray-700">5. Contact</h2>
-      <p className="text-gray-700">Pour toute question concernant cette politique en matière de cookies, veuillez nous contacter à [Adresse courriel de l'entreprise].</p>
+      <p className="text-gray-700">Pour toute question concernant cette politique en matière de cookies, veuillez nous contacter à info@r2pro.ca.</p>
     </div>
   );
 };

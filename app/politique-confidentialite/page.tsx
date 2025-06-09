@@ -20,7 +20,7 @@ const PolitiqueConfidentialitePage = () => {
       <p className="mb-6 text-gray-700">Vous avez le droit d'accéder à vos informations personnelles, de les corriger ou de demander leur suppression, sous réserve des exigences légales.</p>
 
       <h2 className="text-2xl font-semibold mb-4 text-gray-700">6. Contact</h2>
-      <p className="text-gray-700">Pour toute question concernant cette politique de confidentialité, veuillez nous contacter à [Adresse courriel de l'entreprise].</p>
+      <p className="text-gray-700">Pour toute question concernant cette politique de confidentialité, veuillez nous contacter à info@r2pro.ca.</p>
     </div>
   );
 };
