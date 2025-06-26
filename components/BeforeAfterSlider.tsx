@@ -66,6 +66,9 @@ export function BeforeAfterSlider({
       window.addEventListener("mouseup", handleMouseUp)
       window.addEventListener("touchmove", handleTouchMove)
       window.addEventListener("touchend", handleMouseUp)
+      document.body.classList.add("no-select")
+    } else {
+      document.body.classList.remove("no-select")
     }
 
     return () => {
@@ -73,6 +76,7 @@ export function BeforeAfterSlider({
       window.removeEventListener("mouseup", handleMouseUp)
       window.removeEventListener("touchmove", handleTouchMove)
       window.removeEventListener("touchend", handleMouseUp)
+      document.body.classList.remove("no-select") // Clean up on unmount
     }
   }, [isDragging])
 
@@ -85,7 +89,7 @@ export function BeforeAfterSlider({
     >
       {/* After Image (Full width) */}
       <div className="absolute inset-0 w-full h-full">
-        <Image src={afterImage || "/placeholder.svg"} alt="Après" fill className="object-cover" sizes="100vw" />
+        <Image src={afterImage || "/placeholder.svg"} alt="Après" fill className="object-cover" sizes="100vw" draggable="false" />
         <div className="absolute top-4 right-4 bg-black/70 text-white text-sm font-medium px-3 py-1 rounded-full">
           {afterLabel}
         </div>
@@ -93,7 +97,7 @@ export function BeforeAfterSlider({
 
       {/* Before Image (Partial width based on slider) */}
       <div className="absolute inset-0 h-full overflow-hidden" style={{ width: `${sliderPosition}%` }}>
-        <Image src={beforeImage || "/placeholder.svg"} alt="Avant" fill className="object-cover" sizes="100vw" />
+        <Image src={beforeImage || "/placeholder.svg"} alt="Avant" fill className="object-cover" sizes="100vw" draggable="false" />
         <div className="absolute top-4 left-4 bg-black/70 text-white text-sm font-medium px-3 py-1 rounded-full">
           {beforeLabel}
         </div>
