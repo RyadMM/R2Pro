@@ -43,6 +43,37 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    id: "remise-a-9-boucherville",
+    category: "revetement",
+    subcategory: "aluminium",
+    title: "Revêtement aluminium Rialux Tiago – Remise à 9, Boucherville",
+    description: "Remplacement du parement métallique par un revêtement aluminium Rialux Tiago (noyer foncé) et peinture des portes, fenêtres, soffites et fascias.",
+    fullDescription:
+      "Pour cette belle transformation , le propriétaire souhaitait moderniser l’apparence tout en gardant un certain budget. Nous avons donc retiré l’ancien revêtement métallique, ainsi que la sous-couche existante, nous avons du ajouter certains éléments nécessaires à une bonne fonctionnalité, et nous nous sommes assurés que la maison était belle et bien étanche. Nous avons par la suite installé des panneaux d’aluminium de marque Rialux modèle Tiago couleur noyé Foncé Un produit réputé pour son élégance, mais aussi pour sa durabilité et performance au climat québécois. \n\nEn parallèle, nous avons rafraîchi les portes et fenêtres avec une peinture industriel deux- composés, harmonisant la teinte au nouveau parement. Les soffites et fascias ont aussi reçu une couche de peinture pour un fini uniforme\n\nLe résultat : une allure chaude et contemporaine qui donne une deuxième vie à cette maison",
+    features: [
+      "Revêtement aluminium Rialux Tiago, couleur Noyer Foncé",
+      "Démontage complet de l’ancien parement métallique",
+      "Peinture haute performance sur portes, fenêtres, soffites et fascias",
+      "Finition du parement sans joints apparents pour une esthétique haut de gamme",
+      "Matériaux résistants au gel, UV et humidité québécoise",
+      "Valorisation visuelle et protection accrue du bâtiment",
+    ],
+    date: "Juin 2025",
+    location: "Boucherville, QC",
+    images: [
+      "/images/realisations/projet-10/optimized/IMG_2008 2.jpeg",
+      "/images/realisations/projet-10/optimized/IMG_2008.jpeg",
+      "/images/realisations/projet-10/optimized/IMG_2010.jpeg",
+      "/images/realisations/projet-10/optimized/IMG_5479.jpeg",
+      "/images/realisations/projet-10/optimized/IMG_5480.jpeg",
+      "/images/realisations/projet-10/optimized/IMG_5483.jpeg",
+      "/images/realisations/projet-10/optimized/Pasted image 20250619020820.jpg"
+    ],
+    beforeAfter: [],
+    specifications: {},
+    relatedProjects: [],
+  },
+  {
     id: "2",
     category: "revetement",
     title: "Revêtement en CanExel à Boucherville",
