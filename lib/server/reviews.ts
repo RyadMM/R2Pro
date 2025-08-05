@@ -6,18 +6,20 @@ export async function getReviewsFromJson(): Promise<Review[]> {
     const rawReviews: any[] = rawReviewsData;
 
     const reviews: Review[] = rawReviews
-      .filter(rawReview => rawReview.review_text && rawReview.review_text.trim() !== '') // Filter out reviews with empty text
+      .filter(rawReview =>
+        (rawReview.review_text && rawReview.review_text.trim() !== '') || // Keep reviews with text
+        (rawReview.rating === 5) // OR keep 5-star reviews
+      )
       .map(rawReview => ({
         id: rawReview.review_id, // Map review_id to id
         name: rawReview.name,
         location: rawReview.location || '', // Assuming location might be missing
         rating: rawReview.rating,
         avatar: rawReview.reviewer_profile, // Using reviewer_profile as a placeholder for avatar
-        text: rawReview.review_text.trim(), // Map review_text to text, handle null and trim whitespace
+        text: rawReview.review_text ? rawReview.review_text.trim() : '', // Map review_text to text, handle null and trim whitespace
         date: rawReview.published_at || '', // Keep existing date field for now
         published_at_date: rawReview.published_at_date, // Map published_at_date
         project: '', // No direct mapping for project in JSON, using empty string
-        projectId: rawReview.projectId, // Include projectId
       }))
       .sort((a, b) => {
         // Sort by published_at_date in descending order (most recent first)

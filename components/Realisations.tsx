@@ -10,18 +10,26 @@ import { AnimatedSection } from "./AnimatedSection";
 import { ProjectCard } from "./ProjectCard";
 
 // Extraire toutes les catégories uniques des projets
-const categories = ["tous", ...new Set(projects.map((project) => project.category))]
+const categories: (
+  | "tous"
+  | "revetement"
+  | "peinture"
+  | "calfeutrage"
+  | "gouttieres"
+  | "isolation"
+  | "portes-fenetres"
+  | "soffites-fascias"
+)[] = ["tous", ...new Set(projects.flatMap((project) => project.category))];
 
 interface RealisationsProps {
-  category?: string;
-  reviews: Review[]; // Add reviews prop
+  category?: string; // Changed back to string to allow "tous"
+  reviews: Review[];
 }
 
-export function Realisations({ category, reviews }: RealisationsProps) { // Accept reviews prop
-  // Limiter à 3 projets pour la page d'accueil
-  const allProjects = projects.slice(0, 3);
-  const filteredProjects = category
-    ? allProjects.filter((project) => project.category === category)
+export function Realisations({ category, reviews }: RealisationsProps) {
+  const allProjects = projects.filter(p => p.reviewId).slice(0, 3);
+  const filteredProjects = category && category !== "tous"
+    ? allProjects.filter((project) => project.category.includes(category as any)) // Cast to any to bypass type error for now
     : allProjects;
 
   return (
@@ -53,7 +61,7 @@ export function Realisations({ category, reviews }: RealisationsProps) { // Acce
           <AnimatePresence mode="sync">
             {filteredProjects.map((project) => { // Use curly braces for map body
               // Filter reviews to only include those with a projectId before finding
-              const projectReview = reviews.filter(review => review.projectId).find(review => review.projectId === project.id);
+              const projectReview = reviews.find(review => review.id === project.reviewId);
 
               return ( // Return the JSX
                 <motion.div
@@ -66,11 +74,11 @@ export function Realisations({ category, reviews }: RealisationsProps) { // Acce
                   className="h-full"
                 >
                   <ProjectCard
-                    id={Number(project.id)}
+                    id={project.id}
                     title={project.title}
                     description={project.description}
                     imageUrl={project.images[0]}
-                    category={project.category}
+                    category={project.category} // Pass the entire category array
                     review={projectReview} // Pass the full review object if found
                     href={"/realisations/" + project.id.toString()}
                   />

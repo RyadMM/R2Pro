@@ -33,12 +33,20 @@ import { formatDateInFrench } from "@/lib/dateUtils"; // Import the helper funct
 import { Review } from "@/lib/reviews"; // Import Review interface
 
 interface ProjectCardProps {
-  id: number
+  id: string
   title: string
   description: string
   imageUrl: string
-  category?: string
-  review?: Review; // Added optional review prop
+  category?: (
+    | "revetement"
+    | "peinture"
+    | "calfeutrage"
+    | "gouttieres"
+    | "isolation"
+    | "portes-fenetres"
+    | "soffites-fascias"
+  )[]; // Use the exact type from projectData.ts
+  review?: Review;
   href: string
 }
 
@@ -74,24 +82,72 @@ export function ProjectCard({
             sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
           />
 
-          {/* Overlay avec catégorie */}
-          {category && (
-            <div className="absolute top-4 left-4 bg-r2pro text-white text-xs font-medium px-3 py-1 rounded-full z-10">
-              {category === "revetement"
-                ? "Revêtement"
-                : category === "peinture"
-                  ? "Peinture"
-                  : category === "calfeutrage"
-                    ? "Calfeutrage"
-                    : category === "gouttieres"
-                      ? "Gouttières"
-                      : category === "isolation"
-                        ? "Isolation"
-                        : category === "portes-fenetres"
-                          ? "Portes et Fenêtres"
-                        : category === "soffites-fascias"
-                          ? "Soffites et Fascias"
-                          : category}
+          {/* Overlay avec catégories */}
+          {category && category.length > 0 && (
+            <div className="absolute top-4 left-4 z-10 flex flex-wrap gap-2">
+              {category.map((cat, index) => {
+                let bgColorClass = "bg-blue-200"; // Default pastel blue
+                let textColorClass = "text-blue-800"; // Darker text for contrast
+
+                switch (cat) {
+                  case "revetement":
+                    bgColorClass = "bg-r2pro"; // Original blue
+                    textColorClass = "text-white";
+                    break;
+                  case "peinture":
+                    bgColorClass = ""; // Remove Tailwind class
+                    textColorClass = "text-white"; // Keep text white for contrast
+                    break;
+                  case "calfeutrage":
+                    bgColorClass = "bg-indigo-200";
+                    textColorClass = "text-indigo-800";
+                    break;
+                  case "gouttieres":
+                    bgColorClass = "bg-cyan-200";
+                    textColorClass = "text-cyan-800";
+                    break;
+                  case "isolation":
+                    bgColorClass = "bg-sky-200";
+                    textColorClass = "text-sky-800";
+                    break;
+                  case "portes-fenetres":
+                    bgColorClass = "bg-blue-500"; // Another shade of blue
+                    textColorClass = "text-white";
+                    break;
+                  case "soffites-fascias":
+                    bgColorClass = "bg-indigo-300";
+                    textColorClass = "text-indigo-900";
+                    break;
+                  default:
+                    bgColorClass = "bg-gray-200"; // Fallback for unknown categories
+                    textColorClass = "text-gray-800";
+                    break;
+                }
+
+                return (
+                  <span
+                    key={index}
+                    className={`${bgColorClass} ${textColorClass} text-xs font-medium px-3 py-1 rounded-full`}
+                    style={cat === "peinture" ? { backgroundColor: "#4052D6" } : {}}
+                  >
+                    {cat === "revetement"
+                      ? "Revêtement"
+                      : cat === "peinture"
+                        ? "Peinture"
+                        : cat === "calfeutrage"
+                          ? "Calfeutrage"
+                          : cat === "gouttieres"
+                            ? "Gouttières"
+                            : cat === "isolation"
+                              ? "Isolation"
+                              : cat === "portes-fenetres"
+                                ? "Portes et Fenêtres"
+                                : cat === "soffites-fascias"
+                                  ? "Soffites et Fascias"
+                                  : cat}
+                  </span>
+                );
+              })}
             </div>
           )}
         </div>

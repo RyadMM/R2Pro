@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "prod": "NODE_ENV=production pnpm build && NODE_ENV=production pnpm start"
+    "update-reviews": "node scripts/update-reviews.mjs",
+    "prod": "pnpm run update-reviews && NODE_ENV=production pnpm build && NODE_ENV=production pnpm start"
   },
   "dependencies": {
     "@emotion/is-prop-valid": "latest",

@@ -191,7 +191,7 @@ export default function AdaptedReviewSection({ reviews }: AdaptedReviewSectionPr
           </div>
         </motion.div>
 
-        <Carousel setApi={setApi} opts={{ loop: true }}> {/* Add setApi and options */}
+        <Carousel setApi={setApi}> {/* Removed loop: true option */}
           <CarouselContent>
             {reviews.map((review) => (
               <CarouselItem key={review.id} className="md:basis-1/2 lg:basis-1/3 py-4"> {/* Use CarouselItem and adjust basis for responsiveness, added py-4 for vertical padding */}

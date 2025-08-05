@@ -1,5 +1,5 @@
 export interface Review {
-  id: number;
+  id: string;
   name: string;
   location: string;
   rating: number;
@@ -8,7 +8,6 @@ export interface Review {
   date: string; // Keep existing date field for now
   published_at_date?: string; // Add the new field as optional
   project: string;
-  projectId?: string;
 }
 
 // Modify utility functions to accept reviews as argument

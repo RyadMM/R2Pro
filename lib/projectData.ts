@@ -1,13 +1,14 @@
 export interface Project {
   id: string;
-  category:
-  | "revetement"
-  | "peinture"
-  | "calfeutrage"
-  | "gouttieres"
-  | "isolation"
-  | "portes-fenetres"
-  | "soffites-fascias";
+  category: (
+    | "revetement"
+    | "peinture"
+    | "calfeutrage"
+    | "gouttieres"
+    | "isolation"
+    | "portes-fenetres"
+    | "soffites-fascias"
+  )[];
   subcategory?:
   | "aluminium"
   | "vinyle"
@@ -39,12 +40,52 @@ export interface Project {
   };
   relatedProjects?: string[];
   reviewerName?: string; // Added reviewerName field
+  reviewId?: string;
 }
 
 export const projects: Project[] = [
   {
+    id: "projet-juin-2025-boucherville",
+    category: ["revetement"],
+    subcategory: "acier",
+    title: "Une façade en acier Moderno à Boucherville",
+    description: "Remplacement de maçonnerie alternative défaillante par un revêtement en acier Distinction couleur désert.",
+    fullDescription: `Le client nous a contactés en raison d’infiltrations d’eau au niveau de la jonction entre la toiture et la maçonnerie alternative de sa façade. Heureusement, il a agi rapidement : en ouvrant le mur, nous avons découvert un nid de fourmis charpentières. Celles-ci n’avaient attaqué que l’isolant sous la maçonnerie et n’avaient pas atteint la structure, évitant ainsi des coûts supplémentaires.
+
+Nous avons procédé à la démolition complète de l’ancienne maçonnerie, corrigé localement l’isolation, puis installé un revêtement mural en acier Distinction, couleur Désert, reconnu pour son esthétique haut de gamme et sa résistance au climat québécois.
+
+En complément, nous avons remplacé les soffites, fascias et gouttières, et procédé à l’habillage architectural des deux colonnes en façade, offrant un rendu uniforme, épuré et moderne.`,
+    features: [
+      "Installation d’un parement mural en acier Distinction, couleur Désert",
+      "Démolition complète de la maçonnerie alternative défaillante",
+      "Remplacement des soffites, fascias et gouttières",
+      "Habillage architectural des colonnes avant",
+      "Intervention rapide qui a évité des dommages structurels",
+      "Isolation refaite localement sous l’ancien mur",
+      "Produit conçu pour résister aux intempéries du climat québécois",
+      "Projet clé en main exécuté en 7 jours",
+    ],
+    date: "Juin 2025",
+    location: "Boucherville, QC",
+    images: [
+      "/images/realisations/projet-juin-2025-boucherville/optimized/IMG_5701.jpeg",
+      "/images/realisations/projet-juin-2025-boucherville/optimized/IMG_5706.jpeg",
+      "/images/realisations/projet-juin-2025-boucherville/optimized/IMG_5714.jpeg",
+      "/images/realisations/projet-juin-2025-boucherville/optimized/IMG_5702.jpeg",
+      "/images/realisations/projet-juin-2025-boucherville/optimized/IMG_5709.jpeg",
+      "/images/realisations/projet-juin-2025-boucherville/optimized/IMG_5713.jpeg",
+      "/images/realisations/projet-juin-2025-boucherville/optimized/IMG_5710.jpeg",
+      "/images/realisations/projet-juin-2025-boucherville/optimized/IMG_5711.jpeg",
+      "/images/realisations/projet-juin-2025-boucherville/optimized/IMG_5715.jpeg",
+      "/images/realisations/projet-juin-2025-boucherville/optimized/IMG_5716.jpeg"
+    ],
+    beforeAfter: [],
+    specifications: {},
+    relatedProjects: [],
+  },
+  {
     id: "projet-10",
-    category: "revetement",
+    category: ["revetement", "peinture"],
     subcategory: "aluminium",
     title: "Revêtement aluminium Rialux Tiago – Remise\u00A0à\u00A0neuf, Boucherville",
     description: "Remplacement du parement métallique par un revêtement aluminium Rialux Tiago (noyer foncé) et peinture des portes, fenêtres, soffites et fascias.",
@@ -84,10 +125,11 @@ export const projects: Project[] = [
     ],
     specifications: {},
     relatedProjects: [],
+    reviewId: "Ci9DQUlRQUNvZENodHljRjlvT2toSU5XTjBURVo2ZDNoNlVHNTVlak5uYjFOVlNXYxAB",
   },
   {
     id: "2",
-    category: "revetement",
+    category: ["revetement"],
     title: "Revêtement en CanExel à Boucherville",
     description: "Projet de revêtement extérieur en CanExel blanc réalisé dans une copropriété à Boucherville.",
     fullDescription:
@@ -119,10 +161,11 @@ export const projects: Project[] = [
     ],
     specifications: { "Type de matériau": "CanExel (fibre de bois haute densité)", "Couleur": "Blanc", "Finition": "V Style", "Installation": "Fixation invisible / conforme aux standards du fabricant", "Garantie": "Selon fabricant et installation R2Pro" },
     relatedProjects: [],
+    reviewId: "ChZDSUhNMG9nS0VNUFlfdkNibTYyZkJREAE",
   },
   {
     id: "1",
-    category: "revetement",
+    category: ["revetement"],
     subcategory: "aluminium",
     images: [
       "/images/realisations/optimized/projet-1/main.png",
@@ -154,10 +197,11 @@ export const projects: Project[] = [
     beforeAfter: [],
     specifications: {},
     relatedProjects: [],
+    reviewId: "ChZDSUhNMG9nS0VJQ0FnSUN6cHVydGJREAE",
   },
   {
     id: "9",
-    category: "revetement",
+    category: ["revetement"],
     subcategory: "aluminium",
     images: [
       "/images/realisations/optimized/projet-9/main.jpg",
@@ -209,7 +253,7 @@ export const projects: Project[] = [
   },
   {
     id: "3",
-    category: "revetement",
+    category: ["revetement"],
     subcategory: "fibrociment",
     title: "Revêtement en CanExel à Saint-Bruno",
     description: "Projet de revêtement extérieur en CanExel VStyle couleur Sierra avec ajout d’isolation rigide à Saint-Bruno.",
@@ -255,7 +299,7 @@ export const projects: Project[] = [
   },
   {
     id: "4",
-    category: "revetement",
+    category: ["revetement"],
     subcategory: "aluminium",
     title: "Finition de façade en composite et aluminium à Boucherville",
     description: "Projet de finition extérieure en composite et aluminium réalisé sur la façade d’une résidence à Boucherville.",

@@ -89,7 +89,7 @@ export default function RealisationsClientPage({ initialReviews }: RealisationsC
 
       result = result.filter((project) => {
         // Si des catégories principales sont sélectionnées, vérifier si le projet correspond
-        const matchesMainCategory = mainCategories.length === 0 || mainCategories.includes(project.category)
+        const matchesMainCategory = mainCategories.length === 0 || project.category.some(projCat => mainCategories.includes(projCat))
 
         // Si des sous-catégories sont sélectionnées, vérifier si le projet correspond
         const matchesSubCategory =
@@ -399,16 +399,16 @@ export default function RealisationsClientPage({ initialReviews }: RealisationsC
               {filteredProjects.length > 0 ? (
                 filteredProjects.map((project) => {
                   // Find the review for this project
-                  const projectReview = reviews.find(review => review.projectId === project.id);
+                  const projectReview = reviews.find(review => review.id === project.reviewId);
 
                   return (
                     <motion.div key={project.id} variants={itemVariants} className="h-full">
                       <ProjectCard
-                        id={parseInt(project.id, 10)}
+                        id={project.id}
                         title={project.title}
                         description={project.description}
                         imageUrl={project.images[0] || "/placeholder.svg"}
-                        category={project.category}
+                        category={project.category} // Pass the entire category array
                         review={projectReview} // Pass the full review object if found
                         href={`/realisations/${project.id}`}
                       />
