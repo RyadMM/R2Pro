@@ -58,11 +58,6 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <HeroImagePreloader images={[
           { src: "/images/hero-background.jpg", sizes: "(max-width: 768px) 100vw, 50vw" },
-          // Service cards that appear above fold on home page (first 4)
-          { src: "/images/services/peinture-spray/hero-peinture.jpg", sizes: "(max-width: 768px) 50vw, 25vw" },
-          { src: "/images/services/revetements-exterieurs/hero-revetement.jpg", sizes: "(max-width: 768px) 50vw, 25vw" },
-          { src: "/images/services/calfeutrage/hero-calfeutrage.jpg", sizes: "(max-width: 768px) 50vw, 25vw" },
-          { src: "/images/services/portes-fenetres/hero-porte-fenetre.jpg", sizes: "(max-width: 768px) 50vw, 25vw" },
         ]} />
       </head>
       <body

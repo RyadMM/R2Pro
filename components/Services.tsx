@@ -27,7 +27,7 @@ const servicesData = [
   {
     title: "Portes et Fenêtres",
     description: "Installation de portes et fenêtres écoénergétiques pour votre confort.",
-    imageUrl: "/images/services/portes-fenetres/hero-portes-fenetres.jpg",
+    imageUrl: "/images/services/portes-fenetres/hero-porte-fenetre.jpg",
     link: "/services/portes-fenetres",
   },
   {
