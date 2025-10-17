@@ -39,13 +39,13 @@ const servicesData = [
   {
     title: "Gouttières",
     description: "Installation et entretien de gouttières pour protéger votre maison.",
-    imageUrl: "/images/services/gouttieres/hero-gouttieres.jpg",
+    imageUrl: "/images/services/gouttieres/service-installation.jpg",
     link: "/services/gouttieres",
   },
   {
     title: "Isolation Extérieure",
     description: "Solutions d'isolation pour une efficacité énergétique optimale.",
-    imageUrl: "/images/services/isolation-exterieure/hero-isolation.jpg",
+    imageUrl: "/images/services/isolation-exterieure/materiau-fibre.jpg",
     link: "/services/isolation-exterieure",
   },
   {
