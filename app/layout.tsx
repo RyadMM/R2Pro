@@ -54,19 +54,10 @@ export default function RootLayout({
         <meta name="ICBM" content="45.7419, -73.4497" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
         {/* Fix pour iOS Safari */}
+        <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <HeroImagePreloader images={[
           { src: "/images/hero-background.jpg", sizes: "(max-width: 768px) 100vw, 50vw" },
-          { src: "/images/realisations/hero-realisation.jpg", sizes: "(max-width: 768px) 100vw, 50vw" },
-          { src: "/images/contact/contact-background.jpg", sizes: "(max-width: 768px) 100vw, 50vw" },
-          { src: "/images/services/calfeutrage/hero-calfeutrage.jpg", sizes: "(max-width: 768px) 100vw, 50vw" },
-          { src: "/images/services/design-3d/hero-design.jpg", sizes: "(max-width: 768px) 100vw, 50vw" },
-          { src: "/images/services/gouttieres/hero-gouttieres.jpg", sizes: "(max-width: 768px) 100vw, 50vw" },
-          { src: "/images/services/isolation-exterieure/hero-isolation.jpg", sizes: "(max-width: 768px) 100vw, 50vw" },
-          { src: "/images/services/peinture-spray/hero-peinture.jpg", sizes: "(max-width: 768px) 100vw, 50vw" },
-          { src: "/images/services/portes-fenetres/hero-porte-fenetre.jpg", sizes: "(max-width: 768px) 100vw, 50vw" },
-          { src: "/images/services/revetements-exterieurs/hero-revetement.jpg", sizes: "(max-width: 768px) 100vw, 50vw" },
-          { src: "/images/services/soffites-fascias/hero-soffites.jpg", sizes: "(max-width: 768px) 100vw, 50vw" },
         ]} />
       </head>
       <body

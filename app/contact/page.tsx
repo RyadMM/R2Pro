@@ -14,6 +14,7 @@ import { motion } from "framer-motion"; // Re-add for other animations
 import { CheckCircle, Clock, Mail, Map as MapIcon, Phone, Send } from "lucide-react"
 // import Image from "next/image" // No longer directly used for hero background
 import { GenericHero } from "@/components/GenericHero"
+import HeroImagePreloader from "@/components/HeroImagePreloader"; // Added import
 import Link from "next/link"; // For the button
 import { useState } from "react"
 import { useForm } from "react-hook-form"
@@ -207,6 +208,9 @@ export default function ContactPage() {
 
   return (
     <div className="flex-1 flex flex-col">
+      <HeroImagePreloader images={[
+        { src: "/images/contact/contact-background.jpg", sizes: "(max-width: 768px) 100vw, 50vw" },
+      ]} />
       <GenericHero
         backgroundImageSrc="/images/contact/contact-background.jpg"
         backgroundImageAlt="Contactez R2Pro"

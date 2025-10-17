@@ -1,6 +1,7 @@
 "use client"
 
 import { AnimatedSection } from "@/components/AnimatedSection";
+import HeroImagePreloader from "@/components/HeroImagePreloader";
 import { ProjectCard } from "@/components/ProjectCard";
 import { SectionContainer } from "@/components/SectionContainer";
 import { ServiceHero } from "@/components/ServiceHero";
@@ -176,6 +177,9 @@ export default function RealisationsClientPage({ initialReviews }: RealisationsC
 
   return (
     <div className="flex-1 flex flex-col">
+      <HeroImagePreloader images={[
+        { src: "/images/realisations/hero-realisation.jpg", sizes: "(max-width: 768px) 100vw, 50vw" },
+      ]} />
       <ServiceHero
         title="Nos Réalisations"
         description="Découvrez notre portfolio de projets exceptionnels qui témoignent de notre expertise et de notre engagement envers la qualité."
