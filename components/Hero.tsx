@@ -118,6 +118,7 @@ export function Hero({ className }: HeroProps) { // className is received here
       renderButtons={renderHomepageButtons}
       // renderAccessory prop removed
       imagePriority={true}
+      fetchPriority="high"
       contentAlignment="center"
       overlayOpacityClass="bg-opacity-60" // Corresponds to "from-black/70 to-black/50"
       // showScrollIndicator prop is not needed here as default is true

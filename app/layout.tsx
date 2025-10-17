@@ -56,9 +56,7 @@ export default function RootLayout({
         {/* Fix pour iOS Safari */}
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
-        <HeroImagePreloader images={[
-          { src: "/images/hero-background.jpg", sizes: "(max-width: 768px) 100vw, 50vw" },
-        ]} />
+        
       </head>
       <body
         className={`min-h-screen font-sans antialiased flex flex-col ios-scroll-fix ${montserrat.className} ${roboto.className} overflow-x-hidden`}
